@@ -33,4 +33,5 @@ Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Down
 - [oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)
 - [tokyonight-windows-terminal](https://github.com/kawijayaa/tokyonight-windows-terminal)
 - [Text to ASCII Art Generator](http://patorjk.com/software/taag/)
+- [Shell](https://github.com/moudey/Shell)
 - --

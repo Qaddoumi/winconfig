@@ -26,4 +26,6 @@ Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Down
 # Credit to :
  - [winget-install](https://github.com/asheroto/winget-install)
  - [winutil](https://github.com/ChrisTitusTech/winutil)
+ - **
+ - [oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)
  - [Text to ASCII Art Generator](http://patorjk.com/software/taag/)

@@ -6,7 +6,7 @@ function Install-Program {
     Write-Output "Starting installation check for $program..."
 
     Write-Output "Checking if $program is already installed..."
-    $installedPrograms = winget list | Select-String -Pattern $program
+    $installedPrograms = winget list --id $program | Select-String -Pattern $program
     if ($null -ne $installedPrograms) {
         Write-Output "Output from winget list:`n$($installedPrograms -join '; ')"
         Write-Output "Skipping installation of $program as it is already installed."

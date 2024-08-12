@@ -28,7 +28,7 @@ Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Down
 - [winget-install](https://github.com/asheroto/winget-install)
 - [winutil](https://github.com/ChrisTitusTech/winutil)
 - --
-# Tools, settings and main apps i used
+# Tools, settings 
 - [shanselman / Microsoft.PowerShell_profile.ps1](https://gist.github.com/shanselman)
 - [oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)
 - [tokyonight-windows-terminal](https://github.com/kawijayaa/tokyonight-windows-terminal)

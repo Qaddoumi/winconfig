@@ -31,7 +31,7 @@ try {
 # Specify the target PowerShell command
 $command = "Set-Location `"$desktopPath\winconfig-main`";& .\Install.ps1"
 # Specify the path for the shortcut
-$shortcutPath = Join-Path $desktopPath 'winconf.lnk'
+$shortcutPath = Join-Path $desktopPath 'winconfig.lnk'
 if (Test-Path -Path "$shortcutPath"){
     Remove-Item "$shortcutPath" -Force
 }

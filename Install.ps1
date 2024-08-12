@@ -7,7 +7,6 @@ if($ScriptLocation){
 }
 #region Run As Admin
 # Check for admin privileges
-# TODO: check if already running in wt
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
 {
     Write-Host "================================================================`n" -Foregroundcolor Red

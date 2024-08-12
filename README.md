@@ -4,6 +4,7 @@
 
 ![screen-install](./Images/Screenshot%202024-08-07.png)
 
+
 # How to use
 
 ## Download
@@ -14,7 +15,7 @@
 irm https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | iex
 ```
 
-- Or
+- OR
 
 ```powershell
 Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression

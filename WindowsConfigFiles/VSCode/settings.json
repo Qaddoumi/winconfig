@@ -1,0 +1,126 @@
+{
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "window.zoomLevel": -1, // zooms out by 20%
+    "search.searchEditor.doubleClickBehaviour": "goToLocation",
+    "search.searchOnType": true,
+    "search.searchOnTypeDebouncePeriod": 300,
+    "search.showLineNumbers": true,
+    "markdown.validate.enabled": true,
+    "editor.renderWhitespace": "boundary",
+    "editor.suggestSelection": "first",
+    "editor.colorDecorators": true,
+    "window.newWindowDimensions": "maximized",
+    "indentRainbow.colorOnWhiteSpaceOnly": false,
+    "java.semanticHighlighting.enabled": true,
+    "html-css-class-completion.HTMLLanguages": [
+        "html",
+        "vue",
+        "razor",
+        "blade",
+        "handlebars",
+        "twig",
+        "django-html",
+        "php",
+        "markdown",
+        "erb",
+        "ejs",
+        "svelte"
+    ],
+    "html-css-class-completion.CSSLanguages": [
+        "css",
+        "sass",
+        "scss"
+    ],
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "on",
+        "strings": "on"
+    },
+    "editor.quickSuggestionsDelay": 10,
+    "workbench.remoteIndicator.showExtensionRecommendations": true,
+    "editor.tabCompletion": "on",
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true
+    },
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": false,
+    "editor.guides.indentation": true,
+    "telemetry.telemetryLevel": "off",
+    "workbench.colorCustomizations": {
+        "editorLineNumber.foreground": "#00ff00"
+    },
+    "editor.acceptSuggestionOnEnter": "off",
+    "files.associations": {
+        "*.html": "html",
+        "*.py": "python"
+    },
+    "gitlens.defaultDateFormat": null,
+    "gitlens.hovers.currentLine.over": "line",
+    "debug.console.fontFamily": "MesloLGL Nerd Font Mono",
+    "terminal.integrated.fontFamily": "MesloLGL Nerd Font Mono",
+    "terminal.integrated.fontSize": 11,
+    "files.exclude": {
+        "**/.git": false,
+        "// **/.git": true
+    },
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "[markdown]": {
+        "editor.unicodeHighlight.ambiguousCharacters": true,
+        "editor.unicodeHighlight.invisibleCharacters": true,
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+        }
+    },
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+    "editor.fontFamily": "MesloLGL Nerd Font Mono",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "powershell.integratedConsole.showOnStartup": true,
+    "terminal.integrated.hideOnStartup": "always",
+    "powershell.enableProfileLoading": true,
+    "javascript.referencesCodeLens.showOnAllFunctions": true,
+    "settingsSync.ignoredSettings": [],
+    "settingsSync.ignoredExtensions": [],
+    "chat.editor.fontFamily": "MesloLGL Nerd Font Mono",
+    "workbench.settings.applyToAllProfiles": [],
+    "window.systemColorTheme": "dark",
+    "terminal.integrated.gpuAcceleration": "on",
+    "redhat.telemetry.enabled": false,
+    "editor.fontSize": 13,
+    "debug.console.fontSize": 12,
+    "scm.inputFontSize": 11,
+    "chat.editor.fontSize": 12,
+    "extensions.closeExtensionDetailsOnViewChange": false,
+    "editor.linkedEditing": true,
+    "typescript.suggest.paths": true,
+    "javascript.suggest.paths": true,
+    "markdown.suggest.paths.enabled": true,
+    "files.hotExit": "onExit",
+    "workbench.colorTheme": "Tokyo Night",
+}

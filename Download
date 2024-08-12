@@ -1,0 +1,62 @@
+# Download the files and Create WinConf shortcut on the desktop
+
+$desktopPath = "$($env:USERPROFILE)\Desktop"
+$url = "https://github.com/Qaddoumi/dotfiles/archive/refs/heads/master.zip"
+try{
+    if (Test-Path -Path "$desktopPath\dotfiles-master"){
+        Remove-Item -Recurse "$desktopPath\dotfiles-master" -Force
+    }
+} catch {
+    Write-Error "An error occurred: $_"
+}
+
+try {
+    Invoke-WebRequest -Uri $url -OutFile "$env:TEMP\temp.zip"
+} catch {
+    Write-Error "An error occurred while downloading the file: $_"
+}
+
+try {
+    Expand-Archive -Path "$env:TEMP\temp.zip" -DestinationPath $desktopPath -Force
+} catch {
+    Write-Error "An error occurred while extracting the archive: $_"
+}
+
+try {
+    Remove-Item -Path "$env:TEMP\temp.zip" -Force
+} catch {
+    Write-Error "An error occurred while deleting the file: $_"
+}
+
+# Specify the target PowerShell command
+$command = "Set-Location `"$desktopPath\dotfiles-master`";& .\Install.ps1"
+# Specify the path for the shortcut
+$shortcutPath = Join-Path $desktopPath 'winconf.lnk'
+if (Test-Path -Path "$shortcutPath"){
+    Remove-Item "$shortcutPath" -Force
+}
+# Create a shell object
+$shell = New-Object -ComObject WScript.Shell
+
+# Create a shortcut object
+$shortcut = $shell.CreateShortcut($shortcutPath)
+
+# Invoke-WebRequest -Uri "https://christitus.com/images/logo-full.png" -OutFile "$env:TEMP\cttlogo.png"
+# if (Test-Path -Path "c:\Windows\mylogo.png")
+# {
+#     $shortcut.IconLocation = "c:\Windows\mylogo.png"
+# }
+
+# Set properties of the shortcut
+$shortcut.TargetPath = "powershell.exe"
+$shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -Command `"$command`""
+# Save the shortcut
+$shortcut.Save()
+
+# Make the shortcut have 'Run as administrator' property on
+$bytes = [System.IO.File]::ReadAllBytes($shortcutPath)
+# Set byte value at position 0x15 in hex, or 21 in decimal, from the value 0x00 to 0x20 in hex
+$bytes[0x15] = $bytes[0x15] -bor 0x20
+[System.IO.File]::WriteAllBytes($shortcutPath, $bytes)
+
+Write-Host "Shortcut created at: $shortcutPath"

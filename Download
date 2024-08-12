@@ -1,10 +1,10 @@
 # Download the files and Create WinConf shortcut on the desktop
 
 $desktopPath = "$($env:USERPROFILE)\Desktop"
-$url = "https://github.com/Qaddoumi/dotfiles/archive/refs/heads/master.zip"
+$url = "https://github.com/Qaddoumi/winconfig/archive/refs/heads/main.zip"
 try{
-    if (Test-Path -Path "$desktopPath\dotfiles-master"){
-        Remove-Item -Recurse "$desktopPath\dotfiles-master" -Force
+    if (Test-Path -Path "$desktopPath\winconfig-main"){
+        Remove-Item -Recurse "$desktopPath\winconfig-main" -Force
     }
 } catch {
     Write-Error "An error occurred: $_"
@@ -29,7 +29,7 @@ try {
 }
 
 # Specify the target PowerShell command
-$command = "Set-Location `"$desktopPath\dotfiles-master`";& .\Install.ps1"
+$command = "Set-Location `"$desktopPath\winconfig-main`";& .\Install.ps1"
 # Specify the path for the shortcut
 $shortcutPath = Join-Path $desktopPath 'winconf.lnk'
 if (Test-Path -Path "$shortcutPath"){

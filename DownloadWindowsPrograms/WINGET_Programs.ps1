@@ -10,10 +10,10 @@ $WINGET_PROGRAMS_ID = @(
     # "PDFLabs.PDFtk.Free" # PDF merge
     "OpenJS.NodeJS"  # NodeJS
     # "Google.GoogleDrive"
-    # "Mozilla.Firefox"
     # "Avidemux.Avidemux" # fast video split,cut ..
     # "Mega.MEGASync"
     # "Gyan.FFmpeg"
+    "Mozilla.Firefox"
     "Brave.Brave"
     # "calibre.calibre" # open book files like epub ..
     # "HandBrake.HandBrake" # Video conversion

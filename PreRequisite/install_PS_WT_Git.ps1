@@ -5,6 +5,7 @@ $PROGRAMS_ID = @(
     "JanDeDobbeleer.OhMyPosh" # powershell prompt
     "Microsoft.VisualStudioCode"
     "GitHub.cli"
+    "Nilesoft.Shell" #Powerful context menu manager
 )
 
 foreach($program in $PROGRAMS_ID){

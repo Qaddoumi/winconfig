@@ -1,6 +1,7 @@
 $VSCode_Extensions = @(
     "adpyke.codesnap"
     "bmewburn.vscode-intelephense-client"
+    "code-nature.nilesoft-shell-file-formatter"
     "continue.continue"
     "cweijan.vscode-mysql-client2"
     "dart-code.dart-code"

@@ -33,4 +33,6 @@
 		item(title='help' image=\uE136 cmd-line='/k dotnet -h')
 		item(title='version' cmd-line='/k dotnet --info')
 	}
+	sep
+	item(title='Restart Explorer' cmd=command.restart_explorer() image='%ProgramFiles%\Nilesoft Shell\images\explorer.png')
 }

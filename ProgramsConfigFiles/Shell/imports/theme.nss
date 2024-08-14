@@ -20,4 +20,26 @@
 		opacity = 80
 		offset = 0
 	}
+	border {
+		size = 1
+		color = #454545
+		radius = 2
+		padding = [0, 4, 0, 4]
+	}
+	separator {
+		size = 1
+		color = #454545
+		margin=[0, 4]
+	}
+	item {
+		text {
+			normal = #CCCCCC
+			select = #CCCCCC
+			normal.disabled = #505050
+			select.disabled = #505050
+		}
+		back {
+			select = #12395F
+		}
+	}
 }

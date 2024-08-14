@@ -91,7 +91,7 @@ $scripts = @(
     @{ Name = ".\PreRequisite\SET_EP.ps1"; Description = "Set Execution Policy"; Parameter = ""; SleepTime = 0; MessageAfter = ""}
     @{ Name = ".\DownloadWindowsPrograms\InstallWinAppsWithWinget.ps1"; Description = "Bulk install windows progarm"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
     @{ Name = ".\DownloadWindowsPrograms\UpdatePrograms.ps1"; Description = "Bulk Upgrade windows progarm"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
-    @{ Name = ".\ProgramsConfigFiles\SetWT&PS&Code_settings.ps1"; Description = "Set WindowsTerminal, PowerShell & Code Settings"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
+    @{ Name = ".\ProgramsConfigFiles\SetWT&PS&Code_settings.ps1"; Description = "Set WindowsTerminal, PowerShell, Shell & Code Settings"; Parameter = ""; SleepTime = 0; MessageAfter = "Hold ctrl then click right moush button to refresh shell" }
     @{ Name = ".\WindowsTweaks\ApplyTweaks.ps1"; Description = "Apply Windows Tweaks"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change" }
     @{ Name = ".\WindowsTweaks\RemoveEdge.ps1"; Description = "Remove Microsoft Edge Browser"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change" }
     @{ Name = ".\WindowsTweaks\RemoveTeams.ps1"; Description = "Remove Microsoft Teams"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart if some setting did not change" }

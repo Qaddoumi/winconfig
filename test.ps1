@@ -87,24 +87,9 @@ if ($pwshPath -and $isBuiltInWindowsPowerShell) {
 #         )
 #     }
 
-# @{ Message = ""
-#         Data = @(
-#             @{
-#                 Name = ""
-#                 Type = ""
-#                 Path = ""
-#                 Value = ""
-#             }
-#         )
-#     }
-
-# @{ Message = ""
-#         Data = @(
-#             @{
-#                 Name = ""
-#                 Type = ""
-#                 Path = ""
-#                 Value = ""
-#             }
-#         )
-#     }
+# @{ Name         = ""
+#     Source      = ""
+#     Id          = ""
+#     Installer   = "winget"
+#     Description = ""
+# }

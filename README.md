@@ -24,7 +24,7 @@ Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Down
 ## Install
 - Run the shortcut on the desktop or Run Install.bat
 
-# Special thanks
+# Credit
 - [winget-install](https://github.com/asheroto/winget-install)
 - [winutil](https://github.com/ChrisTitusTech/winutil)
 - --

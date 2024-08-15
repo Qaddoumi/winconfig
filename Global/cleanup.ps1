@@ -1,3 +1,4 @@
+# TODO: Implement this
 function Cleanup {
     <#
         .SYNOPSIS
@@ -43,6 +44,6 @@ function Cleanup {
             Write-Output "Deleted: $Path"
         }
     } catch {
-        # Errors are ignored
+        Write-Warning $PSItem.PSMessageDetails
     }
 }

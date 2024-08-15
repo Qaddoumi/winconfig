@@ -114,7 +114,7 @@ function Show-Menu {
     for ($i = 0; $i -lt $scripts.Count; $i++) {
         Write-Host "$($i + 1). $($scripts[$i].Description)"
     }
-    Write-Host "$($scripts.Count + 1). Clear"
+    Write-Host "$($scripts.Count + 1). Clear Screen"
     Write-Host "$($scripts.Count + 2). Exit"
 
     $choice = Read-Host "Enter the number of your choice"

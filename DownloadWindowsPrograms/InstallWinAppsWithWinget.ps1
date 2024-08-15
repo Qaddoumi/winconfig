@@ -1,36 +1,35 @@
 # Function to install a program using winget
-function Install-Program {
+function Install-ProgramWithWinget {
     param (
-        [string]$program
+        [Hashtable]$program
     )
-    Write-Output "Starting installation check for $program..."
+    Write-Output "Starting installation check for $($program.Name)..."
 
-    Write-Output "Checking if $program is already installed..."
-    $installedPrograms = winget list --id $program | Select-String -Pattern $program
+    Write-Output "Checking if $($program.Name) is already installed..."
+    $installedPrograms = winget list --id $program.Id | Select-String -Pattern $program.Id
     if ($null -ne $installedPrograms) {
         Write-Output "Output from winget list:`n$($installedPrograms -join '; ')"
-        Write-Output "Skipping installation of $program as it is already installed."
+        Write-Output "Skipping installation of $($program.Name) as it is already installed."
     } else {
-        Write-Output "$program is not installed."
-        Write-Output "Attempting to install $program..."
+        Write-Output "$($program.Name) is not installed."
+        Write-Output "Attempting to install $($program.Name)..."
         try {
-            $installArgs = "install --exact --id $program  --source winget --accept-package-agreements --accept-source-agreements"
+            $installArgs = "install --exact --id $($program.Id) --source $($program.Source) --accept-package-agreements --accept-source-agreements"
             $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -PassThru -Wait
             # always use -Wait instaed of $process.WaitForExit() because it did not work well in build in powershell
-            # Check the exit code of the process
             $exitCode = $process.ExitCode
             if ($exitCode -eq 0) {
-                Write-Host "Done Installing (ID): $program Exit code: $($exitCode)"
-            } 
-            elseif ($exitCode -eq  -1978335189){
-                Write-Host "$program No applicable update found"
+                Write-Host "Done Installing (ID): $($program.Id) Exit code: $($exitCode)"
+            }
+            elseif ($exitCode -eq -1978335189){
+                Write-Host "$($program.Id) No applicable update found"
             }
             else {
-                Write-Host "Failed to install $program. Exit code: $($exitCode)"
+                Write-Host "Failed to install $($program.Id). Exit code: $($exitCode)"
             }
-        } 
+        }
         catch {
-            Write-Output "An error occurred while attempting to install $program. Error: $_"
+            Write-Output "An error occurred while attempting to install $($program.Id). Error: $PSItem"
         }
     }
 }
@@ -40,25 +39,21 @@ Write-Output "`n   === Refresh Environment Variabels : ===`n"
 & ..\Global\RefreshEnvironmentVariabels.ps1
 Write-Output "`n================================================================"
 
-# Main script execution
 Write-Output "`n   === Start Installing Programs : ==="
 
 # Source the variable definition script (List of Programs IDs)
 . ".\WINGET_Programs.ps1"
 
-# Installing each program
-for ($i = 0; $i -lt $WINGET_PROGRAMS_ID.Count; $i++) {
-    $program = $WINGET_PROGRAMS_ID[$i]
+for ($i = 0; $i -lt $PROGRAMS_COLLECTION.Count; $i++) {
+    $program = $PROGRAMS_COLLECTION[$i]
 
-    # Calculate the percentage complete
-    $percentComplete = ($i + 1) / $WINGET_PROGRAMS_ID.Count * 100
+    $percentComplete = ($i + 1) / $PROGRAMS_COLLECTION.Count * 100
 
-    # Write progress
-    Write-Progress -Activity "Installing Programs" -Status "Processing program $($i + 1) of $($WINGET_PROGRAMS_ID.Count)" -PercentComplete $percentComplete -CurrentOperation "($($i + 1)/$($WINGET_PROGRAMS_ID.Count))"
+    Write-Progress -Activity "Installing Programs" -Status "Processing program $($i + 1) of $($PROGRAMS_COLLECTION.Count)" -PercentComplete $percentComplete -CurrentOperation "($($i + 1)/$($PROGRAMS_COLLECTION.Count))"
 
     Write-Output "`n================================================================"
-    Write-Output "`n ($($i + 1)/$($WINGET_PROGRAMS_ID.Count)) - Processing program(ID) : $program"
-    Install-Program -program $program
+    Write-Output "`n ($($i + 1)/$($PROGRAMS_COLLECTION.Count)) - Processing program : $($program.Name)"
+    Install-ProgramWithWinget -program $program
 }
 # Ensure the progress bar is cleared after the loop
 Write-Progress -Activity "Installing Programs" -Completed

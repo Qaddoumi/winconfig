@@ -1,4 +1,3 @@
-# Function to install a program using winget
 function Install-ProgramWithWinget {
     param (
         [Hashtable]$program
@@ -19,13 +18,13 @@ function Install-ProgramWithWinget {
             # always use -Wait instaed of $process.WaitForExit() because it did not work well in build in powershell
             $exitCode = $process.ExitCode
             if ($exitCode -eq 0) {
-                Write-Host "Done Installing (ID): $($program.Id) Exit code: $($exitCode)"
+                Write-Host "Done Installing (ID): $($program.Id) Exit code: $exitCode"
             }
             elseif ($exitCode -eq -1978335189){
                 Write-Host "$($program.Id) No applicable update found"
             }
             else {
-                Write-Host "Failed to install $($program.Id). Exit code: $($exitCode)"
+                Write-Host "Failed to install $($program.Id). Exit code: $exitCode"
             }
         }
         catch {
@@ -53,6 +52,10 @@ for ($i = 0; $i -lt $PROGRAMS_COLLECTION.Count; $i++) {
 
     Write-Output "`n================================================================"
     Write-Output "`n ($($i + 1)/$($PROGRAMS_COLLECTION.Count)) - Processing program : $($program.Name)"
+    Write-Output "Descreption(or Message) : $($program.Description)"
+    Write-Output "Id : $($program.Id)"
+    Write-Output "Source : $($program.Source)"
+    Write-Output "Installer : $($program.Installer)"
     Install-ProgramWithWinget -program $program
 }
 # Ensure the progress bar is cleared after the loop

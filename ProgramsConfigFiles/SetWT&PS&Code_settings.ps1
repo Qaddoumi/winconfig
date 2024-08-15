@@ -88,3 +88,4 @@ $items = Get-ChildItem -Path ".\ProgramsConfigFiles\Shell" | ForEach-Object { $P
 foreach ($item in $items) {
     Copy-ItemWithCheck -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell\$item"
 }
+# TODO: copy procmon to Documents

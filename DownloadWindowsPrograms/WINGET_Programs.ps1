@@ -7,12 +7,12 @@ $WINGET_PROGRAMS_ID = @(
     #         Microsoft.VCRedist.2015+.x64, Microsoft.VCRedist.2015+.x86
     #       Use winget search Visual
     # "Microsoft.VisualStudio.2022.Community"
-    "Microsoft.RemoteDesktopClient"
-    "Google.ChromeRemoteDesktopHost"
-    "Canonical.Ubuntu"
-    "sylikc.JPEGView"
-    "File-New-Project.EarTrumpet"
-    "infinitepower18.WSASystemControl"
+    # "Microsoft.RemoteDesktopClient"
+    # "Google.ChromeRemoteDesktopHost"
+    # "Canonical.Ubuntu"
+    # "sylikc.JPEGView"
+    # "File-New-Project.EarTrumpet"
+    # "infinitepower18.WSASystemControl"
     # "PDFLabs.PDFtk.Free" # PDF merge
     "OpenJS.NodeJS"  # NodeJS
     # "Google.GoogleDrive"

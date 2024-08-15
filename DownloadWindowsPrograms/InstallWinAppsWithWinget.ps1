@@ -49,10 +49,21 @@ Write-Output "`n   === Start Installing Programs : ==="
 # Installing each program
 for ($i = 0; $i -lt $WINGET_PROGRAMS_ID.Count; $i++) {
     $program = $WINGET_PROGRAMS_ID[$i]
+
+    # Calculate the percentage complete for Write-Progress
+    $percentComplete = ($i / $WINGET_PROGRAMS_ID.Count) * 100
+
+    # Update the progress bar
+    Write-Progress -Activity "Installing Programs" -Status "Processing program $($i + 1) of $($WINGET_PROGRAMS_ID.Count)" -PercentComplete $percentComplete
+
     Write-Output "`n================================================================"
     Write-Output "`n ($($i + 1)/$($WINGET_PROGRAMS_ID.Count)) - Processing program(ID) : $program"
+
+    # Call your custom function to install the program
     Install-Program -program $program
 }
+# Ensure the progress bar is cleared after the loop
+Write-Progress -Activity "Installing Programs" -Completed
 
 Write-Output "`n================================================================"
 Write-Output "`nInstalling programs Finished."

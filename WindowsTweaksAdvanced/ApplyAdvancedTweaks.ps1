@@ -15,7 +15,7 @@ $scripts = @(
 # and get user choice
 function Show-Menu {
     param (
-        [string]$prompt = 'Select a script to run:'
+        [string]$prompt = '`nSelect a script to run:'
     )
 
     # TODO: make a choice to run everythings.

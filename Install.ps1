@@ -113,7 +113,7 @@ function Show-Menu {
     Write-Host "$($scripts.Count + 1). Clear Screen" -ForegroundColor Cyan
     Write-Host "$($scripts.Count + 2). Exit" -ForegroundColor Cyan
 
-    $choice = Read-Host "Enter the number of your choice" -ForegroundColor Green
+    $choice = Read-Host "Enter the number of your choice"
     return [int]$choice
 }
 

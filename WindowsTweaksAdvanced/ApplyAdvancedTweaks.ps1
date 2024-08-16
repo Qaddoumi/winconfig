@@ -26,7 +26,7 @@ function Show-Menu {
     }
     Write-Host "$($scripts.Count + 1). Return to main menu" -ForegroundColor Cyan
 
-    $choice = Read-Host "Enter the number of your choice" -ForegroundColor Green
+    $choice = Read-Host "Enter the number of your choice"
     return [int]$choice
 }
 

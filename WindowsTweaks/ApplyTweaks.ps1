@@ -149,6 +149,9 @@ if (!(Test-Path 'HKU:')) {
 }
 
 Write-Host "`n================================================================" -NoNewline
+& ".\TimeZoneLanguages.ps1"
+
+Write-Host "`n================================================================" -NoNewline
 . ".\RegistrySettings.ps1"
 foreach($Setting in $RegistrySettings){
     Write-Host "`n================================================================"

@@ -1,8 +1,8 @@
 Try{
     # Erases TEMP Folders
     Write-Host "Delete Temporary Files" -ForegroundColor Green
-    Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-    Get-ChildItem -Path $env:TEMP *.* -Recurse | Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
+    Get-ChildItem -Path "C:\Windows\Temp" *.* -Recurse | Remove-Item -Force -Recurse -ErrorAction Continue
+    Get-ChildItem -Path $env:TEMP *.* -Recurse | Remove-Item -Force -Recurse -ErrorAction Continue
 }
 Catch{
     Write-Warning "Unable to Delete Temporary Files due to unhandled exception"

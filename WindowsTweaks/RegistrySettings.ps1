@@ -320,288 +320,288 @@ $RegistrySettings  = @(
             }
         )
     }
-    @{ Message = "Regional format set to English (Canada) 'yyyy-MM-dd'"
-        Data = @(
-            #For user
-            @{
-                Name = "LocaleName"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "en-CA"
-            }
-            @{
-                Name = "Locale" # English (Canada) Locale ID
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "00001009"
-            }
-            @{
-                Name = "sLanguage"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "ENU"
-            }
-            @{
-                Name = "sCountry"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "Canada"
-            }
-            @{
-                Name = "sShortDate"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "yyyy-MM-dd"
-            }
-            @{
-                Name = "sLongDate"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "dddd, MMMM dd, yyyy"
-            }
-            @{
-                Name = "sTimeFormat"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "HH:mm:ss"
-            }
-            @{
-                Name = "iCountry"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "1"
-            }
-            @{
-                Name = "iDate"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "2"
-            }
-            @{
-                Name = "iTime"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "24"
-            }
-            @{
-                Name = "sCurrency"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "`$"
-            }
-            @{
-                Name = "sMonDecimalSep"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "."
-            }
-            @{
-                Name = "sMonGrouping"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "3;0"
-            }
-            @{
-                Name = "sMonThousandSep"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = ","
-            }
-            @{
-                Name = "iMeasure"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "0"
-            }
-            @{
-                Name = "sDecimal"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "."
-            }
-            @{
-                Name = "sGrouping"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "3;0"
-            }
-            @{
-                Name = "sThousand"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = ","
-            }
-            @{
-                Name = "iNegNumber"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "1"
-            }
-            @{
-                Name = "iCurrDigits"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "2"
-            }
-            @{
-                Name = "iCurrency"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "0"
-            }
-            @{
-                Name = "iLZero"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "1"
-            }
-            @{
-                Name = "iDigits"
-                Type = "String"
-                Path = "HKCU:\Control Panel\International"
-                Value = "2"
-            }
-            #For system
-            @{
-                Name = "LocaleName"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "en-CA"
-            }
-            @{
-                Name = "Locale" # English (Canada) Locale ID
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "00001009"
-            }
-            @{
-                Name = "sLanguage"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "ENU"
-            }
-            @{
-                Name = "sCountry"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "Canada"
-            }
-            @{
-                Name = "sShortDate"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "yyyy-MM-dd"
-            }
-            @{
-                Name = "sLongDate"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "dddd, MMMM dd, yyyy"
-            }
-            @{
-                Name = "sTimeFormat"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "HH:mm:ss"
-            }
-            @{
-                Name = "iCountry"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "1"
-            }
-            @{
-                Name = "iDate"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "2"
-            }
-            @{
-                Name = "iTime"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "24"
-            }
-            @{
-                Name = "sCurrency"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "`$"
-            }
-            @{
-                Name = "sMonDecimalSep"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "."
-            }
-            @{
-                Name = "sMonGrouping"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "3;0"
-            }
-            @{
-                Name = "sMonThousandSep"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = ","
-            }
-            @{
-                Name = "iMeasure"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "0"
-            }
-            @{
-                Name = "sDecimal"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "."
-            }
-            @{
-                Name = "sGrouping"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "3;0"
-            }
-            @{
-                Name = "sThousand"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = ","
-            }
-            @{
-                Name = "iNegNumber"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "1"
-            }
-            @{
-                Name = "iCurrDigits"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "2"
-            }
-            @{
-                Name = "iCurrency"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "0"
-            }
-            @{
-                Name = "iLZero"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "1"
-            }
-            @{
-                Name = "iDigits"
-                Type = "String"
-                Path = "HKU:\.DEFAULT\Control Panel\International"
-                Value = "2"
-            }
-        )
-    }
+    # @{ Message = "Regional format set to English (Canada) 'yyyy-MM-dd'"
+    #     Data = @(
+    #         #For user
+    #         @{
+    #             Name = "LocaleName"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "en-CA"
+    #         }
+    #         @{
+    #             Name = "Locale" # English (Canada) Locale ID
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "00001009"
+    #         }
+    #         @{
+    #             Name = "sLanguage"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "ENU"
+    #         }
+    #         @{
+    #             Name = "sCountry"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "Canada"
+    #         }
+    #         @{
+    #             Name = "sShortDate"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "yyyy-MM-dd"
+    #         }
+    #         @{
+    #             Name = "sLongDate"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "dddd, MMMM dd, yyyy"
+    #         }
+    #         @{
+    #             Name = "sTimeFormat"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "HH:mm:ss"
+    #         }
+    #         @{
+    #             Name = "iCountry"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "1"
+    #         }
+    #         @{
+    #             Name = "iDate"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "2"
+    #         }
+    #         @{
+    #             Name = "iTime"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "24"
+    #         }
+    #         @{
+    #             Name = "sCurrency"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "`$"
+    #         }
+    #         @{
+    #             Name = "sMonDecimalSep"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "."
+    #         }
+    #         @{
+    #             Name = "sMonGrouping"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "3;0"
+    #         }
+    #         @{
+    #             Name = "sMonThousandSep"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = ","
+    #         }
+    #         @{
+    #             Name = "iMeasure"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "0"
+    #         }
+    #         @{
+    #             Name = "sDecimal"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "."
+    #         }
+    #         @{
+    #             Name = "sGrouping"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "3;0"
+    #         }
+    #         @{
+    #             Name = "sThousand"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = ","
+    #         }
+    #         @{
+    #             Name = "iNegNumber"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "1"
+    #         }
+    #         @{
+    #             Name = "iCurrDigits"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "2"
+    #         }
+    #         @{
+    #             Name = "iCurrency"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "0"
+    #         }
+    #         @{
+    #             Name = "iLZero"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "1"
+    #         }
+    #         @{
+    #             Name = "iDigits"
+    #             Type = "String"
+    #             Path = "HKCU:\Control Panel\International"
+    #             Value = "2"
+    #         }
+    #         #For system
+    #         @{
+    #             Name = "LocaleName"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "en-CA"
+    #         }
+    #         @{
+    #             Name = "Locale" # English (Canada) Locale ID
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "00001009"
+    #         }
+    #         @{
+    #             Name = "sLanguage"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "ENU"
+    #         }
+    #         @{
+    #             Name = "sCountry"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "Canada"
+    #         }
+    #         @{
+    #             Name = "sShortDate"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "yyyy-MM-dd"
+    #         }
+    #         @{
+    #             Name = "sLongDate"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "dddd, MMMM dd, yyyy"
+    #         }
+    #         @{
+    #             Name = "sTimeFormat"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "HH:mm:ss"
+    #         }
+    #         @{
+    #             Name = "iCountry"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "1"
+    #         }
+    #         @{
+    #             Name = "iDate"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "2"
+    #         }
+    #         @{
+    #             Name = "iTime"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "24"
+    #         }
+    #         @{
+    #             Name = "sCurrency"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "`$"
+    #         }
+    #         @{
+    #             Name = "sMonDecimalSep"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "."
+    #         }
+    #         @{
+    #             Name = "sMonGrouping"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "3;0"
+    #         }
+    #         @{
+    #             Name = "sMonThousandSep"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = ","
+    #         }
+    #         @{
+    #             Name = "iMeasure"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "0"
+    #         }
+    #         @{
+    #             Name = "sDecimal"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "."
+    #         }
+    #         @{
+    #             Name = "sGrouping"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "3;0"
+    #         }
+    #         @{
+    #             Name = "sThousand"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = ","
+    #         }
+    #         @{
+    #             Name = "iNegNumber"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "1"
+    #         }
+    #         @{
+    #             Name = "iCurrDigits"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "2"
+    #         }
+    #         @{
+    #             Name = "iCurrency"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "0"
+    #         }
+    #         @{
+    #             Name = "iLZero"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "1"
+    #         }
+    #         @{
+    #             Name = "iDigits"
+    #             Type = "String"
+    #             Path = "HKU:\.DEFAULT\Control Panel\International"
+    #             Value = "2"
+    #         }
+    #     )
+    # }
     @{ Message = "Set Time to UTC (Dual Boot)"
         Data = @(
             @{
@@ -612,76 +612,76 @@ $RegistrySettings  = @(
             }
         )
     }
-    @{ Message = "Set Time Zone To Amman Jordan"
-        Data = @(
-            @{
-                Name = "Bias"
-                Value = 0xffffff4c
-                Type = "DWord"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "DaylightBias"
-                Value = 0xffffffc4
-                Type = "DWord"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "DaylightStart"
-                Value = [byte[]]@(0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00)
-                Type = "Binary"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "StandardStart"
-                Value = [byte[]]@(0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00)
-                Type = "Binary"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "StandardBias"
-                Value = 0x00000000
-                Type = "DWord"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "DynamicDaylightTimeDisabled"
-                Value = 0x00000000
-                Type = "DWord"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "ActiveTimeBias"
-                Value = 0xffffff4c
-                Type = "DWord"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "RealTimeIsUniversal"
-                Value = 0x00000001
-                Type = "DWord"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "DaylightName"
-                Value = "@tzres.dll,-334"
-                Type = "String"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "StandardName"
-                Value = "@tzres.dll,-335"
-                Type = "String"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-            @{
-                Name = "TimeZoneKeyName"
-                Value = "Jordan Standard Time"
-                Type = "String"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-            }
-        )
-    }
+    # @{ Message = "Set Time Zone To Amman Jordan"
+    #     Data = @(
+    #         @{
+    #             Name = "Bias"
+    #             Value = 0xffffff4c
+    #             Type = "DWord"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "DaylightBias"
+    #             Value = 0xffffffc4
+    #             Type = "DWord"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "DaylightStart"
+    #             Value = [byte[]]@(0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00)
+    #             Type = "Binary"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "StandardStart"
+    #             Value = [byte[]]@(0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00)
+    #             Type = "Binary"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "StandardBias"
+    #             Value = 0x00000000
+    #             Type = "DWord"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "DynamicDaylightTimeDisabled"
+    #             Value = 0x00000000
+    #             Type = "DWord"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "ActiveTimeBias"
+    #             Value = 0xffffff4c
+    #             Type = "DWord"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "RealTimeIsUniversal"
+    #             Value = 0x00000001
+    #             Type = "DWord"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "DaylightName"
+    #             Value = "@tzres.dll,-334"
+    #             Type = "String"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "StandardName"
+    #             Value = "@tzres.dll,-335"
+    #             Type = "String"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #         @{
+    #             Name = "TimeZoneKeyName"
+    #             Value = "Jordan Standard Time"
+    #             Type = "String"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #         }
+    #     )
+    # }
     @{ Message = "Disable Wifi-Sense"
         Data = @(
             @{
@@ -971,7 +971,7 @@ $RegistrySettings  = @(
             }
         )
     }
-    @{ Message = "Add `"Run with graphics processor`" to context menu" # For NVIDIA
+    @{ Message = "Add `"Run with graphics processor`" to context menu(For NVIDIA)" # For NVIDIA
         Data   = @(
             @{
                 Name  = "ShowContextMenu"

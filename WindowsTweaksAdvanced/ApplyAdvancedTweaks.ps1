@@ -15,7 +15,7 @@ $scripts = @(
 # and get user choice
 function Show-Menu {
     param (
-        [string]$prompt = '`nSelect a script to run:'
+        [string]$prompt = "`nSelect a script to run:"
     )
 
     # TODO: make a choice to run everythings.
@@ -79,7 +79,7 @@ do {
         }
     }
     elseif ($choice -eq $scripts.Count + 1) {
-        Write-Host "Returning to main menu`n" -ForegroundColor Green
+        Write-Host "Returning to main menu" -ForegroundColor Green
         exit
     }
     else {

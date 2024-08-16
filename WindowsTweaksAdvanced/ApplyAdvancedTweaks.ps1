@@ -20,13 +20,13 @@ function Show-Menu {
 
     # TODO: make a choice to run everythings.
     # 1. Run all scripts
-    Write-Host $prompt
+    Write-Host $prompt -ForegroundColor Green
     for ($i = 0; $i -lt $scripts.Count; $i++) {
         Write-Host "$($i + 1). $($scripts[$i].Description)" -ForegroundColor Cyan
     }
-    Write-Host "$($scripts.Count + 1). Return to main menu" -ForegroundColor Green
+    Write-Host "$($scripts.Count + 1). Return to main menu" -ForegroundColor Cyan
 
-    $choice = Read-Host "Enter the number of your choice"
+    $choice = Read-Host "Enter the number of your choice" -ForegroundColor Green
     return [int]$choice
 }
 

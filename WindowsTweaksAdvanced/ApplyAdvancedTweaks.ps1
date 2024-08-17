@@ -7,6 +7,7 @@ $scripts = @(
     @{ Name = ".\Hibernation.ps1"; Description = "Enabling Ultimate Performance, Turn on hibernation and stop sleep mode"; Parameter = ""; SleepTime = 2; MessageAfter = "" }
     @{ Name = ".\SET_DNS.ps1"; Description = "Choose DNS to set to DHCP or Google or AdGuard_Ads_Trackers or etc..."; Parameter = ""; SleepTime = 2; MessageAfter = "" }
     @{ Name = ".\Teredo.ps1"; Description = "Disable Teredo (ipv6 feature that can cause additional latency)"; Parameter = ""; SleepTime = 2; MessageAfter = "" }
+    @{ Name = ".\LegacyF8BootRecovery.ps1"; Description = "Enables Advanced Boot Options screen that lets you start Windows in advanced troubleshooting modes"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
     @{ Name = ".\RemoveEdge.ps1"; Description = "Remove Microsoft Edge Browser"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change" }
     @{ Name = ".\RemoveTeams.ps1"; Description = "Remove Microsoft Teams"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart if some setting did not change" }
     @{ Name = "..\WindowsCleanupMaintenance\Maintenance.ps1"; Description = "Daily Registry Backup AND Create Restore Point"; Parameter = ""; SleepTime = 0; MessageAfter = "" }

@@ -3,6 +3,8 @@
 #region Define the scripts
 #  and their descriptions
 $scripts = @(
+    @{ Name = ".\TimeZoneLanguages.ps1"; Description = "Setting date, date format, timezone and location"; Parameter = ""; SleepTime = 2; MessageAfter = "" }
+    @{ Name = ".\Hibernation.ps1"; Description = "Enabling Ultimate Performance, Turn on hibernation and stop sleep mode"; Parameter = ""; SleepTime = 2; MessageAfter = "" }
     @{ Name = ".\RemoveEdge.ps1"; Description = "Remove Microsoft Edge Browser"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change" }
     @{ Name = ".\RemoveTeams.ps1"; Description = "Remove Microsoft Teams"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart if some setting did not change" }
     @{ Name = "..\WindowsCleanupMaintenance\Maintenance.ps1"; Description = "Daily Registry Backup AND Create Restore Point"; Parameter = ""; SleepTime = 0; MessageAfter = "" }

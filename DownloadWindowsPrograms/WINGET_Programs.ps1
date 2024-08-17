@@ -250,4 +250,10 @@
     #     Installer = "winget"
     #     Description = ""
     # }
+    @{ Name         = "ZoomIt"
+        Source      = "winget"
+        Id          = "Microsoft.Sysinternals.ZoomIt"
+        Installer   = "winget"
+        Description = "screen zoom, annotation, and recording tool for technical presentations and demos"
+    }
 )

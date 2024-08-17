@@ -602,16 +602,16 @@ $RegistrySettings  = @(
     #         }
     #     )
     # }
-    @{ Message = "Set Time to UTC (Dual Boot)"
-        Data = @(
-            @{
-                Name = "RealTimeIsUniversal"
-                Type = "DWord"
-                Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-                Value = "1"
-            }
-        )
-    }
+    # @{ Message = "Set Time to UTC (Dual Boot)"
+    #     Data = @(
+    #         @{
+    #             Name = "RealTimeIsUniversal"
+    #             Type = "DWord"
+    #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    #             Value = "1"
+    #         }
+    #     )
+    # }
     # @{ Message = "Set Time Zone To Amman Jordan"
     #     Data = @(
     #         @{

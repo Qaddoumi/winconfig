@@ -1,6 +1,5 @@
 # TODO: Implement this
-
-function Invoke-WinUtilFeatureInstall {
+function Invoke-FeatureInstall {
     <#
 
     .SYNOPSIS
@@ -59,9 +58,6 @@ function Invoke-WinUtilFeatureInstall {
 }
 $f = @(Content = "NFS - Network File System"
     Description = "Network File System (NFS) is a mechanism for storing files on a network."
-    category = "Features"
-    panel = "1"
-    Order = "a014_"
     feature = {
         "ServicesForNFS-ClientOnly"
         "ClientForNFS-Infrastructure"
@@ -77,12 +73,13 @@ $f = @(Content = "NFS - Network File System"
 )
 $f = @(Content = "Windows Sandbox"
     Description = "Windows Sandbox is a lightweight virtual machine that provides a temporary desktop environment to safely run applications and programs in isolation."
+    Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online -NoRestart
+    Disable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -Online -NoRestart
 )
 $f = @{ Content = "Windows Subsystem for Linux"
-        Description          = "Windows Subsystem for Linux is an optional feature of Windows that allows Linux programs to run natively on Windows without the need for a separate virtual machine or dual booting."
-        feature              = @(
-            "VirtualMachinePlatform"
-            "Microsoft-Windows-Subsystem-Linux"
+    Description = "Windows Subsystem for Linux is an optional feature of Windows that allows Linux programs to run natively on Windows without the need for a separate virtual machine or dual booting."
+    feature     = @(
+        "VirtualMachinePlatform"
+        "Microsoft-Windows-Subsystem-Linux"
     )
 }
-$f=$f

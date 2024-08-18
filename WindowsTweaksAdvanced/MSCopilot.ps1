@@ -1,8 +1,8 @@
 . "..\Global\Set-Registry.ps1"
 
-# TODO: Implement this
-Write-Host "Disables MS Copilot AI built into Windows since 23H2" -ForegroundColor Green
+Write-Host "Disables MS Copilot AI built into Windows since 23H2, and turn off Recall" -ForegroundColor Green
 $RegData = @(
+#region Disable Copilot
     @{
         Name = "TurnOffWindowsCopilot"
         Type = "DWord"
@@ -24,30 +24,59 @@ $RegData = @(
         Value = "0"
         OriginalValue = "1"
     }
+#region Disable Windows Recall
+    @{
+        Name  = "DisableAIDataAnalysis"
+        Type  = "DWord"
+        Path  = "HKU:\DefaultUser\Software\Policies\Microsoft\Windows\WindowsAI"
+        Value = "1"
+    }
+    @{
+        Name  = "DisableAIDataAnalysis"
+        Type  = "DWord"
+        Path  = "HKCU:\Software\Policies\Microsoft\Windows\WindowsAI"
+        Value = "1"
+    }
+    @{
+        Name  = "DisableAIDataAnalysis"
+        Type  = "DWord"
+        Path  = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI"
+        Value = "1"
+    }
+    @{
+        Name  = "TurnOffSavingSnapshots"
+        Type  = "DWord"
+        Path  = "HKU:\DefaultUser\Software\Policies\Microsoft\Windows\Windows AI"
+        Value = "1"
+    }
+    @{
+        Name  = "TurnOffSavingSnapshots"
+        Type  = "DWord"
+        Path  = "HKCU:\DefaultUser\Software\Policies\Microsoft\Windows\Windows AI"
+        Value = "1"
+    }
+    @{
+        Name  = "TurnOffSavingSnapshots"
+        Type  = "DWord"
+        Path  = "HKLM:\DefaultUser\Software\Policies\Microsoft\Windows\Windows AI"
+        Value = "1"
+    }
 )
+
 foreach($entry in $RegData){
     Set-Registry -Name $entry.Name -Path $entry.Path -Type $entry.Type -Value $entry.Value
 }
-Try{
-    Write-Host "Remove Copilot" -ForegroundColor Gray
-    dism /online /remove-package /package-name:Microsoft.Windows.Copilot
-    <#
-    UndoScript =
-        Write-Host "Install Copilot"
-        dism /online /add-package /package-name:Microsoft.Windows.Copilot
-    #>
+
+try{
+    Write-Host "`nRemove Copilot Package" -ForegroundColor Cyan
+    $Name = "Microsoft.Windows.Ai.Copilot.Provider"
+    Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
+    Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+    $Name = "Microsoft.Windows.Copilot"
+    Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
+    Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
 }
-Catch{
+catch{
     Write-Warning "Unable to Remove Copilot due to unhandled exception"
     Write-Warning $PSItem.Exception.StackTrace
 }
-
-:: Disables Windows Recall on Copilot+ PC - Credit Britec09
-reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsAI" /f
-reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d 1 /f
-reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\Windows AI" /v "TurnOffSavingSnapshots" /t REG_DWORD /d 1 /f
-
-:: Disables Windows Recall on Copilot+ PC - Credit Britec09
-reg.exe add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI" /f
-reg.exe add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d 1 /f
-reg.exe add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Windows AI" /v "TurnOffSavingSnapshots" /t REG_DWORD /d 1 /f

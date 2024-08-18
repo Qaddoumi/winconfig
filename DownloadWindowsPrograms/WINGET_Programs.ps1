@@ -1,62 +1,39 @@
 ﻿$PROGRAMS_COLLECTION = @(
-    # TODO: Add VisualStudio tools like Microsoft.VisualStudio.2022.BuildTools,
-    #         Microsoft.DotNet.AspNetCore.8, Microsoft.DotNet.DesktopRuntime.8,
-    #         Microsoft.DotNet.Runtime.8, Microsoft.DotNet.SDK.8,
-    #         Microsoft.VCRedist.2015+.x64, Microsoft.VCRedist.2015+.x86
-    #       Use winget search Visual
-    # @{ Name = "Visual Studio Community 2022"
-    #     Source = "winget"
-    #     Id = "Microsoft.VisualStudio.2022.Community"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    # @{ Name = "Visual Studio 2022 Build Tools"
-    #     Source = "winget"
-    #     Id = "Microsoft.VisualStudio.2022.BuildTools"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    # @{ Name = ".NET AspNetCore 8"
-    #     Source = "winget"
-    #     Id = "Microsoft.DotNet.AspNetCore.8"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    # @{ Name = ".NET Desktop Runtime 8"
-    #     Source = "winget"
-    #     Id = "Microsoft.DotNet.DesktopRuntime.8"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    # @{ Name = ".NET Runtime 8"
-    #     Source = "winget"
-    #     Id = "Microsoft.DotNet.Runtime.8"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    # @{ Name = ".NET SDK 8"
-    #     Source = "winget"
-    #     Id = "Microsoft.DotNet.SDK.8"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    # @{ Name = "Microsoft Visual C++ 2015-2022 Redistributable (x86)"
-    #     Source = "winget"
-    #     Id = "Microsoft.VCRedist.2015+.x64"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    # @{ Name = "Microsoft Visual C++ 2015-2022 Redistributable (x64)"
-    #     Source = "winget"
-    #     Id = "Microsoft.VCRedist.2015+.x86"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
+    @{ Name         = "Visual Studio Community 2022"
+        Source      = "winget"
+        Id          = "Microsoft.VisualStudio.2022.Community"
+        Installer   = "winget"
+        Description = ""
+    }
+    @{ Name         = "Visual Studio 2022 Build Tools"
+        Source      = "winget"
+        Id          = "Microsoft.VisualStudio.2022.BuildTools"
+        Installer   = "winget"
+        Description = "standalone toolset, build and compile applications without having to install the full Visual Studio Integrated Development Environment (IDE)"
+    }
     # @{ Name         = "Remote Desktop Client"
     #     Source      = "winget"
     #     Id          = "Microsoft.RemoteDesktopClient"
     #     Installer   = "winget"
     #     Description = ""
+    # }
+    @{ Name         = "Microsoft Visual C++ 2015-2022 Redistributable (x86)"
+        Source      = "winget"
+        Id          = "Microsoft.VCRedist.2015+.x64"
+        Installer   = "winget"
+        Description = ""
+    }
+    @{ Name         = "Microsoft Visual C++ 2015-2022 Redistributable (x64)"
+        Source      = "winget"
+        Id          = "Microsoft.VCRedist.2015+.x86"
+        Installer   = "winget"
+        Description = ""
+    }
+    # @{ Name         = "Microsoft Garage Mouse without Borders "
+    #     Source      = "winget"
+    #     Id          = "Microsoft.MouseWithoutBorders"
+    #     Installer   = "winget"
+    #     Description = "control multiple (windows only) computers using a single mouse and keyboard,Clipboard Sharing,File Drag-and-Drop and work across different networks with some additional setup"
     # }
     @{ Name         = "Google Chrome"
         Source      = "winget"
@@ -73,6 +50,18 @@
     @{ Name         = "Google Drive"
         Source      = "winget"
         Id          = "Google.GoogleDrive"
+        Installer   = "winget"
+        Description = ""
+    }
+    @{ Name         = "Google Play Games beta"
+        Source      = "winget"
+        Id          = "Google.PlayGames.Beta"
+        Installer   = "winget"
+        Description = ""
+    }
+    @{ Name         = "Android Studio"
+        Source      = "winget"
+        Id          = "Google.AndroidStudio"
         Installer   = "winget"
         Description = ""
     }
@@ -262,6 +251,12 @@
     #     Installer = "winget"
     #     Description = ""
     # }
+    # @{ Name         = "ZoomRemoteControl"
+    #     Source      = "winget"
+    #     Id          = "Zoom.ZoomRemoteControl"
+    #     Installer   = "winget"
+    #     Description = "Remotely control another participant's computer"
+    # }
     @{ Name         = "ZoomIt"
         Source      = "winget"
         Id          = "Microsoft.Sysinternals.ZoomIt"
@@ -279,5 +274,11 @@
         Id          = "Avidemux.Avidemux"
         Installer   = "winget"
         Description = "Fast video split, cut, etc."
+    }
+    @{ Name         = "7-Zip"
+        Source      = "winget"
+        Id          = "7zip.7zip"
+        Installer   = "winget"
+        Description = ""
     }
 )

@@ -4,7 +4,6 @@ $PROGRAMS_ID = @(
     "Git.Git"
     "JanDeDobbeleer.OhMyPosh" # powershell prompt
     "Microsoft.VisualStudioCode"
-    "GitHub.cli"
     "Nilesoft.Shell" #Powerful context menu manager
 )
 

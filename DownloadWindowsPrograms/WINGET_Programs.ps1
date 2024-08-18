@@ -1,10 +1,4 @@
 ﻿$PROGRAMS_COLLECTION = @(
-    @{ Name         = "Process Monitor (procmon)"
-        Source      = "winget"
-        Id          = "Microsoft.Sysinternals.ProcessMonitor"
-        Installer   = "winget"
-        Description = "Log real-time file system, registry, and process/thread activity"
-    }
     # TODO: Add VisualStudio tools like Microsoft.VisualStudio.2022.BuildTools,
     #         Microsoft.DotNet.AspNetCore.8, Microsoft.DotNet.DesktopRuntime.8,
     #         Microsoft.DotNet.Runtime.8, Microsoft.DotNet.SDK.8,
@@ -64,27 +58,27 @@
     #     Installer   = "winget"
     #     Description = ""
     # }
-    # @{ Name         = "Chrome Remote Desktop Host"
-    #     Source      = "winget"
-    #     Id          = "Google.ChromeRemoteDesktopHost"
-    #     Installer   = "winget"
-    #     Description = ""
-    # }
-    # @{ Name         = "Ubuntu"
-    #     Source      = "winget"
-    #     Id          = "Canonical.Ubuntu"
-    #     Installer   = "winget"
-    #     Description = ""
-    # }
-    # @{ Name         = "JPEGView"
-    #     Source      = "winget"
-    #     Id          = "sylikc.JPEGView"
-    #     Installer   = "winget"
-    #     Description = ""
-    # }
-    # @{ Name         = "EarTrumpet"
-    #     Source      = "winget"
-    #     Id          = "File-New-Project.EarTrumpet"
+    @{ Name         = "Google Chrome"
+        Source      = "winget"
+        Id          = "Google.Chrome"
+        Installer   = "winget"
+        Description = "Browser"
+    }
+    @{ Name         = "Chrome Remote Desktop Host"
+        Source      = "winget"
+        Id          = "Google.ChromeRemoteDesktopHost"
+        Installer   = "winget"
+        Description = ""
+    }
+    @{ Name         = "Google Drive"
+        Source      = "winget"
+        Id          = "Google.GoogleDrive"
+        Installer   = "winget"
+        Description = ""
+    }
+    # @{ Name         = "Ubuntu 24.04 LTS"
+    #     Source      = "msstore"
+    #     Id          = "9NZ3KLHXDJP5"
     #     Installer   = "winget"
     #     Description = ""
     # }
@@ -100,23 +94,23 @@
         Installer   = "winget"
         Description = "PDF merge"
     }
+    # @{ Name         = "JPEGView"
+    #     Source      = "winget"
+    #     Id          = "sylikc.JPEGView"
+    #     Installer   = "winget"
+    #     Description = ""
+    # }
+    @{ Name         = "EarTrumpet"
+        Source      = "winget"
+        Id          = "File-New-Project.EarTrumpet"
+        Installer   = "winget"
+        Description = ""
+    }
     @{ Name         = "Node.js"
         Source      = "winget"
         Id          = "OpenJS.NodeJS"
         Installer   = "winget"
         Description = "NodeJS"
-    }
-    # @{ Name = "Google Drive"
-    #     Source = "winget"
-    #     Id = "Google.GoogleDrive"
-    #     Installer = "winget"
-    #     Description = ""
-    # }
-    @{ Name         = "Avidemux"
-        Source      = "winget"
-        Id          = "Avidemux.Avidemux"
-        Installer   = "winget"
-        Description = "Fast video split, cut, etc."
     }
     # @{ Name = "MEGAsync"
     #     Source = "winget"
@@ -130,66 +124,78 @@
         Installer   = "winget"
         Description = ""
     }
-    @{ Name         = "Firefox"
-        Source      = "winget"
-        Id          = "Mozilla.Firefox"
-        Installer   = "winget"
-        Description = ""
-    }
-    @{ Name         = "Brave"
-        Source      = "winget"
-        Id          = "Brave.Brave"
-        Installer   = "winget"
-        Description = ""
-    }
     # @{ Name = "Calibre"
     #     Source = "winget"
     #     Id = "calibre.calibre"
     #     Installer = "winget"
     #     Description = "Open book files like epub"
     # }
+    @{ Name         = "Brave"
+        Source      = "winget"
+        Id          = "Brave.Brave"
+        Installer   = "winget"
+        Description = ""
+    }
     # @{ Name = "HandBrake"
     #     Source = "winget"
     #     Id = "HandBrake.HandBrake"
     #     Installer = "winget"
     #     Description = "Video conversion"
     # }
+    @{ Name         = "GitHub CLI"
+        Source      = "winget"
+        Id          = "GitHub.cli"
+        Installer   = "winget"
+        Description = ""
+    }
     # @{ Name = "Kdenlive"
     #     Source = "winget"
     #     Id = "KDE.Kdenlive"
     #     Installer = "winget"
     #     Description = "Video editor, production"
     # }
+    @{ Name         = "Firefox"
+        Source      = "winget"
+        Id          = "Mozilla.Firefox"
+        Installer   = "winget"
+        Description = ""
+    }
     # @{ Name = "ONLYOFFICE Desktop Editors"
     #     Source = "winget"
     #     Id = "ONLYOFFICE.DesktopEditors"
     #     Installer = "winget"
     #     Description = "PDF Editor"
     # }
-    # @{ Name = "LibreOffice"
-    #     Source = "winget"
-    #     Id = "TheDocumentFoundation.LibreOffice"
-    #     Installer = "winget"
-    #     Description = "For Documents"
-    # }
+    @{ Name         = "LibreOffice"
+        Source      = "winget"
+        Id          = "TheDocumentFoundation.LibreOffice"
+        Installer   = "winget"
+        Description = "For Documents"
+    }
     # @{ Name = "NAPS2"
     #     Source = "winget"
     #     Id = "Cyanfish.NAPS2"
     #     Installer = "winget"
     #     Description = "OCR and merge for pdf"
     # }
-    # @{ Name = "OBS Studio"
-    #     Source = "winget"
-    #     Id = "OBSProject.OBSStudio"
-    #     Installer = "winget"
-    #     Description = "Video stream and record"
-    # }
+    @{ Name         = "OBS Studio"
+        Source      = "winget"
+        Id          = "OBSProject.OBSStudio"
+        Installer   = "winget"
+        Description = "Video stream and record"
+    }
     # @{ Name = "VirtualBox"
     #     Source = "winget"
     #     Id = "Oracle.VirtualBox"
     #     Installer = "winget"
     #     Description = "Don't forget to install VB Extensions"
     # }
+    @{ Name         = "Process Monitor (procmon)"
+        Source      = "winget"
+        Id          = "Microsoft.Sysinternals.ProcessMonitor"
+        Installer   = "winget"
+        Description = "Log real-time file system, registry, and process/thread activity"
+    }
     # @{ Name = "Postman"
     #     Source = "winget"
     #     Id = "Postman.Postman"
@@ -214,36 +220,42 @@
         Installer   = "winget"
         Description = "File copy, paste"
     }
-    @{ Name = "Tor Browser"
-        Source = "winget"
-        Id = "TorProject.TorBrowser"
-        Installer = "winget"
-        Description = ""
-    }
-    @{ Name         = "Revo Uninstaller"
-        Source      = "winget"
-        Id          = "RevoUninstaller.RevoUninstaller"
-        Installer   = "winget"
-        Description = "Fully uninstall Windows programs(with leftover)"
-    }
     # @{ Name = "qBittorrent"
     #     Source = "winget"
     #     Id = "qBittorrent.qBittorrent"
     #     Installer = "winget"
     #     Description = ""
     # }
+    @{ Name         = "Revo Uninstaller"
+        Source      = "winget"
+        Id          = "RevoUninstaller.RevoUninstaller"
+        Installer   = "winget"
+        Description = "Fully uninstall Windows programs(with leftover)"
+    }
     # @{ Name = "VLC"
     #     Source = "winget"
     #     Id = "VideoLAN.VLC"
     #     Installer = "winget"
     #     Description = ""
     # }
-    # @{ Name = "GeForce Now"
+    @{ Name         = "Tor Browser"
+        Source      = "winget"
+        Id          = "TorProject.TorBrowser"
+        Installer   = "winget"
+        Description = ""
+    }
+    # @{ Name = "NVIDIA GeForce NOW"
     #     Source = "winget"
     #     Id = "Nvidia.GeForceNow"
     #     Installer = "winget"
     #     Description = ""
     # }
+    @{ Name         = "AnyBurn"
+        Source      = "winget"
+        Id          = "PowerSoftware.AnyBurn"
+        Installer   = "winget"
+        Description = "CD / DVD / Blu-ray burning, Append data to disc, Create or edit image files"
+    }
     # @{ Name = "Zoom"
     #     Source = "winget"
     #     Id = "Zoom.Zoom"
@@ -255,5 +267,17 @@
         Id          = "Microsoft.Sysinternals.ZoomIt"
         Installer   = "winget"
         Description = "screen zoom, annotation, and recording tool for technical presentations and demos"
+    }
+    # @{ Name         = "Looking Glass"
+    #     Source      = "winget"
+    #     Id          = "gnif.LookingGlass"
+    #     Installer   = "winget"
+    #     Description = ""
+    # }
+    @{ Name         = "Avidemux"
+        Source      = "winget"
+        Id          = "Avidemux.Avidemux"
+        Installer   = "winget"
+        Description = "Fast video split, cut, etc."
     }
 )

@@ -250,12 +250,12 @@ $RegistrySettings  = @(
                 Type = "DWord"
                 Path = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config"
             }
-            @{
-                Name = "RequestInfoType"
-                Value = 0
-                Type = "DWord"
-                Path = "HKU:\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization"
-            }
+            # @{
+            #     Name = "RequestInfoType"
+            #     Value = 0
+            #     Type = "DWord"
+            #     Path = "HKU:\S-1-5-20\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization"
+            # }
             @{
                 Name = "DownloadMode"
                 Value = 0

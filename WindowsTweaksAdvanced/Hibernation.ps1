@@ -5,8 +5,10 @@ function Enable-UltimatePerformance {
     .PARAMETER State
         Indicates whether to enable or disable the Ultimate Performance power scheme
     #>
-    $state = "Enable"
-    Try {
+    param(
+        $state = "Enable"
+    )
+    try {
         # Check if Ultimate Performance plan is installed
         $ultimatePlan = powercfg -list | Select-String -Pattern "Ultimate Performance"
         if ($state -eq "Enable") {
@@ -45,7 +47,7 @@ function Enable-UltimatePerformance {
             }
         }
     }
-    Catch {
+    catch {
         Write-Warning $PSItem.Exception.Message
     }
 }

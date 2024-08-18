@@ -1,6 +1,7 @@
 Write-Host "Remove ALL MS Store Apps - NOT RECOMMENDED" -ForegroundColor Green
 Write-Host "USE WITH CAUTION!!!!! This will remove ALL Microsoft store apps other than the essentials to make winget work. Games installed by MS Store ARE INCLUDED!" -ForegroundColor DarkYellow
-
+# TODO: Run to get all packages
+# Get-AppxPackage | Select {$_.Name}
 $Appx = @(
     "Microsoft.Microsoft3DViewer"
     "Microsoft.AppConnector"

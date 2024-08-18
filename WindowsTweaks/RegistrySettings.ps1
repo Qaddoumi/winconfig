@@ -230,6 +230,12 @@ $RegistrySettings  = @(
                 Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
                 Value = "0"
             }
+            @{
+                Name  = "AllowNewsAndInterests"
+                Type = "DWord"
+                Path  = "HKLM:\Software\Policies\Microsoft\Dsh"
+                Value = "0"
+            }
         )
     }
     @{ Message = "Enabling Task View"

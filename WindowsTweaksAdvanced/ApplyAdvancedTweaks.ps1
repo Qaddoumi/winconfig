@@ -1,5 +1,3 @@
-#TODO: Not finished
-
 #region Define the scripts
 #  and their descriptions
 $scripts = @(
@@ -11,10 +9,9 @@ $scripts = @(
     @{ Name = ".\MSCopilot.ps1"; Description = "Remove MSCopilot,and turn off Recall"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change" }
     @{ Name = ".\RemoveEdge.ps1"; Description = "Remove Microsoft Edge Browser"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change" }
     @{ Name = ".\RemoveTeams.ps1"; Description = "Remove Microsoft Teams"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart if some setting did not change" }
+    @{ Name = ".\RemoveMSStoreApps.ps1"; Description = "Remove Microsoft Store Apps"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
     @{ Name = "..\WindowsCleanupMaintenance\Maintenance.ps1"; Description = "Daily Registry Backup AND Create Restore Point"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
-    @{ Name = "..\WindowsCleanupMaintenance\DeleteTempFiles.ps1"; Description = "Delete Temp files and disk cleanup"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
-
-    # @{ Name = ".\Install_winget.ps1"; Description = ""; Parameter = ""; SleepTime = 0; MessageAfter = "" }
+    @{ Name = "..\WindowsCleanupMaintenance\DeleteTempFiles.ps1"; Description = "Delete Temp files and Run disk cleanup"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
 )
 
 #region Display Menu

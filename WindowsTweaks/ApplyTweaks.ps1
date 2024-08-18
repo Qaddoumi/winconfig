@@ -129,9 +129,6 @@ foreach($service in $ServicesCollection.service){
 # Source the variable definition script (List of reg,sch,and function)
 # . ".\DisableTelemetry.ps1"
 
-Write-Host "`n================================================================"
-& .\RemoveMSStoreApps.ps1
-
 Write-Host "`n================================================================" -ForegroundColor DarkYellow
 . "..\Global\TimeoutInput.ps1"
 

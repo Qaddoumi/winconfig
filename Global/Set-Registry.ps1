@@ -1,5 +1,5 @@
 # To Use "HKU:\" reg path instaed of "Registry::HKU\"
-if (!(Test-Path 'HKU:')) { 
+if (!(Test-Path 'HKU:')) {
     Write-Host "Creating HKU: drive..." -ForegroundColor Yellow
     New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS
 }

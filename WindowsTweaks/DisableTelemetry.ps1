@@ -249,7 +249,7 @@ $RegistrySettingsTele = @(
 )
 
 $ScheduledTaskSettings = @(
-    @{ 
+    @{
         Name          = "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser"
         State         = "Disabled"
         OriginalState = "Enabled"
@@ -406,7 +406,7 @@ function Disable-Telemetry {
         Write-Warning $PSItem.Exception.Message
     }
 
-    # removes a specific diagnostic log file if it exists 
+    # removes a specific diagnostic log file if it exists
     # and denies SYSTEM access to the AutoLogger directory
     Write-Host "removes diagnostic log file and denies SYSTEM access to the AutoLogger directory" -ForegroundColor Green
     Try {

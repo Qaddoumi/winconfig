@@ -4,7 +4,7 @@
     #         Microsoft.DotNet.Runtime.8, Microsoft.DotNet.SDK.8,
     #         Microsoft.VCRedist.2015+.x64, Microsoft.VCRedist.2015+.x86
     #       Use winget search Visual
-    # @{ Name = "Visual Studio 2022 Community"
+    # @{ Name = "Visual Studio Community 2022"
     #     Source = "winget"
     #     Id = "Microsoft.VisualStudio.2022.Community"
     #     Installer = "winget"
@@ -40,13 +40,13 @@
     #     Installer = "winget"
     #     Description = ""
     # }
-    # @{ Name = "Visual C++ Redistributable 2015+ x64"
+    # @{ Name = "Microsoft Visual C++ 2015-2022 Redistributable (x86)"
     #     Source = "winget"
     #     Id = "Microsoft.VCRedist.2015+.x64"
     #     Installer = "winget"
     #     Description = ""
     # }
-    # @{ Name = "Visual C++ Redistributable 2015+ x86"
+    # @{ Name = "Microsoft Visual C++ 2015-2022 Redistributable (x64)"
     #     Source = "winget"
     #     Id = "Microsoft.VCRedist.2015+.x86"
     #     Installer = "winget"

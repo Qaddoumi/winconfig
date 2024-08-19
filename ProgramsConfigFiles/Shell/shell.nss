@@ -26,8 +26,8 @@ import 'imports/modify.nss'
 $ico_winget = icon.res(path.combine(sys.bin, 'shell32.dll'), 122)
 menu(title="winget" type='Taskbar' where=sys.version.build>=1809 image=ico_winget)
 {
-	item(title='Download Qaddoumi winconfig' image=image.glyph(\uE142) sep='after'
-		admin cmd='powershell.exe' args='irm https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | iex')
+	item(title='Download winconfig' image=image.glyph(\uE142) sep='after'
+		admin cmd='powershell.exe' args='Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression')
 	separator()
 	item(title='winstall.app' image=image.glyph(\uE11F) cmd='https://winstall.app/')
 	item(title='winget.run' image=image.glyph(\uE11F) cmd='https://winget.run/')

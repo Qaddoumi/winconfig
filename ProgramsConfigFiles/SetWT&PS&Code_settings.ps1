@@ -84,8 +84,9 @@ function Copy-ItemWithCheck {
 Copy-ItemWithCheck -sourcePath ".\PowerShell" -destinationPath "$Env:USERPROFILE\Documents"
 Copy-ItemWithCheck -sourcePath ".\WindowsTerminal\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Copy-ItemWithCheck -sourcePath ".\VSCode\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
-$items = Get-ChildItem -Path ".\ProgramsConfigFiles\Shell" | ForEach-Object { $PSItem.Name.Trim() }
+$items = Get-ChildItem -Path ".\Shell" | ForEach-Object { $PSItem.Name.Trim() }
 foreach ($item in $items) {
-    Copy-ItemWithCheck -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell\$item"
+    if ($item.Contains(".nss")) { Copy-ItemWithCheck -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell\$item"}
+    else { Copy-ItemWithCheck -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell"}
 }
 Copy-ItemWithCheck -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"

@@ -8,11 +8,11 @@ $RegistrySettingsTele = @(
         OriginalValue = "1"
     }
     @{
-        Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
-        OriginalValue = "1"
         Name          = "AllowTelemetry"
+        Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
         Value         = "0"
         Type          = "DWord"
+        OriginalValue = "1"
     }
     @{
         Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"

@@ -23,7 +23,7 @@ function Set-Registry {
     )
     If (!(Test-Path $Path)) {
         Write-Warning "$Path was not found, Creating..."
-        New-Item -Path $Path -Force -ErrorAction Stop | Out-Null
+        New-Item -Path $Path -Force -ErrorAction Continue | Out-Null
     }
     Try {
         Write-Host "Setting registry key: $Name at $Path" -ForegroundColor Cyan

@@ -69,12 +69,9 @@ foreach($entry in $RegData){
 
 try{
     Write-Host "`nRemove Copilot Package" -ForegroundColor Cyan
-    $Name = "Microsoft.Windows.Ai.Copilot.Provider"
-    Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
-    Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-    $Name = "Microsoft.Windows.Copilot"
-    Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
-    Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+    $Name = "Copilot"
+    Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction Continue
+    Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction Continue
 }
 catch{
     Write-Warning "Unable to Remove Copilot due to unhandled exception"

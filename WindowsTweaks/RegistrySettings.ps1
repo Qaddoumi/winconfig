@@ -1028,4 +1028,231 @@ $RegistrySettings  = @(
             }
         )
     }
+    @{ Message = "Allows the use of long file paths that exceed the traditional maximum path length of 260 characters"
+        Data   = @(
+            @{
+                Name          = "LongPathsEnabled"
+                Type          = "DWord"
+                Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+        )
+    }
+    # TODO: review each item in Disable-Telemetry
+    @{ Message = "Disable Telemetry(Part 1), Note: This will lock many Edge Browser settings. Microsoft spies heavily on you when using the Edge browser"
+        Data   = @(
+            @{
+                Name          = "LongPathsEnabled"
+                Type          = "DWord"
+                Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+            @{
+                Name          = "AllowTelemetry"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "AllowTelemetry"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "ContentDeliveryAllowed"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "OemPreInstalledAppsEnabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "PreInstalledAppsEnabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "PreInstalledAppsEverEnabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "SilentInstalledAppsEnabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "SubscribedContent-338387Enabled"
+                Type          = "DWord"
+                Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "SubscribedContent-338388Enabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "SubscribedContent-338389Enabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "SubscribedContent-353698Enabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "SystemPaneSuggestionsEnabled"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "NumberOfSIUFInPeriod"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Siuf\Rules"
+                Value         = "0"
+                OriginalValue = "0"
+            }
+            @{
+                Name          = "DoNotShowFeedbackNotifications"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+            @{
+                Name          = "DisableTailoredExperiencesWithDiagnosticData"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+            @{
+                Name          = "DisabledByGroupPolicy"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+            @{
+                Name          = "Disabled"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+            @{
+                Name          = "fAllowToGetHelp"
+                Type          = "DWord"
+                Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "EnthusiastMode"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+            @{
+                Name          = "PeopleBand"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                _Comment      = "Driver searching is a function that should be left in"
+                Name          = "SearchOrderConfig"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching"
+                Value         = "1"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "SystemResponsiveness"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "NetworkThrottlingIndex"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"
+                Value         = "4294967295"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "IRPStackSize"
+                Type          = "DWord"
+                Path          = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters"
+                Value         = "30"
+                OriginalValue = "20"
+            }
+            @{
+                Name          = "EnableFeeds"
+                Type          = "DWord"
+                Path          = "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "ShellFeedsTaskbarViewMode"
+                Type          = "DWord"
+                Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds"
+                Value         = "2"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "HideSCAMeetNow"
+                Type          = "DWord"
+                Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+                Value         = "1"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "ScoobeSystemSettingEnabled"
+                Type          = "DWord"
+                Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement"
+                Value         = "0"
+                OriginalValue = "1"
+            }
+            @{
+                Name          = "DOTNET_CLI_TELEMETRY_OPTOUT"
+                Type          = "String"
+                Path          = "HKCU:\Environment"
+                Value         = "false"
+                OriginalValue = "true"
+            }
+        )
+    }
 )

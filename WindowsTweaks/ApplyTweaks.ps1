@@ -105,6 +105,9 @@ foreach($Setting in $RegistrySettings){
 }
 
 Write-Host "`n================================================================"
+. ".\DisableTelemetry.ps1"
+
+Write-Host "`n================================================================"
 Show-IconsSysTray
 
 Write-Host "`n================================================================"
@@ -125,9 +128,9 @@ foreach($service in $ServicesCollection.service){
     Set-ServiceStartupType -Name $service.Name -StartupType $service.StartupType -OriginalType $service.OriginalType
 }
 
-# Write-Host "`n================================================================"
-# Source the variable definition script (List of reg,sch,and function)
-# . ".\DisableTelemetry.ps1"
+Write-Host "`n================================================================"
+. ".\DisablingScheduledTasks.ps1"
+
 
 Write-Host "`n================================================================" -ForegroundColor DarkYellow
 . "..\Global\TimeoutInput.ps1"

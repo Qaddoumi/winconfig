@@ -67,7 +67,11 @@ if($pwshPath -and $isBuiltInWindowsPowerShell){
     Start-Sleep -Seconds 2
     exit 0
 }
-#TODO: If running in buildIn and not wt and wt installed run in wt buildIn
+# TODO:(don't do) If running in buildIn and not wt and wt installed run in wt buildIn
+# tried all method for this but nothing works in a situation where if you go to
+# start menu and open powershell or pwsh and it openned in windows terminal then
+# any method will fail to detect if it running in windows terminal
+# Hopfully someone fix this oneday
 
 # Font : Small Keyboard
 Write-Host "        ____ ____ ____ ____ ____ ____ ____ _________ ____ ____ "
@@ -141,7 +145,7 @@ do {
 
         #Write-Host "`nRunning $scriptToRun...`n"
         #Write-Output "================================================================"
-        # TODO: $host.ui.RawUI.WindowTitle = """Winget Install"""
+        $host.ui.RawUI.WindowTitle = """Winconfig"""
         if ($scriptParameter) {
             $command = "& .\$(Split-Path -Leaf $scriptToRun) $scriptParameter"
             Invoke-Expression $command

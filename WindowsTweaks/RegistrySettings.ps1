@@ -1256,3 +1256,13 @@ $RegistrySettings  = @(
         )
     }
 )
+# @{ Message = ""
+#         Data = @(
+#             @{
+#                 Name = ""
+#                 Type = ""
+#                 Path = ""
+#                 Value = ""
+#             }
+#         )
+#     }

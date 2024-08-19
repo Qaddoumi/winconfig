@@ -282,3 +282,9 @@
         Description = ""
     }
 )
+# @{ Name         = ""
+#     Source      = ""
+#     Id          = ""
+#     Installer   = "winget"
+#     Description = ""
+# }

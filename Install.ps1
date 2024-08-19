@@ -108,6 +108,7 @@ function Show-Menu {
         [string]$prompt = 'Select a script to run:'
     )
 
+    $host.ui.RawUI.WindowTitle = """Winconfig"""
     # TODO: make a choice to run everythings.
     # 1. Run all scripts
     Write-Host $prompt -ForegroundColor Green
@@ -145,7 +146,6 @@ do {
 
         #Write-Host "`nRunning $scriptToRun...`n"
         #Write-Output "================================================================"
-        $host.ui.RawUI.WindowTitle = """Winconfig"""
         if ($scriptParameter) {
             $command = "& .\$(Split-Path -Leaf $scriptToRun) $scriptParameter"
             Invoke-Expression $command

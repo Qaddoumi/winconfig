@@ -880,6 +880,14 @@ $RegistrySettings  = @(
                 Path= "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
                 Value= "0"
             }
+            @{
+                _Comment      = "waits before registering a mouse hover event,affects how quickly tooltip pop-ups and other hover-based events are triggered"
+                Name          = "MouseHoverTime"
+                Type          = "String"
+                Path          = "HKCU:\Control Panel\Mouse"
+                Value         = "400"
+                OriginalValue = "400"
+            }
         )
     }
     @{ Message = "Smooth edges of screen fonts" # needs restart
@@ -984,6 +992,39 @@ $RegistrySettings  = @(
                 Type  = "DWord"
                 Path  = "HKCU:\Software\NVIDIA Corporation\Global\CoProcManager"
                 Value = "1"
+            }
+        )
+    }
+    @{ Message = "Automatically end any tasks or applications when they are not responding during shutdown or logoff."
+        Data   = @(
+            @{
+                Name  = "AutoEndTasks"
+                Type  = "DWord"
+                Path  = "HKCU:\Control Panel\Desktop"
+                Value = "1"
+            }
+        )
+    }
+    @{ Message = "Clears the page file (also known as the virtual memory file) when the system shuts down(For Security)"
+        Data   = @(
+            @{
+                Name          = "ClearPageFileAtShutdown"
+                Type          = "DWord"
+                Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+        )
+    }
+    @{ Message = "Controls the startup behavior of the Network Data Usage Monitoring Driver(tracking data usage across different network)"
+        Data   = @(
+            @{
+                _Comment      = "0 BootStart,1 SystemStart,2 Automatic,3 Manual,4 Disabled"
+                Name          = "Start"
+                Type          = "DWord"
+                Path          = "HKLM:\SYSTEM\ControlSet001\Services\Ndu"
+                Value         = "2"
+                OriginalValue = "1"
             }
         )
     }

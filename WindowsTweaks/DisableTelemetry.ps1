@@ -1,250 +1,215 @@
 # TODO: Implement this
 $RegistrySettingsTele = @(
     @{
+        Name          = "AllowTelemetry"
+        Type          = "DWord"
         Path          = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
-        Type          = "DWord"
         Value         = "0"
-        Name          = "AllowTelemetry"
         OriginalValue = "1"
     }
     @{
         Name          = "AllowTelemetry"
+        Type          = "DWord"
         Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
         Value         = "0"
-        Type          = "DWord"
         OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "ContentDeliveryAllowed"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "OemPreInstalledAppsEnabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "PreInstalledAppsEnabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "PreInstalledAppsEverEnabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "SilentInstalledAppsEnabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "SubscribedContent-338387Enabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "SubscribedContent-338388Enabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "SubscribedContent-338389Enabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
-        OriginalValue = "1"
         Name          = "SubscribedContent-353698Enabled"
-        Value         = "0"
         Type          = "DWord"
-    }
-    @{
         Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
         OriginalValue = "1"
+    }
+    @{
         Name          = "SystemPaneSuggestionsEnabled"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Siuf\Rules"
-        OriginalValue = "0"
         Name          = "NumberOfSIUFInPeriod"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Siuf\Rules"
+        Value         = "0"
+        OriginalValue = "0"
     }
     @{
-        Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
-        OriginalValue = "0"
         Name          = "DoNotShowFeedbackNotifications"
-        Value         = "1"
         Type          = "DWord"
+        Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
+        Value         = "1"
+        OriginalValue = "0"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
-        OriginalValue = "0"
         Name          = "DisableTailoredExperiencesWithDiagnosticData"
-        Value         = "1"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent"
+        Value         = "1"
+        OriginalValue = "0"
     }
     @{
-        Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo"
-        OriginalValue = "0"
         Name          = "DisabledByGroupPolicy"
-        Value         = "1"
         Type          = "DWord"
+        Path          = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo"
+        Value         = "1"
+        OriginalValue = "0"
     }
     @{
-        Path          = "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting"
-        OriginalValue = "0"
         Name          = "Disabled"
-        Value         = "1"
         Type          = "DWord"
+        Path          = "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting"
+        Value         = "1"
+        OriginalValue = "0"
     }
     @{
-        Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance"
-        OriginalValue = "1"
         Name          = "fAllowToGetHelp"
+        Type          = "DWord"
+        Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance"
         Value         = "0"
-        Type          = "DWord"
-    }
-    @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager"
-        OriginalValue = "0"
-        Name          = "EnthusiastMode"
-        Value         = "1"
-        Type          = "DWord"
-    }
-    @{
-        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People"
         OriginalValue = "1"
-        Name          = "PeopleBand"
-        Value         = "0"
-        Type          = "DWord"
     }
     @{
-        Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem"
-        OriginalValue = "0"
-        Name          = "LongPathsEnabled"
-        Value         = "1"
+        Name          = "EnthusiastMode"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager"
+        Value         = "1"
+        OriginalValue = "0"
+    }
+    @{
+        Name          = "PeopleBand"
+        Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People"
+        Value         = "0"
+        OriginalValue = "1"
+    }
+    @{
+        Name          = "LongPathsEnabled"
+        Type          = "DWord"
+        Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem"
+        Value         = "1"
+        OriginalValue = "0"
     }
     @{
         _Comment      = "Driver searching is a function that should be left in"
-        Path          = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching"
-        OriginalValue = "1"
         Name          = "SearchOrderConfig"
-        Value         = "1"
         Type          = "DWord"
+        Path          = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching"
+        Value         = "1"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"
-        OriginalValue = "1"
         Name          = "SystemResponsiveness"
-        Value         = "0"
         Type          = "DWord"
-    }
-    @{
         Path          = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"
+        Value         = "0"
         OriginalValue = "1"
+    }
+    @{
         Name          = "NetworkThrottlingIndex"
+        Type          = "DWord"
+        Path          = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile"
         Value         = "4294967295"
-        Type          = "DWord"
-    }
-    @{
-        Path          = "HKCU:\Control Panel\Desktop"
         OriginalValue = "1"
-        Name          = "MenuShowDelay"
-        Value         = "1"
-        Type          = "DWord"
     }
     @{
-        Path          = "HKCU:\Control Panel\Desktop"
-        OriginalValue = "1"
-        Name          = "AutoEndTasks"
-        Value         = "1"
-        Type          = "DWord"
-    }
-    @{
-        Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management"
-        OriginalValue = "0"
-        Name          = "ClearPageFileAtShutdown"
-        Value         = "0"
-        Type          = "DWord"
-    }
-    @{
-        Path          = "HKLM:\SYSTEM\ControlSet001\Services\Ndu"
-        OriginalValue = "1"
-        Name          = "Start"
-        Value         = "2"
-        Type          = "DWord"
-    }
-    @{
-        Path          = "HKCU:\Control Panel\Mouse"
-        OriginalValue = "400"
-        Name          = "MouseHoverTime"
-        Value         = "400"
-        Type          = "String"
-    }
-    @{
-        Path          = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters"
-        OriginalValue = "20"
         Name          = "IRPStackSize"
+        Type          = "DWord"
+        Path          = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters"
         Value         = "30"
-        Type          = "DWord"
+        OriginalValue = "20"
     }
     @{
-        Path          = "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds"
-        OriginalValue = "1"
         Name          = "EnableFeeds"
-        Value         = "0"
         Type          = "DWord"
+        Path          = "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds"
+        Value         = "0"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds"
-        OriginalValue = "1"
         Name          = "ShellFeedsTaskbarViewMode"
+        Type          = "DWord"
+        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds"
         Value         = "2"
-        Type          = "DWord"
+        OriginalValue = "1"
     }
     @{
-        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
-        OriginalValue = "1"
         Name          = "HideSCAMeetNow"
+        Type          = "DWord"
+        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer"
         Value         = "1"
-        Type          = "DWord"
-    }
-    @{
-        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement"
         OriginalValue = "1"
-        Name          = "ScoobeSystemSettingEnabled"
-        Value         = "0"
-        Type          = "DWord"
     }
     @{
-        Path          = "HKCU:\Environment"
-        OriginalValue = "true"
+        Name          = "ScoobeSystemSettingEnabled"
+        Type          = "DWord"
+        Path          = "HKCU:\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement"
+        Value         = "0"
+        OriginalValue = "1"
+    }
+    @{
         Name          = "DOTNET_CLI_TELEMETRY_OPTOUT"
-        Value         = "false"
         Type          = "String"
+        Path          = "HKCU:\Environment"
+        Value         = "false"
+        OriginalValue = "true"
     }
 )
 

@@ -174,7 +174,8 @@ do {
         Write-Host "`nExiting..."
         break
     } else {
-        Write-Host "Invalid choice. Please try again."
+        Write-Host "Invalid choice. Please try again." -ForegroundColor Red
+        Write-Output "================================================================"
     }
 } while ($true)
 #region Exit

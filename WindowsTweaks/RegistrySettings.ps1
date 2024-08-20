@@ -1039,6 +1039,17 @@ $RegistrySettings  = @(
             }
         )
     }
+    @{ Message = "Enabling Verbose Logon Messages"
+        Data   = @(
+            @{
+                Name          = "VerboseStatus"
+                Type          = "DWord"
+                Path          = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+                Value         = "1"
+                OriginalValue = "0"
+            }
+        )
+    }
     # TODO: review each item in Disable-Telemetry
     @{ Message = "Disable Telemetry(Part 1), Note: This will lock many Edge Browser settings. Microsoft spies heavily on you when using the Edge browser"
         Data   = @(

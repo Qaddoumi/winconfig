@@ -62,15 +62,20 @@ import 'imports/taskbar.nss'
 item(title='Browser' type='Back' image='%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe' cmd='%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe' args='https://www.duckduckgo.com/')
 item(title='Calculator' type='Back' image='%ProgramFiles%\Nilesoft Shell\images\Windows-10-Calculator.png' cmd='calc')
 sep
-item(title='Open folder with VS-Code' type='Back' image='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' args='.')
-item(title='Open folder with VS-Code' type='dir' image='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' args='"@sel.path"')
+item(title='Open with VS-Code' type='Back' image='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' args='.')
+item(title='Open with VS-Code' type='dir' image='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' args='"@sel.path"')
+item(title='Open with Visual Studio 2022' type='Back' image='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' cmd='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' args='.')
+item(title='Open with Visual Studio 2022' type='dir' image='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' cmd='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' args='"@sel.path"')
 
 menu(mode="single" type='file' title='Edit with' pos=1 image=\uE17A sep=bottom){
 	item(title='Notepad' image='%ProgramFiles%\Nilesoft Shell\images\notepad.png' cmd='notepad' arg='"@sel.file.name"')
 	item(title='VS-Code' image=[\uE272, #22A7F2] cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' arg='"@sel.file.name"')
+	item(title='Visual Studio 2022' image='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' cmd='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' arg='"@sel.file.name"')
 }
 
 remove(find="Open Git GUI here|Open Git Bash here|Browse in Adobe Bridge 2024")
 remove(find='OneDrive|Sync or Backup')
 remove(find='Add to Favorites')
+remove(find='Open with Visual Studio')
+remove(find='Edit in Notepad')
 remove(find="Always keep on this device|Free up space|Version history")

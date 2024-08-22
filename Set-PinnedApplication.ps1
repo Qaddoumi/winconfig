@@ -1,3 +1,4 @@
+
 Function Set-PinnedApplication {
     <#
 .SYNOPSIS
@@ -59,7 +60,7 @@ https://psappdeploytoolkit.com
     Begin {
         ## Get the name of this function and write header
         [String]${CmdletName} = $PSCmdlet.MyInvocation.MyCommand.Name
-        Write-FunctionHeaderOrFooter -CmdletName ${CmdletName} -CmdletBoundParameters $PSBoundParameters -Header
+        #Write-FunctionHeaderOrFooter -CmdletName ${CmdletName} -CmdletBoundParameters $PSBoundParameters -Header
 
         #region Function Get-PinVerb
         Function Get-PinVerb {
@@ -72,9 +73,9 @@ https://psappdeploytoolkit.com
 
             [String]${CmdletName} = $PSCmdlet.MyInvocation.MyCommand.Name
 
-            Write-Log -Message "Get localized pin verb for verb id [$VerbID]." -Source ${CmdletName}
+            Write-Host "Get localized pin verb for verb id [$VerbID]." -Source ${CmdletName}
             [String]$PinVerb = [PSADT.FileVerb]::GetPinVerb($VerbId)
-            Write-Log -Message "Verb ID [$VerbID] has a localized pin verb of [$PinVerb]." -Source ${CmdletName}
+            Write-Host "Verb ID [$VerbID] has a localized pin verb of [$PinVerb]." -Source ${CmdletName}
             Write-Output -InputObject ($PinVerb)
         }
         #endregion
@@ -100,21 +101,21 @@ https://psappdeploytoolkit.com
                 $itemVerb = $item.Verbs() | Where-Object { $_.Name.Replace('&', '') -eq $Verb } -ErrorAction 'Stop'
 
                 If ($null -eq $itemVerb) {
-                    Write-Log -Message "Performing action [$Verb] is not programmatically supported for this file [$FilePath]." -Severity 2 -Source ${CmdletName}
+                    Write-Host "Performing action [$Verb] is not programmatically supported for this file [$FilePath]." -Severity 2 -Source ${CmdletName}
                 }
                 Else {
-                    Write-Log -Message "Performing action [$Verb] on [$FilePath]." -Source ${CmdletName}
+                    Write-Host "Performing action [$Verb] on [$FilePath]." -Source ${CmdletName}
                     $itemVerb.DoIt()
                 }
             }
             Catch {
-                Write-Log -Message "Failed to perform action [$Verb] on [$FilePath]. `r`n$(Resolve-Error)" -Severity 2 -Source ${CmdletName}
+                Write-Host "Failed to perform action [$Verb] on [$FilePath]. `r`n$(Resolve-Error)" -Severity 2 -Source ${CmdletName}
             }
         }
         #endregion
 
         If (([Version]$envOSVersion).Major -ge 10) {
-            Write-Log -Message 'Detected Windows 10 or higher, using Windows 10 verb codes.' -Source ${CmdletName}
+            Write-Host 'Detected Windows 10 or higher, using Windows 10 verb codes.' -Source ${CmdletName}
             [Hashtable]$Verbs = @{
                 'PinToStartMenu'     = 51201
                 'UnpinFromStartMenu' = 51394
@@ -134,7 +135,7 @@ https://psappdeploytoolkit.com
     }
     Process {
         Try {
-            Write-Log -Message "Execute action [$Action] for file [$FilePath]." -Source ${CmdletName}
+            Write-Host "Execute action [$Action] for file [$FilePath]." -Source ${CmdletName}
 
             If (-not (Test-Path -LiteralPath $FilePath -PathType 'Leaf' -ErrorAction 'Stop')) {
                 Throw "Path [$filePath] does not exist."
@@ -168,12 +169,12 @@ https://psappdeploytoolkit.com
 
                     If (($Action -eq 'PinToTaskbar') -and ($PinExists)) {
                         If ($(Invoke-ObjectMethod -InputObject $Shell -MethodName 'CreateShortcut' -ArgumentList "$envAppData\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar\$($FileNameWithoutExtension).lnk").TargetPath -eq $FilePath) {
-                            Write-Log -Message "Pin [$FileNameWithoutExtension] already exists." -Source ${CmdletName}
+                            Write-Host "Pin [$FileNameWithoutExtension] already exists." -Source ${CmdletName}
                             Return
                         }
                     }
                     ElseIf (($Action -eq 'UnpinFromTaskbar') -and ($PinExists -eq $false)) {
-                        Write-Log -Message "Pin [$FileNameWithoutExtension] does not exist." -Source ${CmdletName}
+                        Write-Host "Pin [$FileNameWithoutExtension] does not exist." -Source ${CmdletName}
                         Return
                     }
 
@@ -204,7 +205,7 @@ https://psappdeploytoolkit.com
             }
         }
         Catch {
-            Write-Log -Message "Failed to execute action [$Action]. `r`n$(Resolve-Error)" -Severity 2 -Source ${CmdletName}
+            Write-Host "Failed to execute action [$Action]. `r`n$(Resolve-Error)" -Severity 2 -Source ${CmdletName}
         }
         Finally {
             Try {
@@ -226,7 +227,7 @@ https://psappdeploytoolkit.com
         }
     }
     End {
-        Write-FunctionHeaderOrFooter -CmdletName ${CmdletName} -Footer
+        #Write-FunctionHeaderOrFooter -CmdletName ${CmdletName} -Footer
     }
 }
 Set-PinnedApplication -Action 'PinToStartMenu' -FilePath "$Env:ProgramFiles\Nilesoft Shell\shell.exe"

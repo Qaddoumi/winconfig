@@ -51,11 +51,6 @@ $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = "powershell.exe"
 $shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -Command `"$command`""
 
-# Pinning is controlled by this property
-# 1 = Pin to Start
-# 2 = Unpin from Start (not always supported, depending on the Windows version)
-$Shortcut.ExtendedProperty("System.AppUserModel.StartPinOption") = 1
-
 # Save the shortcut
 $shortcut.Save()
 
@@ -66,5 +61,21 @@ $bytes[0x15] = $bytes[0x15] -bor 0x20
 [System.IO.File]::WriteAllBytes($shortcutPath, $bytes)
 
 Write-Host "Shortcut created at: $shortcutPath"
+
+
+# Define the path to the application
+$appPath = $shortcutPath
+
+# Create a new Shell COM object
+$Shell = New-Object -ComObject Shell.Application
+
+# Get the folder containing the application
+$Folder = $Shell.Namespace((Get-Item $appPath).DirectoryName)
+
+# Get the application item
+$Item = $Folder.ParseName((Get-Item $appPath).Name)
+
+# Invoke the pin command
+$Item.InvokeVerb('P&in to Start')
 Read-Host
 Pause

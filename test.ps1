@@ -10,7 +10,7 @@ $extractPath = "$env:SystemDrive\Tools"
 Invoke-WebRequest -Uri $downloadUrl -OutFile $zipPath
 
 # Extract the contents
-Expand-Archive -Path $zipPath -DestinationPath $extractPath
+Expand-Archive -Path $zipPath -DestinationPath $extractPath -Force
 
 # Clean up
 Remove-Item $zipPath

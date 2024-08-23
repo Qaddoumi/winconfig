@@ -50,6 +50,12 @@ $shortcut = $shell.CreateShortcut($shortcutPath)
 # Set properties of the shortcut
 $shortcut.TargetPath = "powershell.exe"
 $shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -Command `"$command`""
+
+# Pinning is controlled by this property
+# 1 = Pin to Start
+# 2 = Unpin from Start (not always supported, depending on the Windows version)
+$Shortcut.ExtendedProperty("System.AppUserModel.StartPinOption") = 1
+
 # Save the shortcut
 $shortcut.Save()
 

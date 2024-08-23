@@ -402,3 +402,4 @@
 #     Installer   = "winget"
 #     Description = ""
 # }
+# Windows Configuration Designer                   9NBLGGH4TX22             Unknown  msstore

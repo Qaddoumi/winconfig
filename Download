@@ -66,3 +66,4 @@ $bytes[0x15] = $bytes[0x15] -bor 0x20
 [System.IO.File]::WriteAllBytes($shortcutPath, $bytes)
 
 Write-Host "Shortcut created at: $shortcutPath"
+Pause

@@ -62,20 +62,4 @@ $bytes[0x15] = $bytes[0x15] -bor 0x20
 
 Write-Host "Shortcut created at: $shortcutPath"
 
-
-# Define the path to the application
-$appPath = $shortcutPath
-
-# Create a new Shell COM object
-$Shell = New-Object -ComObject Shell.Application
-
-# Get the folder containing the application
-$Folder = $Shell.Namespace((Get-Item $appPath).DirectoryName)
-
-# Get the application item
-$Item = $Folder.ParseName((Get-Item $appPath).Name)
-
-# Invoke the pin command
-$Item.InvokeVerb('P&in to Start')
-Read-Host
 Pause

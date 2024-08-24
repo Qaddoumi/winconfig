@@ -4,11 +4,11 @@ $PROGRAMS_ID = @(
     "Git.Git"
     "JanDeDobbeleer.OhMyPosh" # powershell prompt
     "Microsoft.VisualStudioCode"
-    "Nilesoft.Shell" #Powerful context menu manager
+    "Nilesoft.Shell" #Powerfull context menu manager
 )
 
 foreach($program in $PROGRAMS_ID){
-    $installArgs = "install --exact --id $program  --source winget --accept-package-agreements --accept-source-agreements"
+    $installArgs = "install --exact --id $program  --source winget --accept-package-agreements --accept-source-agreements --scope Machine"
     $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -PassThru
     $process.WaitForExit()
 }

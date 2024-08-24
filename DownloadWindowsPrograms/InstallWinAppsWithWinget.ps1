@@ -13,7 +13,7 @@ function Install-ProgramWithWinget {
         Write-Output "$($program.Name) is not installed."
         Write-Output "Attempting to install $($program.Name)..."
         try {
-            $installArgs = "install --exact --id $($program.Id) --source $($program.Source) --accept-package-agreements --accept-source-agreements"
+            $installArgs = "install --exact --id $($program.Id) --source $($program.Source) --accept-package-agreements --accept-source-agreements --scope Machine"
             $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -PassThru -Wait
             # always use -Wait instaed of $process.WaitForExit() because it did not work well in build in powershell
             $exitCode = $process.ExitCode

@@ -1,4 +1,3 @@
-# TODO: fix start menu pins
 # Found it got the same data in %UserProfile%\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState start2.bin
 # $Data = @{
 #         Name  = "Config"
@@ -14,7 +13,7 @@
 # [System.IO.File]::WriteAllBytes($FilePath, $Data.Value)
 
 # To get the LayoutModification using powershell 'Export-StartLayout -Path ".\LayoutModification.json"'
-#       $LayoutModificationJSON = '{"pinnedList":[{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Microsoft Edge.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Word.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\PowerPoint.lnk"},{"packagedAppId":"windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanel"},{"desktopAppLink":"%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Recycle Bin.lnk"},{"packagedAppId":"Microsoft.OutlookforWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows"},{"packagedAppId":"Microsoft.WindowsStore_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.Windows.Photos_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.GamingApp_8wekyb3d8bbwe!Microsoft.Xbox.App"},{"packagedAppId":"Clipchamp.Clipchamp_yxz26nhyzhsrt!App"},{"packagedAppId":"Microsoft.Todos_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.WindowsCalculator_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.WindowsAlarms_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.WindowsNotepad_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.Paint_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.ScreenSketch_8wekyb3d8bbwe!App"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\OneNote.lnk"},{"desktopAppLink":"%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\System Tools\\Control Panel.lnk"},{"packagedAppId":"Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe!App"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Macrium\\Reflect\\Macrium Reflect.lnk"},{"packagedAppId":"4789ZeroByte.NetSpeedMeter_gvheqymwk6zrr!App"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\NVIDIA Corporation\\GeForce Experience.lnk"},{"packagedAppId":"Microsoft.WindowsTerminal_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.WindowsSoundRecorder_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.BingWeather_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.WindowsScan_8wekyb3d8bbwe!App"},{"packagedAppId":"Microsoft.Whiteboard_8wekyb3d8bbwe!Whiteboard"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Google Chrome.lnk"},{"desktopAppLink":"%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Chrome Apps\\Chrome Remote Desktop.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Google Drive.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Firefox.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Git\\Git GUI.lnk"},{"desktopAppLink":"%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\Visual Studio Code.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio 2022.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Installer.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\VMware\\VMware Workstation Pro.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\VMware\\VMware Workstation 17 Player.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\VMware\\Virtual Network Editor.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\LibreOffice 24.2\\LibreOffice.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\LibreOffice 24.2\\LibreOffice Writer.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\LibreOffice 24.2\\LibreOffice Calc.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\LibreOffice 24.2\\LibreOffice Draw.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\ONLYOFFICE\\ONLYOFFICE Editors.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\ONLYOFFICE\\New spreadsheet.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\ONLYOFFICE\\New PDF Form.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\ONLYOFFICE\\New document.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\PDFtk - The PDF Toolkit\\PDFtk - The PDF Toolkit.lnk"},{"desktopAppLink":"%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\NAPS2\\NAPS2.lnk"},{"desktopAppLink":"%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\procmon.lnk"}]}'
+
 # Application User Model ID AUMID "Get-StartApps"
 # To Get AUMID to use in StartLayout
 <#
@@ -28,40 +27,15 @@
         $aumidList
 #>
 
-# [System.IO.FileInfo]$start_layout = "..\ProgramsConfigFiles\StartMenuPins\start2.bin"
+[System.IO.FileInfo]$start_layout = "..\ProgramsConfigFiles\StartMenuPins\start2.bin"
 
-# ls "C:\Users\" -Attributes Directory -Force | ? { $_.FullName -notin $env:PUBLIC -and $_.Name -notin "All Users", "Default User" } | % {
+ls "C:\Users\" -Attributes Directory -Force | ? { $_.FullName -notin $env:PUBLIC -and $_.Name -notin "All Users", "Default User" } | % {
 
-#         [System.IO.DirectoryInfo]$destination = "$($_.FullName)\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState"
+        [System.IO.DirectoryInfo]$destination = "$($_.FullName)\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState"
 
-#         if (!$destination.Exists) {
-#                 $destination.Create()
-#         }
-
-#         $start_layout.CopyTo("$($destination)\start2.bin", $true)
-# }
-
-
-# Define the app name to unpin
-$appName = "Microsoft Edge"
-
-# Get the shell object
-$shell = New-Object -ComObject Shell.Application
-
-# Get the Start menu folder
-$startFolder = $shell.NameSpace('Shell:StartMenu')
-
-# Iterate over the items in the Start menu
-foreach ($item in $startFolder.Items()) {
-        if ($item.Name -eq $appName) {
-                # Invoke the unpin action
-                $verb = $item.Verbs() | Where-Object { $_.Name -eq 'Unpin from Start' }
-                if ($verb) {
-                        $verb.DoIt()
-                        Write-Host "$appName has been unpinned from the Start menu."
-                }
-                else {
-                        Write-Host "$appName is not pinned to the Start menu."
-                }
+        if (!$destination.Exists) {
+                $destination.Create()
         }
+
+        $start_layout.CopyTo("$($destination)\start2.bin", $true)
 }

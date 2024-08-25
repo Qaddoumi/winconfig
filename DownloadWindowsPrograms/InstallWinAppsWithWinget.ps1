@@ -5,15 +5,35 @@ function Install-ProgramWithWinget {
     Write-Output "Starting installation check for $($program.Name)..."
 
     Write-Output "Checking if $($program.Name) is already installed..."
+    $isInstalled = $false
     $installedPrograms = winget list --id $program.Id | Select-String -Pattern $program.Id
-    if ($null -ne $installedPrograms) {
+    if($installedPrograms){
         Write-Output "Output from winget list:`n$($installedPrograms -join '; ')"
         Write-Output "Skipping installation of $($program.Name) as it is already installed."
-    } else {
+        $isInstalled = $true
+    }
+    else{
+        $installedPrograms = (Get-AppxPackage -Name "*$($program.Id)*")
+        if($installedPrograms){
+            Write-Output "Output from Get-AppxPackage:`n$($installedPrograms -join '; ')"
+            Write-Output "Skipping installation of $($program.Name) as it is already installed."
+            $isInstalled = $true
+        }else{
+            $installedPrograms = (Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$($program.Id)*")
+            if($installedPrograms){
+                $isInstalled = $true
+                Write-Output "Output from Get-AppxProvisionedPackage:`n$($installedPrograms -join '; ')"
+                Write-Output "Skipping installation of $($program.Name) as it is already installed."
+            }
+        }
+    }
+
+    if (-not $isInstalled){
         Write-Output "$($program.Name) is not installed."
         Write-Output "Attempting to install $($program.Name)..."
         try {
-            $installArgs = "install --exact --id $($program.Id) --source $($program.Source) --accept-package-agreements --accept-source-agreements"
+            $locationOption = if ($($program.Location)) { "--location `"$($program.Location)`"" } else { "" }
+            $installArgs = "install --exact --id $($program.Id) --source $($program.Source) --accept-package-agreements --accept-source-agreements $locationOption"
             $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -PassThru -Wait
             # always use -Wait instaed of $process.WaitForExit() because it did not work well in build in powershell
             $exitCode = $process.ExitCode

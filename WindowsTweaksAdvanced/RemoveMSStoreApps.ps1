@@ -112,9 +112,29 @@ foreach ($appx_item in $Appx) {
                 [string]$Name
             )
             Try {
-                Write-Host "Removing $Name" -ForegroundColor Cyan
-                Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
-                Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+                # Write-Host "Removing $Name" -ForegroundColor Cyan
+                # Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
+                # Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+                # Check if the app is installed for any user
+                $appxPackage = Get-AppxPackage "*$Name*" -allusers
+                $provisionedPackage = Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*"
+
+                if ($appxPackage -or $provisionedPackage) {
+                    Write-Host "Removing $Name" -ForegroundColor Cyan
+
+                    if ($appxPackage) {
+                        $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
+                    }
+
+                    if ($provisionedPackage) {
+                        $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+                    }
+
+                    Write-Host "$Name has been removed." -ForegroundColor Cyan
+                }
+                else {
+                    Write-Host "$Name not found." -ForegroundColor Yellow
+                }
             }
             Catch {
                 Write-Host "Failed to remove $Name" -ForegroundColor Red

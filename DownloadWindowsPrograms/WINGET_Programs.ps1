@@ -231,7 +231,8 @@
         Source      = "winget"
         Id          = "TorProject.TorBrowser"
         Installer   = "winget"
-        Description = ""
+        Location    = "C:\TorBrowser"
+        Description = "This is a portable version of Tor"
     }
     # @{ Name = "NVIDIA GeForce NOW"
     #     Source = "winget"

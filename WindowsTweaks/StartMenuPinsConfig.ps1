@@ -27,16 +27,6 @@
         $aumidList
 #>
 
-[System.IO.FileInfo]$start_layout = "..\ProgramsConfigFiles\StartMenuPins\start2.bin"
-# [System.IO.FileInfo]$start_layout = "..\ProgramsConfigFiles\StartMenuPins\Empty_start2.bin"
-
-ls "C:\Users\" -Attributes Directory -Force | ? { $_.FullName -notin $env:PUBLIC -and $_.Name -notin "All Users", "Default User" } | % {
-
-        [System.IO.DirectoryInfo]$destination = "$($_.FullName)\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState"
-
-        if (!$destination.Exists) {
-                $destination.Create()
-        }
-
-        $start_layout.CopyTo("$($destination)\start2.bin", $true)
-}
+. "..\Global\Copy.ps1"
+Copy-FileOrFolder -sourcePath "..\ProgramsConfigFiles\StartMenuPins\start2.bin" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start2.bin"
+# Copy-FileOrFolder -sourcePath "..\ProgramsConfigFiles\StartMenuPins\Empty_start2.bin" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start2.bin"

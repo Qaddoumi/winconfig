@@ -5,7 +5,6 @@ $zipPath = "$env:USERPROFILE\Downloads\LGPO.zip"
 #$extractPath = "$env:USERPROFILE\Downloads\LGPO"
 $extractPath = "$env:SystemDrive\Tools"
 
-
 # Download the zip file
 Invoke-WebRequest -Uri $downloadUrl -OutFile $zipPath
 

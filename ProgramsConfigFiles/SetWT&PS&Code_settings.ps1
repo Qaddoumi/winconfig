@@ -48,45 +48,14 @@ Write-Output "`n================================================================
 
 Write-Output "`nCoping Settings Files : `n"
 
-function Copy-ItemWithCheck {
-    param (
-        [string]$sourcePath,
-        [string]$destinationPath
-    )
+. "..\Global\Copy.ps1"
 
-    # Check if the source path exists
-    if (Test-Path -Path $sourcePath) {
-        # Determine if the source path is a file or a folder
-        $item = Get-Item -Path $sourcePath
-        if ($item.PSIsContainer) {
-            # It's a folder, create the destination folder if it does not exist
-            if (-not (Test-Path -Path $destinationPath)) {
-                New-Item -ItemType Directory -Path $destinationPath
-            }
-            # Copy the folder recursively
-            Copy-Item -Path $sourcePath -Destination $destinationPath -Recurse -Force
-            Write-Output "Folder copied successfully from $sourcePath to $destinationPath."
-        } else {
-            # It's a file, create the destination folder if it does not exist
-            $destinationFolder = Split-Path -Parent $destinationPath
-            if (-not (Test-Path -Path $destinationFolder)) {
-                New-Item -ItemType Directory -Path $destinationFolder
-            }
-            # Copy the file
-            Copy-Item -Path $sourcePath -Destination $destinationPath -Force
-            Write-Output "File copied successfully from $sourcePath to $destinationPath."
-        }
-    } else {
-        Write-Output "Source path $sourcePath does not exist."
-    }
-}
-
-Copy-ItemWithCheck -sourcePath ".\PowerShell" -destinationPath "$Env:USERPROFILE\Documents"
-Copy-ItemWithCheck -sourcePath ".\WindowsTerminal\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-Copy-ItemWithCheck -sourcePath ".\VSCode\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
+Copy-FileOrFolder -sourcePath ".\PowerShell" -destinationPath "$Env:USERPROFILE\Documents"
+Copy-FileOrFolder -sourcePath ".\WindowsTerminal\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Copy-FileOrFolder -sourcePath ".\VSCode\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
 $items = Get-ChildItem -Path ".\Shell" | ForEach-Object { $PSItem.Name.Trim() }
 foreach ($item in $items) {
-    if ($item.Contains(".nss")) { Copy-ItemWithCheck -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell\$item"}
-    else { Copy-ItemWithCheck -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell"}
+    if ($item.Contains(".nss")) { Copy-FileOrFolder -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell\$item" }
+    else { Copy-FileOrFolder -sourcePath ".\Shell\$item" -destinationPath "$Env:ProgramFiles\Nilesoft Shell" }
 }
-Copy-ItemWithCheck -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"
+Copy-FileOrFolder -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"

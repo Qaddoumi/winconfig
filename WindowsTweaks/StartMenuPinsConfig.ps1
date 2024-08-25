@@ -28,6 +28,7 @@
 #>
 
 [System.IO.FileInfo]$start_layout = "..\ProgramsConfigFiles\StartMenuPins\start2.bin"
+# [System.IO.FileInfo]$start_layout = "..\ProgramsConfigFiles\StartMenuPins\Empty_start2.bin"
 
 ls "C:\Users\" -Attributes Directory -Force | ? { $_.FullName -notin $env:PUBLIC -and $_.Name -notin "All Users", "Default User" } | % {
 

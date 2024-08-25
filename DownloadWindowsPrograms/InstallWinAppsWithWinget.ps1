@@ -8,7 +8,7 @@ function Install-ProgramWithWinget {
     $isInstalled = $false
     $installedPrograms = winget list --id $program.Id | Select-String -Pattern $program.Id
     if(-not $installedPrograms){
-        $installedPrograms = (winget list | ? { $_ -like "*$($Name.Replace(" ","*"))*" })
+        $installedPrograms = (winget list | ? { $_ -like "*$(($program.Name).Replace(" ","*"))*" })
     }
     if($installedPrograms){
         Write-Output "Output from winget list:`n$($installedPrograms -join '; ')"

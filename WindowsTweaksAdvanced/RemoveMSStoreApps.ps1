@@ -48,7 +48,7 @@ $Appx = @(
     "Microsoft.XboxApp"
     "Microsoft.ConnectivityStore"
     "Microsoft.ScreenSketch"
-    "Microsoft.MicrosoftStickyNotes"
+    # "Microsoft.MicrosoftStickyNotes"
     "Microsoft.Xbox.TCUI"
     "Microsoft.XboxGameOverlay"
     "Microsoft.XboxGamingOverlay"

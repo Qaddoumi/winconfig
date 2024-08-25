@@ -52,7 +52,9 @@ for ($i = 0; $i -lt $PROGRAMS_COLLECTION.Count; $i++) {
 
     Write-Output "`n================================================================"
     Write-Output "`n ($($i + 1)/$($PROGRAMS_COLLECTION.Count)) - Processing program : $($program.Name)"
-    Write-Output "Descreption(or Message) : $($program.Description)"
+    if ($($program.Description)){
+        Write-Output "Description/Message : $($program.Description)"
+    }
     Write-Output "Id : $($program.Id)"
     Write-Output "Source : $($program.Source)"
     Write-Output "Installer : $($program.Installer)"

@@ -371,12 +371,12 @@
         Installer   = "winget"
         Description = ""
     }
-    @{ Name         = "Outlook for Windows"
-        Source      = "msstore"
-        Id          = "9NRX63209R7B"
-        Installer   = "winget"
-        Description = ""
-    }
+    # @{ Name         = "Outlook for Windows"
+    #     Source      = "msstore"
+    #     Id          = "9NRX63209R7B"
+    #     Installer   = "winget"
+    #     Description = ""
+    # }
     @{ Name         = "Microsoft OneDrive"
         Source      = "winget"
         Id          = "Microsoft.OneDrive"
@@ -403,3 +403,4 @@
 #     Description = ""
 # }
 # Windows Configuration Designer                   9NBLGGH4TX22             Unknown  msstore
+# Vim                                   vim.vim                                      9.1.0618             Tag: te… winget

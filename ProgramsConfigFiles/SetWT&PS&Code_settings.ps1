@@ -8,7 +8,7 @@ Write-Output "`nChange Default Terminal To Windows Terminal`n"
 
 Write-Output "`n================================================================"
 
-# Installing NuGet in using BuildIn powershell
+# Installing NuGet if using BuildIn powershell
 & .\InstallNuGet.ps1
 
 Write-Output "`n================================================================"
@@ -43,6 +43,8 @@ foreach ($extension in $VSCode_Extensions) {
     }
     Write-Host ""
 }
+
+windhawk.exe -tray-only
 
 Write-Output "`n================================================================"
 

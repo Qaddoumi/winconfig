@@ -227,13 +227,13 @@
     #     Installer = "winget"
     #     Description = ""
     # }
-    @{ Name         = "Tor Browser"
-        Source      = "winget"
-        Id          = "TorProject.TorBrowser"
-        Installer   = "winget"
-        Location    = "C:\TorBrowser"
-        Description = "This is a portable version of Tor"
-    }
+    # @{ Name         = "Tor Browser"
+    #     Source      = "winget"
+    #     Id          = "TorProject.TorBrowser"
+    #     Installer   = "winget"
+    #     Location    = "C:\TorBrowser"
+    #     Description = "This is a portable version of Tor"
+    # }
     # @{ Name = "NVIDIA GeForce NOW"
     #     Source = "winget"
     #     Id = "Nvidia.GeForceNow"

@@ -122,5 +122,5 @@
     "javascript.suggest.paths": true,
     "markdown.suggest.paths.enabled": true,
     "files.hotExit": "onExit",
-    "workbench.colorTheme": "Tokyo Night",
+    "workbench.colorTheme": "Night Owl (No Italics)",
 }

@@ -6,17 +6,17 @@ function Install-ProgramWithWinget {
 
     Write-Output "Checking if $($program.Name) is already installed..."
     $isInstalled = $false
-    $installedPrograms = winget list --id $program.Id | Select-String -Pattern $program.Id
+    $installedPrograms = (winget list --id $program.Id --exact)
     if(-not $installedPrograms){
-        $installedPrograms = (winget list | ? { $_ -like "*$(($program.Name).Replace(" ","*"))*" })
+        $Name = "*$($program.Name.Replace(" ","*").Replace(".","*"))*"
+        $installedPrograms = (winget list | ? { $_ -like "$Name" })
     }
     if($installedPrograms){
         Write-Output "Output from winget list:`n$($installedPrograms -join '; ')"
         Write-Output "Skipping installation of $($program.Name) as it is already installed."
         $isInstalled = $true
-    }
-    else{
-        $Name = "$($program.Id)"
+    }else{
+        $Name = "$($program.Name.Replace(" ","*").Replace(".","*"))"
         $installedPrograms = (Get-AppxPackage -Name "*$(($program.Name).Replace(" ","*"))*")
         if($installedPrograms){
             Write-Output "Output from Get-AppxPackage:`n$($installedPrograms -join '; ')"

@@ -6,6 +6,7 @@ $PROGRAMS_ID = @(
     "Microsoft.VisualStudioCode"
     "Nilesoft.Shell" #Powerfull context menu manager
     "RamenSoftware.Windhawk"
+    "samlab-ws.SnappyDriverInstaller"
 )
 
 foreach($program in $PROGRAMS_ID){

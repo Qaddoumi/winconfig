@@ -6,9 +6,9 @@ function Install-ProgramWithWinget {
 
     Write-Output "Checking if $($program.Name) is already installed..."
     $isInstalled = $false
-    $installedPrograms = (winget list --id $program.Id --exact | Select-String -Pattern $program.Id)
+    $installedPrograms = (winget list --id $program.Id --exact | ? { $_.Contains($program.Id) })
     if(-not $installedPrograms){
-        $Name = "*$($program.Name.Replace(" ","*").Replace(".","*"))*"
+        $Name = "*$($program.Name.Replace(" ","*").Replace(".","*").Replace("+","\+"))*"
         $installedPrograms = (winget list | ? { $_ -like "$Name" })
     }
     if($installedPrograms){

@@ -231,8 +231,9 @@
         Source      = "winget"
         Id          = "TorProject.TorBrowser"
         Installer   = "winget"
-        Location    = "C:\TorBrowser"
+        Location    = "$Env:SystemDrive\TorBrowser"
         Description = "This is a portable version of Tor"
+        IsPortable = $true
     }
     # @{ Name = "NVIDIA GeForce NOW"
     #     Source = "winget"

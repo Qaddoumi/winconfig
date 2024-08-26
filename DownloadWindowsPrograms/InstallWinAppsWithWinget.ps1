@@ -16,6 +16,12 @@ function Install-ProgramWithWinget {
         Write-Output "Skipping installation of $($program.Name) as it is already installed."
         $isInstalled = $true
     }
+    if ((-not $isInstalled) -and ($program.IsPortable)) {
+        if (Test-Path "$($program.Location)\*") {
+            Write-Host "Skipping installation of $($program.Name) as it is installed in $($program.Location)."
+            $isInstalled = $true
+        }
+    }
 
     if (-not $isInstalled){
         Write-Output "$($program.Name) is not installed."

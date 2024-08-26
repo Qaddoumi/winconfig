@@ -1,4 +1,5 @@
-﻿$PROGRAMS_COLLECTION = @(
+﻿# TODO:The installer part is add so maybe in the future i will add chocolaty or scoop
+$PROGRAMS_COLLECTION = @(
     @{ Name         = "Visual Studio Community 2022"
         Source      = "winget"
         Id          = "Microsoft.VisualStudio.2022.Community"

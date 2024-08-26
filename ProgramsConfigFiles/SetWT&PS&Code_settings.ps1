@@ -44,7 +44,13 @@ foreach ($extension in $VSCode_Extensions) {
     Write-Host ""
 }
 
-windhawk.exe -tray-only
+. "..\Global\Get-RegData.ps1"
+. "..\Global\Set-Registry.ps1"
+$windhawkRagData = Get-RegData -Path ".\Windhawk\Windhawk.reg"
+foreach($regData in $windhawkRagData){
+    Set-Registry -Name $regData.Name -Path $regData.Path -Type $regData.Type -Value $regData.Value
+}
+Start-Process windhawk -NoNewWindow -ArgumentList "-tray-only" -PassThru -Wait
 
 Write-Output "`n================================================================"
 

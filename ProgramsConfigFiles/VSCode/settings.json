@@ -59,9 +59,9 @@
     "editor.formatOnSave": false,
     "editor.guides.indentation": true,
     "telemetry.telemetryLevel": "off",
-    "workbench.colorCustomizations": {
-        "editorLineNumber.foreground": "#00ff00"
-    },
+    // "workbench.colorCustomizations": {
+    //     "editorLineNumber.foreground": "#00ff00"
+    // },
     "editor.acceptSuggestionOnEnter": "off",
     "files.associations": {
         "*.html": "html",

@@ -59,6 +59,7 @@ import 'imports/develop.nss'
 import 'imports/goto.nss'
 import 'imports/taskbar.nss'
 
+// Add
 item(title='Browser' type='Back' image='%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe' cmd='%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe' args='https://www.duckduckgo.com/')
 item(title='Calculator' type='Back' image='%ProgramFiles%\Nilesoft Shell\images\Windows-10-Calculator.png' cmd='calc')
 sep
@@ -72,7 +73,11 @@ menu(mode="single" type='file' title='Edit with' pos=1 image=\uE17A sep=bottom){
 	item(title='VS-Code' image=[\uE272, #22A7F2] cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' arg='"@sel.file.name"')
 	item(title='Visual Studio 2022' image='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' cmd='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' arg='"@sel.file.name"')
 }
+// Move
+modify(where=this.name=='scan with microsoft defender' menu="more options")
+modify(find='using this file' menu='more options')
 
+// Delete
 remove(find="Open Git GUI here|Open Git Bash here|Browse in Adobe Bridge 2024")
 remove(find='OneDrive|Sync or Backup')
 remove(find='Add to Favorites')

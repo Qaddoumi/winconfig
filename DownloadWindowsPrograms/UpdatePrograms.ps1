@@ -6,7 +6,7 @@ $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWin
 $exitCode = $process.ExitCode
 if ($exitCode -eq 0) {
     Write-Host "Done Upgrading Exit code: $($exitCode)" -ForegroundColor Cyan
-} 
+}
 elseif ($exitCode -eq -1978335189) {
     Write-Host "$program No applicable update found" -ForegroundColor Yellow
 }

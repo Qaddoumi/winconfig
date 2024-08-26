@@ -1,6 +1,7 @@
 
 Write-Host "Upgrading All Programs`n" -ForegroundColor Green
-
+#TODO: upgrade only the apps from WINGET_Programs file
+# and check if the app is portable before upgrade and do the proper thing
 $installArgs = "upgrade --all --accept-package-agreements --accept-source-agreements --scope=machine"
 $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -PassThru -Wait
 $exitCode = $process.ExitCode

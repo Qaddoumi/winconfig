@@ -37,6 +37,7 @@ function Get-RegData{
                 $value = $matches[2]
 
                 # Determine the type and value
+                #TODO: Add support for other data types
                 if ($value -match '^dword:(.+)$') {
                     $valueType = "DWord"
                     $valueData = $matches[1]

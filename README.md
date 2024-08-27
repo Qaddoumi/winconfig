@@ -32,7 +32,7 @@ Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Down
 # Tools, settings 
 - [shanselman / Microsoft.PowerShell_profile.ps1](https://gist.github.com/shanselman)
 - [oh-my-posh](https://github.com/JanDeDobbeleer/oh-my-posh)
-- [tokyonight-windows-terminal](https://github.com/kawijayaa/tokyonight-windows-terminal)
+- [Brogrammer](https://windowsterminalthemes.dev/)
 - [Text to ASCII Art Generator](http://patorjk.com/software/taag/)
 - [Shell](https://github.com/moudey/Shell)
 - --

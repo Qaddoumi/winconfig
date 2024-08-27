@@ -44,58 +44,19 @@ foreach ($extension in $VSCode_Extensions) {
     Write-Host ""
 }
 
+Write-Host "Setting Windhawk registry data" -ForegroundColor Green
 . "..\Global\Get-RegData.ps1"
 . "..\Global\Set-Registry.ps1"
 $windhawkRagData = Get-RegData -Path ".\WindhawkModsSettings\Windhawk.reg"
 foreach($regData in $windhawkRagData){
     Set-Registry -Name $regData.Name -Path $regData.Path -Type $regData.Type -Value $regData.Value
 }
+Write-Host "Modify windhawk userprofile.json"
+. ".\WindhawkMods.ps1"
+$userProfileJson = Get-Content -Path "$Env:ProgramData\Windhawk\userprofile.json" -Raw
+$userProfileJson = $userProfileJson -creplace '(?ms)"mods": {.*?},\s*"os"', $windhawkMods
+$userProfileJson | Set-Content -Path "$Env:ProgramData\Windhawk\userprofile.json"
 
-$windhawkMods = @"
-"mods": {
-"no-focus-rectangle": {
-"disabled": true,
-"latestVersion": "1.0.2",
-"version": "1.0.2"
-},
-"shrink-address-bar-height": {
-"disabled": true,
-"latestVersion": "1.0.1",
-"version": "1.0.1"
-},
-"taskbar-button-scroll": {
-"latestVersion": "1.0.6",
-"version": "1.0.6"
-},
-"taskbar-clock-customization": {
-"disabled": false,
-"latestVersion": "1.3.3",
-"version": "1.3.3"
-},
-"taskbar-icon-size": {
-"latestVersion": "1.2.12",
-"version": "1.2.11"
-},
-"taskbar-notification-icon-spacing": {
-"latestVersion": "1.0.2",
-"version": "1.0.2"
-},
-"themed-regedit-listview": {
-"latestVersion": "1.0.0",
-"version": "1.0.0"
-},
-"windows-11-start-menu-styler": {
-"disabled": true,
-"latestVersion": "1.1.5",
-"version": "1.1.5"
-}
-},
-"os"
-"@
-$userProfileJson = (Get-Content -Path "$Env:ProgramData\Windhawk\userprofile.json")
-$userProfileJson = $userProfileJson.Replace("`"mods`"*`"os`"", $windhawkMods) | Out-File -FilePath "$Env:ProgramData\Windhawk\userprofile.json"
-
-Start-Process windhawk -NoNewWindow -ArgumentList "-tray-only" -PassThru -Wait
 
 Write-Output "`n================================================================"
 
@@ -108,5 +69,6 @@ Copy-FileOrFolder -sourcePath ".\PowerShell" -destinationPath "$Env:USERPROFILE\
 Copy-FileOrFolder -sourcePath ".\VSCode\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
 Copy-FileOrFolder -sourcePath ".\Nilesoft Shell" -destinationPath "$Env:ProgramFiles"
 Copy-FileOrFolder -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"
-
 Copy-FileOrFolder -sourcePath ".\WindhawkModsSettings\Windhawk" -destinationPath "$Env:ProgramData\"
+
+Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-tray-only" -PassThru -Wait

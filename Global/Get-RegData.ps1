@@ -51,7 +51,7 @@ function Get-RegData{
                     Name  = $name
                     Type  = $valueType
                     Path  = $($currentPath.Replace("HKEY_LOCAL_MACHINE","HKLM:"))
-                    Value = $valueData
+                    Value = if($valueType -eq "DWord"){"0x$($valueData.TrimStart("0"))"} else {$valueData}
                 }
                 $data += $currentEntry
             }

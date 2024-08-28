@@ -77,6 +77,7 @@ menu(mode="single" type='file' title='Edit with' pos=1 image=\uE17A sep=bottom){
 }
 // Move
 modify(where=this.name=='scan with microsoft defender' menu="more options")
+modify(where=this.name=='Troubleshoot Compatibility' menu="more options")
 modify(find='using this file' menu='more options')
 
 // Delete

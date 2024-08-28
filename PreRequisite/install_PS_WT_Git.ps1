@@ -8,6 +8,7 @@ $PROGRAMS_ID = @(
     "Nilesoft.Shell" #Powerfull context menu manager
     "RamenSoftware.Windhawk"
     "samlab-ws.SnappyDriverInstaller"
+    "RevoUninstaller.RevoUninstaller"
 )
 
 foreach($program in $PROGRAMS_ID){

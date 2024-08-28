@@ -17,3 +17,28 @@ Remove-Item $zipPath
 # Example of adding LGPO.exe to PATH
 $lgpoPath = "$env:SystemDrive\Tools\LGPO_30"
 [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$lgpoPath", [System.EnvironmentVariableTarget]::Machine)
+
+
+
+$wingetOutput = winget list
+# Flag to start collecting lines after finding the headers
+$foundHeader = $false
+
+# Use a loop to filter lines until the header is found
+$filteredOutput = foreach ($line in $wingetOutput) {
+    # Set flag to true after finding the header line
+    if ($line -match '^-{3,}') {
+        $foundHeader = $true
+        continue
+    }
+
+    # Skip lines until the header is found
+    if ($foundHeader) {
+        # Output remaining lines after finding the header
+        $line
+    }
+}
+
+# Display the filtered output
+$filteredOutput
+$filteredOutput.Count

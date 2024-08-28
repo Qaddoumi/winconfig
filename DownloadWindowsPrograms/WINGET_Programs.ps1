@@ -132,12 +132,12 @@ $PROGRAMS_COLLECTION = @(
         Installer   = "winget"
         Description = ""
     }
-    @{ Name         = "EarTrumpet"
-        Source      = "winget"
-        Id          = "File-New-Project.EarTrumpet"
-        Installer   = "winget"
-        Description = ""
-    }
+    # @{ Name         = "EarTrumpet"
+    #     Source      = "winget"
+    #     Id          = "File-New-Project.EarTrumpet"
+    #     Installer   = "winget"
+    #     Description = ""
+    # }
     @{ Name         = "Node.js"
         Source      = "winget"
         Id          = "OpenJS.NodeJS"
@@ -330,7 +330,7 @@ $PROGRAMS_COLLECTION = @(
         Source      = "winget"
         Id          = "Microsoft.Office"
         Installer   = "winget"
-        Description = ""
+        Description = "Office 365"
     }
     @{ Name         = "Microsoft Sticky Notes"
         Source      = "msstore"
@@ -447,5 +447,6 @@ $PROGRAMS_COLLECTION = @(
 #     Installer   = "winget"
 #     Description = ""
 # }
-# Windows Configuration Designer                   9NBLGGH4TX22             Unknown  msstore
-# Vim                                   vim.vim                                      9.1.0618             Tag: te… winget
+# Windows Configuration Designer         9NBLGGH4TX22          Unknown               msstore
+# Vim                                    vim.vim               9.1.0618              winget
+# Neovim                                 Neovim.Neovim         0.10.1                winget

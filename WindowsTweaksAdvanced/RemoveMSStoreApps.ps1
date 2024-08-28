@@ -40,7 +40,7 @@ $Appx = @(
     "Microsoft.Todos"
     "Microsoft.Wallet"
     #"Microsoft.Whiteboard"
-    "Microsoft.WindowsAlarms"
+    #"Microsoft.WindowsAlarms" # Windows Clock
     "microsoft.windowscommunicationsapps"
     "Microsoft.WindowsFeedbackHub"
     "Microsoft.WindowsMaps"
@@ -48,7 +48,7 @@ $Appx = @(
     #"Microsoft.WindowsSoundRecorder"
     "Microsoft.XboxApp"
     "Microsoft.ConnectivityStore"
-    "Microsoft.ScreenSketch"
+    #"Microsoft.ScreenSketch" # Snipping Tool
     # "Microsoft.MicrosoftStickyNotes"
     "Microsoft.Xbox.TCUI"
     "Microsoft.XboxGameOverlay"

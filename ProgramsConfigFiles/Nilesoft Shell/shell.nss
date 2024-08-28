@@ -26,10 +26,10 @@ import 'imports/modify.nss'
 $ico_winget = icon.res(path.combine(sys.bin, 'shell32.dll'), 122)
 menu(title="winget" type='Taskbar' where=sys.version.build>=1809 image=ico_winget)
 {
-	item(title='Download winconfig' image=image.glyph(\uE142)
-		admin cmd='powershell.exe' args='Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression')
-	item(title='Download winconfig(pwsh)' image=image.glyph(\uE142) sep='after'
+	item(title='Download winconfig(pwsh)' image=image.glyph(\uE142)
 		admin cmd='wt.exe' args='pwsh -NoExit -Command "Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression"')
+	item(title='Download winconfig(powershell)' image=image.glyph(\uE142) sep='after'
+		admin cmd='powershell.exe' args='Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression')
 	separator()
 	item(title='winstall.app' image=image.glyph(\uE11F) cmd='https://winstall.app/')
 	item(title='winget.run' image=image.glyph(\uE11F) cmd='https://winget.run/')
@@ -65,16 +65,17 @@ import 'imports/taskbar.nss'
 item(title='Browser' type='Back' image='%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe' cmd='%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe' args='https://www.duckduckgo.com/')
 item(title='Calculator' type='Back' image='%ProgramFiles%\Nilesoft Shell\images\Windows-10-Calculator.png' cmd='calc')
 sep
-item(title='Open with VS-Code' type='Back' image=[\uE272, #22A7F2] cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' args='.')
-item(title='Open with VS-Code' type='dir' image=[\uE272, #22A7F2] cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' args='"@sel.path"')
+item(title='Open with VS-Code' type='Back' image=[\uE272, #22A7F2] cmd='%ProgramFiles%\Microsoft VS Code\Code.exe' args='.')
+item(title='Open with VS-Code' type='dir' image=[\uE272, #22A7F2] cmd='%ProgramFiles%\Microsoft VS Code\Code.exe' args='"@sel.path"')
 item(title='Open with Visual Studio 2022' type='Back' image='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' cmd='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' args='.')
 item(title='Open with Visual Studio 2022' type='dir' image='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' cmd='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' args='"@sel.path"')
 
 menu(mode="single" type='file' title='Edit with' pos=1 image=\uE17A sep=bottom){
 	item(title='Notepad' image='%ProgramFiles%\Nilesoft Shell\images\notepad.png' cmd='notepad' arg='"@sel.file.name"')
-	item(title='VS-Code' image=[\uE272, #22A7F2] cmd='%LocalAppData%\Programs\Microsoft VS Code\Code.exe' arg='"@sel.file.name"')
+	item(title='VS-Code' image=[\uE272, #22A7F2] cmd='%ProgramFiles%\Microsoft VS Code\Code.exe' arg='"@sel.file.name"')
 	item(title='Visual Studio 2022' image='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' cmd='%ProgramFiles%\Microsoft Visual Studio\2022\Community\Common7\IDE\devenv.exe' arg='"@sel.file.name"')
 }
+
 // Move
 modify(where=this.name=='scan with microsoft defender' menu="more options")
 modify(where=this.name=='Troubleshoot Compatibility' menu="more options")

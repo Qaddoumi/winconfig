@@ -18,6 +18,7 @@ $Appx = @(
     # "Microsoft.WindowsCamera"
     "Microsoft.549981C3F5F10" # Cortana
     "Clipchamp.Clipchamp"
+    "Microsoft.DevHome"
     "Microsoft.MinecraftUWP"
     "Microsoft.GamingServices"
     "Microsoft.GamingApp"

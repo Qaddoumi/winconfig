@@ -29,7 +29,7 @@ menu(title="winget" type='Taskbar' where=sys.version.build>=1809 image=ico_winge
 	item(title='Download winconfig' image=image.glyph(\uE142)
 		admin cmd='powershell.exe' args='Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression')
 	item(title='Download winconfig(pwsh)' image=image.glyph(\uE142) sep='after'
-		admin cmd='pwsh.exe' args='Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression')
+		admin cmd='wt.exe' args='pwsh -NoExit -Command "Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Download | Invoke-Expression"')
 	separator()
 	item(title='winstall.app' image=image.glyph(\uE11F) cmd='https://winstall.app/')
 	item(title='winget.run' image=image.glyph(\uE11F) cmd='https://winget.run/')

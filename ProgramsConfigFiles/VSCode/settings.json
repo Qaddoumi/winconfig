@@ -123,4 +123,5 @@
     "markdown.suggest.paths.enabled": true,
     "files.hotExit": "onExit",
     "workbench.colorTheme": "Night Owl (No Italics)",
+    "powershell.scriptAnalysis.settingsPath": "%USERPROFILE%\\Documents\\PowerShell\\PSScriptAnalyzerSettings.psd1"
 }

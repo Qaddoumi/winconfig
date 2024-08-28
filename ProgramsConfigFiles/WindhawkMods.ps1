@@ -1,4 +1,4 @@
-$windhawkMods = @"
+[json]$windhawkMods = @"
 "mods": {
 "no-focus-rectangle": {
 "disabled": true,

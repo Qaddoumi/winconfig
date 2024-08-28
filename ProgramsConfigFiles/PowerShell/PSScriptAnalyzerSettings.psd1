@@ -9,7 +9,8 @@
         'PSAvoidUsingWriteHost',
         'PSAvoidUsingInvokeExpression',
         'PSUseShouldProcessForStateChangingFunctions',
-        'PSUseUsingScopeModifierInNewRunspaces'
+        'PSUseUsingScopeModifierInNewRunspaces',
+        'PSAvoidUsingCmdletAliases'
     )
 }
 # How to use : RUN

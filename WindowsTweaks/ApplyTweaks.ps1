@@ -131,6 +131,12 @@ foreach($service in $ServicesCollection.service){
 Write-Host "`n================================================================"
 . ".\DisablingScheduledTasks.ps1"
 
+Write-Host "`n================================================================"
+Write-Host "Remove ini files in desktop" -ForegroundColor Green
+# Remove shortcuts from the current user's Desktop
+Remove-Item "$([Environment]::GetFolderPath('Desktop'))\*.ini" -Force -ErrorAction SilentlyContinue
+# Remove shortcuts from the Public Desktop
+Remove-Item "C:\Users\Public\Desktop\*.ini" -Force -ErrorAction SilentlyContinue
 
 Write-Host "`n================================================================" -ForegroundColor DarkYellow
 . "..\Global\TimeoutInput.ps1"

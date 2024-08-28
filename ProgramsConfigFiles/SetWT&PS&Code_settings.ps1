@@ -71,4 +71,4 @@ Copy-FileOrFolder -sourcePath ".\Nilesoft Shell" -destinationPath "$Env:ProgramF
 Copy-FileOrFolder -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"
 Copy-FileOrFolder -sourcePath ".\WindhawkModsSettings\Windhawk" -destinationPath "$Env:ProgramData\"
 
-Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-tray-only" -PassThru -Wait
+Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru -Wait

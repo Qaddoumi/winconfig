@@ -84,3 +84,20 @@ Write-Output "`nInstalling programs Finished."
 Write-Output "`n================================================================"
 Write-Output "`n   === Refresh Environment Variabels : ===`n"
 & ..\Global\RefreshEnvironmentVariabels.ps1
+
+
+Write-Host "`n================================================================" -ForegroundColor DarkYellow
+. "..\Global\TimeoutInput.ps1"
+
+$userInput = TimeoutInput -Prompt "Do you want to remove desktop shortcuts? ``(Y/n``) :" -TimeoutSeconds 7 -DefaultValue "Y"
+
+if ($userInput -eq 'y' -or $userInput -eq 'yes') {
+    # Reboot the system
+    Write-Host "choice is $userInput" -ForegroundColor Green
+    Write-Host "`n================================================================"
+    Write-Host "Remove shortcuts in desktop" -ForegroundColor Green
+    # Remove shortcuts from the current user's Desktop
+    Remove-Item "$([Environment]::GetFolderPath('Desktop'))\*.lnk" -Force -ErrorAction SilentlyContinue
+    # Remove shortcuts from the Public Desktop
+    Remove-Item "C:\Users\Public\Desktop\*.lnk" -Force -ErrorAction SilentlyContinue
+}

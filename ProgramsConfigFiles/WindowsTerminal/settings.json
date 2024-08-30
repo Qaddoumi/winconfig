@@ -56,6 +56,7 @@
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
+                "tabTitle": "Pwsh",
                 "opacity": 81,
                 "source": "Windows.Terminal.PowershellCore"
             },
@@ -71,8 +72,47 @@
                 "hidden": false,
                 "icon": "ms-appx:///ProfileIcons/pwsh.png",
                 "name": "PowerShell Admin",
+                "tabTitle": "Pwsh Admin",
                 "opacity": 81,
                 "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "colorScheme": "Brogrammer",
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "elevate": false,
+                "font": {
+                    "face": "MesloLGL Nerd Font Mono",
+                    "size": 9.0
+                },
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+                "hidden": false,
+                "name": "Windows PowerShell",
+                "tabTitle": "PowerShell",
+                "opacity": 81
+            },
+            {
+                "altGrAliasing": true,
+                "antialiasingMode": "grayscale",
+                "closeOnExit": "automatic",
+                "colorScheme": "Brogrammer",
+                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "cursorShape": "bar",
+                "elevate": true,
+                "font": {
+                    "face": "MesloLGL Nerd Font Mono",
+                    "size": 9.0
+                },
+                "guid": "{7a3c6bf3-8262-41a4-96bb-7c1de23cc13e}",
+                "hidden": false,
+                "historySize": 9001,
+                "icon": "ms-appx:///ProfileIcons/{61c54bbd-c2c6-5271-96e7-009a87ff44bf}.png",
+                "name": "Windows PowerShell Admin",
+                "opacity": 81,
+                "padding": "8, 8, 8, 8",
+                "snapOnInput": true,
+                "startingDirectory": "%USERPROFILE%",
+                "tabTitle": "PowerShell Admin",
+                "useAcrylic": false
             },
             {
                 "colorScheme": "Brogrammer",
@@ -84,13 +124,14 @@
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt",
+                "tabTitle": "Cmd",
                 "opacity": 81
             },
             {
-                "colorScheme": "Brogrammer",
                 "altGrAliasing": true,
                 "antialiasingMode": "grayscale",
                 "closeOnExit": "always",
+                "colorScheme": "Brogrammer",
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "cursorShape": "bar",
                 "elevate": true,
@@ -103,6 +144,7 @@
                 "historySize": 9001,
                 "icon": "ms-appx:///ProfileIcons/{0caa0dad-35be-5f56-a8ff-afceeeaa6101}.png",
                 "name": "Command Prompt Admin",
+                "tabTitle": "Cmd Admin",
                 "opacity": 81,
                 "padding": "8, 8, 8, 8",
                 "snapOnInput": true,
@@ -120,19 +162,6 @@
                 "name": "Azure Cloud Shell",
                 "opacity": 81,
                 "source": "Windows.Terminal.Azure"
-            },
-            {
-                "colorScheme": "Brogrammer",
-                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                "elevate": false,
-                "font": {
-                    "face": "MesloLGL Nerd Font Mono",
-                    "size": 9.0
-                },
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": true,
-                "name": "Windows PowerShell",
-                "opacity": 81
             },
             {
                 "colorScheme": "Brogrammer",
@@ -164,15 +193,38 @@
                     "face": "MesloLGL Nerd Font Mono",
                     "size": 9.0
                 },
-                "opacity": 81,
                 "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
                 "hidden": true,
                 "name": "Visual Studio Debug Console",
+                "opacity": 81,
                 "source": "VSDebugConsole"
             }
         ]
     },
     "schemes": [
+        {
+            "background": "#131313",
+            "black": "#1F1F1F",
+            "blue": "#2A84D2",
+            "brightBlack": "#D6DBE5",
+            "brightBlue": "#1081D6",
+            "brightCyan": "#0F7DDB",
+            "brightGreen": "#1DD361",
+            "brightPurple": "#5350B9",
+            "brightRed": "#DE352E",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#F3BD09",
+            "cursorColor": "#B9B9B9",
+            "cyan": "#1081D6",
+            "foreground": "#D6DBE5",
+            "green": "#2DC55E",
+            "name": "Brogrammer",
+            "purple": "#4E5AB7",
+            "red": "#F81118",
+            "selectionBackground": "#1F1F1F",
+            "white": "#D6DBE5",
+            "yellow": "#ECBA0F"
+        },
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
@@ -356,29 +408,6 @@
             "selectionBackground": "#FFFFFF",
             "white": "#D3D7CF",
             "yellow": "#C4A000"
-        },
-        {
-            "name": "Brogrammer",
-            "black": "#1f1f1f",
-            "red": "#f81118",
-            "green": "#2dc55e",
-            "yellow": "#ecba0f",
-            "blue": "#2a84d2",
-            "purple": "#4e5ab7",
-            "cyan": "#1081d6",
-            "white": "#d6dbe5",
-            "brightBlack": "#d6dbe5",
-            "brightRed": "#de352e",
-            "brightGreen": "#1dd361",
-            "brightYellow": "#f3bd09",
-            "brightBlue": "#1081d6",
-            "brightPurple": "#5350b9",
-            "brightCyan": "#0f7ddb",
-            "brightWhite": "#ffffff",
-            "background": "#131313",
-            "foreground": "#d6dbe5",
-            "selectionBackground": "#1f1f1f",
-            "cursorColor": "#b9b9b9"
         },
         {
             "background": "#300A24",

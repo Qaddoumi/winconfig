@@ -28,7 +28,10 @@ function Install-ProgramWithWinget {
         Write-Output "Attempting to install $($program.Name)..."
         try {
             $locationOption = if ($($program.Location)) { "--location `"$($program.Location)`"" } else { "" }
-            $installArgs = "install --exact --id $($program.Id) --source $($program.Source) --accept-package-agreements --accept-source-agreements $locationOption"
+            $overrideOption = if ($($program.Override)) { "--override '$($program.Override)'" } else { "" }
+            $wingetOptions = $locationOption + " " + $overrideOption
+
+            $installArgs = "install --exact --id $($program.Id) --source $($program.Source) --accept-package-agreements --accept-source-agreements $wingetOptions"
             $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -PassThru -Wait
             # always use -Wait instaed of $process.WaitForExit() because it did not work well in build in powershell
             $exitCode = $process.ExitCode

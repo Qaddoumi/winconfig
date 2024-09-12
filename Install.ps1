@@ -91,11 +91,11 @@ Write-Host "                                                                    
 #  and their descriptions
 $scripts = @(
     @{ Name = ".\PreRequisite\Install_winget.ps1"; Description = "Install winget"; Parameter = "-Force"; SleepTime = 3; MessageAfter = "You may need to restart if did not work"}
-    @{ Name = ".\PreRequisite\install_PS_WT_Git.ps1"; Description = "Install pwsh,wt,git etc.."; Parameter = ""; SleepTime = 0; MessageAfter = ""}
+    @{ Name = ".\PreRequisite\install_PS_WT_Git.ps1"; Description = "Install essential programs"; Parameter = ""; SleepTime = 0; MessageAfter = ""}
+    @{ Name = ".\ProgramsConfigFiles\SetWT&PS&Code_settings.ps1"; Description = "Set essential programs settings"; Parameter = ""; SleepTime = 0; MessageAfter = "Hold ctrl then right click mouse button to refresh shell & Restart Explorer" }
     @{ Name = ".\PreRequisite\SET_EP.ps1"; Description = "Set Execution Policy"; Parameter = ""; SleepTime = 0; MessageAfter = ""}
     @{ Name = ".\DownloadWindowsPrograms\InstallWinAppsWithWinget.ps1"; Description = "Bulk install windows progarm"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
     @{ Name = ".\DownloadWindowsPrograms\UpdatePrograms.ps1"; Description = "Bulk Upgrade windows progarm"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
-    @{ Name = ".\ProgramsConfigFiles\SetWT&PS&Code_settings.ps1"; Description = "Set WindowsTerminal, PowerShell, Windhawk, Shell & Code Settings"; Parameter = ""; SleepTime = 0; MessageAfter = "Hold ctrl then right click mouse button to refresh shell & Restart Explorer" }
     @{ Name = ".\WindowsTweaks\ApplyTweaks.ps1"; Description = "Apply Windows Tweaks, And remove telemetry"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change`nOr restart explorer" }
     @{ Name = ".\WindowsTweaksAdvanced\ApplyAdvancedTweaks.ps1"; Description = "Advanced Tweaks Menu"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
     @{ Name = ".\WindowsCleanupMaintenance\RestartExplorer.ps1"; Description = "Restart Explorer"; Parameter = ""; SleepTime = 3; MessageAfter = "" }

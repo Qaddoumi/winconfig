@@ -46,7 +46,8 @@ $PROGRAMS_COLLECTION = @(
         Source      = "winget"
         Id          = "Microsoft.VisualStudio.2022.Community"
         Installer   = "winget"
-        Description = ""
+        Description = "Visual Studio Community 2022 with the C++ and .NET desktop development workloads"
+        Override    = "--passive --norestart --installWhileDownloading --wait --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.ManagedDesktop --includeRecommended"
     }
     @{ Name         = "Visual Studio 2022 Build Tools"
         Source      = "winget"

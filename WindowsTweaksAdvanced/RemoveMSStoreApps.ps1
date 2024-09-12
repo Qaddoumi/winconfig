@@ -1,6 +1,6 @@
 Write-Host "Remove ALL MS Store Apps - NOT RECOMMENDED" -ForegroundColor Green
 Write-Host "USE WITH CAUTION!!!!! This will remove ALL Microsoft store apps other than the essentials to make winget work. Games installed by MS Store ARE INCLUDED!" -ForegroundColor DarkYellow
-# TODO: Run to get all packages
+## Run to get all packages
 # Get-AppxPackage | Select {$_.Name}
 # Get-AppxProvisionedPackage -Online | Select { $_.DisplayName }
 $Appx = @(
@@ -44,15 +44,15 @@ $Appx = @(
     "microsoft.windowscommunicationsapps"
     "Microsoft.WindowsFeedbackHub"
     "Microsoft.WindowsMaps"
-    "Microsoft.YourPhone"
+    #"Microsoft.YourPhone"
     #"Microsoft.WindowsSoundRecorder"
     "Microsoft.XboxApp"
     "Microsoft.ConnectivityStore"
     #"Microsoft.ScreenSketch" # Snipping Tool
     # "Microsoft.MicrosoftStickyNotes"
     "Microsoft.Xbox.TCUI"
-    "Microsoft.XboxGameOverlay"
-    "Microsoft.XboxGamingOverlay"
+    #"Microsoft.XboxGameOverlay"
+    #"Microsoft.XboxGamingOverlay"
     "Microsoft.XboxGameCallableUI"
     "Microsoft.XboxSpeechToTextOverlay"
     "Microsoft.PowerAutomateDesktop"
@@ -124,10 +124,12 @@ foreach ($appx_item in $Appx) {
                     Write-Host "Removing $Name" -ForegroundColor Cyan
 
                     if ($appxPackage) {
+                        Write-Host "AppxPackage Name : $($appxPackage.Name)" -ForegroundColor Cyan
                         $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
                     }
 
                     if ($provisionedPackage) {
+                        Write-Host "AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName)" -ForegroundColor Cyan
                         $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
                     }
 

@@ -93,7 +93,7 @@
             {
                 "altGrAliasing": true,
                 "antialiasingMode": "grayscale",
-                "closeOnExit": "automatic",
+                "closeOnExit": "always",
                 "colorScheme": "Brogrammer",
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "cursorShape": "bar",

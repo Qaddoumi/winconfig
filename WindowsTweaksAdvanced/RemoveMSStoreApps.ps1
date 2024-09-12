@@ -114,18 +114,16 @@ foreach ($appx_item in $Appx) {
             )
             Try {
                 Write-Host "Checking if '*$Name*' is installed" -ForegroundColor Cyan
-                
+
                 $appxPackage = Get-AppxPackage "*$Name*" -allusers
                 if ($appxPackage) {
-                    Write-Host "Removing '*$Name*'" -ForegroundColor Cyan
-                    Write-Host "AppxPackage Name : $($appxPackage.Name)" -ForegroundColor Cyan
+                    Write-Host "Found AppxPackage Name : $($appxPackage.Name) Removing..." -ForegroundColor Cyan
                     $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
                 }
 
                 $provisionedPackage = Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*"
                 if ($provisionedPackage) {
-                    Write-Host "Removing '*$Name*'" -ForegroundColor Cyan
-                    Write-Host "AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName)" -ForegroundColor Cyan
+                    Write-Host "Found AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName) Removing..." -ForegroundColor Cyan
                     $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
                 }
 

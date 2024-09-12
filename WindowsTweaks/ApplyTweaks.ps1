@@ -51,8 +51,9 @@ function Show-IconsSysTray{
         if ($values.IconGuid -eq "{7820AE78-23E3-4229-82C1-E41CB67D5B9C}" -and $values.ExecutablePath -eq "{F38BF404-1D43-42F2-9305-67DE0B28FC23}\explorer.exe" ){
             #Write-Host "FOUND IT" -ForegroundColor Green
             $Enable = 1
-        }
-        else{
+        }elseif($values.ExecutablePath.Contains("NetBalancer")){
+            $Enable = 1
+        }else{
             $Enable = 0
         }
         Set-Registry -Name $Name -Path $subKey.PSPath -Type "DWord" -Value $Enable

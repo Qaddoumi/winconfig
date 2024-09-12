@@ -113,29 +113,23 @@ foreach ($appx_item in $Appx) {
                 [string]$Name
             )
             Try {
-                # Write-Host "Removing $Name" -ForegroundColor Cyan
-                # Get-AppxPackage "*$Name*" -allusers | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
-                # Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*" | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-                # Check if the app is installed for any user
+                Write-Host "Checking if '*$Name*' is installed" -ForegroundColor Cyan
+                
                 $appxPackage = Get-AppxPackage "*$Name*" -allusers
-                $provisionedPackage = Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*"
-
-                if ($appxPackage -or $provisionedPackage) {
-                    Write-Host "Removing $Name" -ForegroundColor Cyan
-
-                    if ($appxPackage) {
-                        Write-Host "AppxPackage Name : $($appxPackage.Name)" -ForegroundColor Cyan
-                        $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
-                    }
-
-                    if ($provisionedPackage) {
-                        Write-Host "AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName)" -ForegroundColor Cyan
-                        $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-                    }
-
-                    Write-Host "$Name has been removed." -ForegroundColor Cyan
+                if ($appxPackage) {
+                    Write-Host "Removing '*$Name*'" -ForegroundColor Cyan
+                    Write-Host "AppxPackage Name : $($appxPackage.Name)" -ForegroundColor Cyan
+                    $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
                 }
-                else {
+
+                $provisionedPackage = Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*"
+                if ($provisionedPackage) {
+                    Write-Host "Removing '*$Name*'" -ForegroundColor Cyan
+                    Write-Host "AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName)" -ForegroundColor Cyan
+                    $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+                }
+
+                if($null -eq $appxPackage -and $null -eq $provisionedPackage){
                     Write-Host "$Name not found." -ForegroundColor Yellow
                 }
             }

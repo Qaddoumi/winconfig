@@ -393,12 +393,12 @@ $PROGRAMS_COLLECTION = @(
         Installer   = "winget"
         Description = ""
     }
-    @{ Name         = "Net Speed Meter"
-        Source      = "msstore"
-        Id          = "9NMBX01PXZ4L"
-        Installer   = "winget"
-        Description = ""
-    }
+    # @{ Name         = "Net Speed Meter"
+    #     Source      = "msstore"
+    #     Id          = "9NMBX01PXZ4L"
+    #     Installer   = "winget"
+    #     Description = ""
+    # }
     @{ Name         = "Microsoft Edge"
         Source      = "winget"
         Id          = "Microsoft.Edge"

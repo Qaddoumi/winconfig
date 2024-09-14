@@ -65,10 +65,90 @@ Write-Output "`nCoping Settings Files : `n"
 . "..\Global\Copy.ps1"
 
 Copy-FileOrFolder -sourcePath ".\WindowsTerminal\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Write-Output "================================================================"
 Copy-FileOrFolder -sourcePath ".\PowerShell" -destinationPath "$Env:USERPROFILE\Documents"
+Write-Output "================================================================"
 Copy-FileOrFolder -sourcePath ".\VSCode\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
+Write-Output "================================================================"
+Copy-FileOrFolder -sourcePath ".\NetBalancer\netbalancer.json" -destinationPath "$Env:USERPROFILE\Documents\netbalancer.json"
+Write-Output "================================================================"
 Copy-FileOrFolder -sourcePath ".\Nilesoft Shell" -destinationPath "$Env:ProgramFiles"
+Write-Output "================================================================"
 Copy-FileOrFolder -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"
+Write-Output "================================================================"
 Copy-FileOrFolder -sourcePath ".\WindhawkModsSettings\Windhawk" -destinationPath "$Env:ProgramData\"
+Write-Output "================================================================"
 
 Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru -Wait
+
+function Set-NetBalancerToRunAtLogin {
+    Write-Host "Set NetBalancer to Run at login" -ForegroundColor Green
+    # Define the path to the NetBalancer Tray executable
+    $exePath = "%ProgramFiles%\NetBalancer\SeriousBit.NetBalancer.Tray.exe"
+    
+    # Define the action to run the NetBalancer Tray
+    $action = New-ScheduledTaskAction -Execute $exePath
+    
+    # Define the trigger to run the task at user logon
+    $trigger = New-ScheduledTaskTrigger -AtLogon
+    
+    # Define the principal (user) that will run the task with the highest privileges in the interactive session
+    $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
+    
+    # Register the scheduled task with the current user and admin rights
+    Register-ScheduledTask -Action $action -Trigger $trigger -Principal $principal -TaskName "NetBalancer Tray User" -Description "Starts NetBalancer Tray at login with admin rights and interactive session"
+}
+
+function Set-NetBalancerSettings {
+    Write-Host "Set NetBalancer registry settings for GUI and Tray" -ForegroundColor Green
+    $regSettings = @(
+        @{ Name   = "MiniFormBlur"
+            Type  = "String"
+            Value = "False"
+        }
+        @{ Name   = "Language"
+            Type  = "String"
+            Value = "English"
+        }
+        @{ Name   = "ShowBandFormTrayIconOnMouseMove"
+            Type  = "String"
+            Value = "True"
+        }
+        @{ Name   = "LightTheme"
+            Type  = "String"
+            Value = "False"
+        }
+        @{ Name   = "MiniFormVisible"
+            Type  = "String"
+            Value = "False"
+        }
+        @{ Name   = "DeskBandVisible"
+            Type  = "String"
+            Value = "True"
+        }
+        @{ Name   = "MiniFormTopMost"
+            Type  = "String"
+            Value = "False"
+        }
+    )
+    $regSettings = Get-RegData -Path ".\NetBalancer\NetBalancer.reg"
+    foreach ($item in $regSettings) {
+        Set-Registry -Name $item.Name -Path $item.Path -Type $item.Type -Value $item.Value
+    }
+}
+
+function Show-IconsSysTray {
+    Write-Host "Show Icons SysTray For NetBalancer" -ForegroundColor Green
+    $subKeys = Get-ChildItem -Path "HKCU:\Control Panel\NotifyIconSettings"
+    foreach ($subKey in $subKeys) {
+        $values = Get-ItemProperty -Path $subKey.PSPath
+        if ($values.ExecutablePath.Contains("NetBalancer")) {
+            Set-Registry -Name "IsPromoted" -Path $subKey.PSPath -Type "DWord" -Value 1
+        }
+    }
+}
+
+Write-Output "================================================================`n"
+Set-NetBalancerToRunAtLogin
+Set-NetBalancerSettings
+Show-IconsSysTray

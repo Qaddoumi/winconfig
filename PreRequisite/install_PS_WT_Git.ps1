@@ -13,9 +13,8 @@ $PROGRAMS_ID = @(
 )
 
 foreach($program in $PROGRAMS_ID){
-    $installArgs = "install --exact --id $program  --source winget --accept-package-agreements --accept-source-agreements --scope Machine"
-    $process = Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -PassThru
-    $process.WaitForExit()
+    $installArgs = "install --exact --id $program  --source winget --accept-package-agreements --accept-source-agreements"
+    Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -Wait
 }
 
 & .\Install-NetBalancer.ps1

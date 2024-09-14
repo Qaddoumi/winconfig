@@ -1,4 +1,3 @@
-#TODO: add to main downloads
 $PROGRAMS_ID = @(
     "Microsoft.PowerShell" # powershell 7
     "Microsoft.WindowsTerminal"

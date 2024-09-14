@@ -18,6 +18,8 @@ foreach($program in $PROGRAMS_ID){
     $process.WaitForExit()
 }
 
+& .\Install-NetBalancer.ps1
+
 Write-Output "`n================================================================"
 Write-Output "`n   === Refresh Environment Variabels : ===`n"
 & ..\Global\RefreshEnvironmentVariabels.ps1

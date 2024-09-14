@@ -125,7 +125,7 @@ function Set-NetBalancerToRunAtLogin {
 }
 
 function Set-NetBalancerSettings {
-    Write-Host "Set NetBalancer registry settings for GUI and Tray" -ForegroundColor Green
+    Write-Host "`nSet NetBalancer registry settings for GUI and Tray" -ForegroundColor Green
     $regSettings = @(
         @{ Name   = "MiniFormBlur"
             Type  = "String"
@@ -163,7 +163,7 @@ function Set-NetBalancerSettings {
 }
 
 function Show-IconsSysTray {
-    Write-Host "Show Icons SysTray For NetBalancer" -ForegroundColor Green
+    Write-Host "`nShow Icons SysTray For NetBalancer" -ForegroundColor Green
     $subKeys = Get-ChildItem -Path "HKCU:\Control Panel\NotifyIconSettings"
     foreach ($subKey in $subKeys) {
         $values = Get-ItemProperty -Path $subKey.PSPath
@@ -177,3 +177,6 @@ Write-Output "================================================================`n
 Set-NetBalancerToRunAtLogin
 Set-NetBalancerSettings
 Show-IconsSysTray
+
+Write-Host "`nStarting NetBalancer"
+Start-Process -FilePath "$Env:ProgramFiles\NetBalancer\SeriousBit.NetBalancer.Tray.exe" -NoNewWindow -PassThru

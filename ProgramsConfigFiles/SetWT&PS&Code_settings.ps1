@@ -31,7 +31,7 @@ Write-Host "Installing VSCode Extension`n" -ForegroundColor Green
 . ".\vscode-extensions.ps1"
 $Counter = 1
 foreach ($extension in $VSCode_Extensions) {
-    Write-Host "Installing $Counter of $($VSCode_Extensions.Count) : " -NoNewline
+    Write-Host "{$Counter of $($VSCode_Extensions.Count)} " -NoNewline
     try{
         $process = Start-Process code -ArgumentList "--install-extension $extension --force" -Wait -NoNewWindow -PassThru
         if($process.ExitCode -eq 0){

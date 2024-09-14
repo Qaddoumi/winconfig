@@ -44,6 +44,7 @@ foreach ($extension in $VSCode_Extensions) {
     Write-Host ""
 }
 
+Write-Output "`n================================================================"
 Write-Host "Setting Windhawk registry data" -ForegroundColor Green
 . "..\Global\Get-RegData.ps1"
 . "..\Global\Set-Registry.ps1"
@@ -90,21 +91,37 @@ Write-Host "Starting Windhawk"
 Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru -Wait
 
 function Set-NetBalancerToRunAtLogin {
-    Write-Host "Set NetBalancer to Run at login" -ForegroundColor Green
-    # Define the path to the NetBalancer Tray executable
-    $exePath = "%ProgramFiles%\NetBalancer\SeriousBit.NetBalancer.Tray.exe"
-    
-    # Define the action to run the NetBalancer Tray
-    $action = New-ScheduledTaskAction -Execute $exePath
-    
-    # Define the trigger to run the task at user logon
-    $trigger = New-ScheduledTaskTrigger -AtLogon
-    
-    # Define the principal (user) that will run the task with the highest privileges in the interactive session
-    $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
-    
-    # Register the scheduled task with the current user and admin rights
-    Register-ScheduledTask -Action $action -Trigger $trigger -Principal $principal -TaskName "NetBalancer Tray User" -Description "Starts NetBalancer Tray at login with admin rights and interactive session"
+    Write-Host "Checking if NetBalancer Tray task already exists..." -ForegroundColor Yellow
+
+    # Task name
+    $taskName = "NetBalancer Tray User"
+
+    # Check if the scheduled task exists
+    $taskExists = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
+
+    if ($taskExists) {
+        Write-Host "Scheduled task '$taskName' already exists. Skipping task creation." -ForegroundColor Cyan
+    }
+    else {
+        Write-Host "Scheduled task '$taskName' not found. Creating new task..." -ForegroundColor Green
+
+        # Define the path to the NetBalancer Tray executable
+        $exePath = "$env:ProgramFiles\NetBalancer\SeriousBit.NetBalancer.Tray.exe"
+
+        # Define the action to run the NetBalancer Tray
+        $action = New-ScheduledTaskAction -Execute $exePath
+
+        # Define the trigger to run the task at user logon
+        $trigger = New-ScheduledTaskTrigger -AtLogon
+
+        # Define the principal (user) that will run the task with the highest privileges in the interactive session
+        $principal = New-ScheduledTaskPrincipal -UserId $env:USERNAME -LogonType Interactive -RunLevel Highest
+
+        # Register the scheduled task with the current user and admin rights
+        Register-ScheduledTask -Action $action -Trigger $trigger -Principal $principal -TaskName $taskName -Description "Starts NetBalancer Tray at login with admin rights and interactive session"
+
+        Write-Host "Scheduled task '$taskName' created successfully." -ForegroundColor Green
+    }
 }
 
 function Set-NetBalancerSettings {

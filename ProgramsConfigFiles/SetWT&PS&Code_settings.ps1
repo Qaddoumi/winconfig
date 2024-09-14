@@ -64,21 +64,29 @@ Write-Output "`nCoping Settings Files : `n"
 
 . "..\Global\Copy.ps1"
 
+Write-Host "Copying Windows Terminal settings file" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\WindowsTerminal\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Write-Output "================================================================"
+Write-Host "Copying PowerShell setting files" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\PowerShell" -destinationPath "$Env:USERPROFILE\Documents"
 Write-Output "================================================================"
+Write-Host "Copying VSCode settings file" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\VSCode\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
 Write-Output "================================================================"
+Write-Host "Copying NetBalancer settings file" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\NetBalancer\netbalancer.json" -destinationPath "$Env:USERPROFILE\Documents\netbalancer.json"
 Write-Output "================================================================"
+Write-Host "Copying Nilesoft Shell settings files" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\Nilesoft Shell" -destinationPath "$Env:ProgramFiles"
 Write-Output "================================================================"
+Write-Host "Copying Procmon settings file" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"
 Write-Output "================================================================"
+Write-Host "Copying Windhawk settings files" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\WindhawkModsSettings\Windhawk" -destinationPath "$Env:ProgramData\"
 Write-Output "================================================================"
 
+Write-Host "Starting Windhawk"
 Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru -Wait
 
 function Set-NetBalancerToRunAtLogin {

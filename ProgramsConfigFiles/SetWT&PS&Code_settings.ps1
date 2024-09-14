@@ -88,7 +88,7 @@ Copy-FileOrFolder -sourcePath ".\WindhawkModsSettings\Windhawk" -destinationPath
 Write-Output "================================================================"
 
 Write-Host "Starting Windhawk"
-Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru -Wait
+Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru
 
 function Set-NetBalancerToRunAtLogin {
     Write-Host "Checking if NetBalancer Tray task already exists..." -ForegroundColor Yellow

@@ -27,6 +27,7 @@
         $aumidList
 #>
 
-. "..\Global\Copy.ps1"
-Copy-FileOrFolder -sourcePath "..\ProgramsConfigFiles\StartMenuPins\start2.bin" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start2.bin"
-# Copy-FileOrFolder -sourcePath "..\ProgramsConfigFiles\StartMenuPins\Empty_start2.bin" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start2.bin"
+#TODO: make my own start2.bin
+# . "..\Global\Copy.ps1"
+# Copy-FileOrFolder -sourcePath "..\ProgramsConfigFiles\StartMenuPins\start2.bin" -destinationPath "$Env:USERPROFILE\AppData\Local\Packages\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\LocalState\start2.bin"
+

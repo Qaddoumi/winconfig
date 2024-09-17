@@ -42,7 +42,7 @@ if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     }
 
     Write-Host "Exiting ..."
-    Start-Sleep -Seconds 2
+    Start-Sleep -Seconds 1
     exit 0
 }
 
@@ -64,7 +64,7 @@ if($pwshPath -and $isBuiltInWindowsPowerShell){
         Start-Process pwsh -Verb RunAs "-NoProfile -ExecutionPolicy Bypass -Command `"Set-Location `"$(Get-Location)`"; & `"$PSCommandPath`";`"" -ErrorAction Stop
     }
     Write-Host "`nExiting ..."
-    Start-Sleep -Seconds 2
+    Start-Sleep -Seconds 1
     exit 0
 }
 # TODO:(don't do) If running in buildIn and not wt and wt installed run in wt buildIn

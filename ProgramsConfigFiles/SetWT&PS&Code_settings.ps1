@@ -49,8 +49,10 @@ foreach ($extension in $VSCode_Extensions) {
 
 Write-Output "`n================================================================"
 Write-Host "Stopping windhawk" -ForegroundColor Yellow
+Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-exit" -PassThru -Wait
+Start-Sleep -Seconds 5
 taskkill /f /im windhawk.exe
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 5
 
 Write-Host "Setting Windhawk registry data" -ForegroundColor Green
 . "..\Global\Get-RegData.ps1"

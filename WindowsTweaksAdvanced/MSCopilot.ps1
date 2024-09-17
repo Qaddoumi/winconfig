@@ -49,18 +49,6 @@ $RegData = @(
         Path  = "HKU:\DefaultUser\Software\Policies\Microsoft\Windows\Windows AI"
         Value = "1"
     }
-    @{
-        Name  = "TurnOffSavingSnapshots"
-        Type  = "DWord"
-        Path  = "HKCU:\DefaultUser\Software\Policies\Microsoft\Windows\Windows AI"
-        Value = "1"
-    }
-    @{
-        Name  = "TurnOffSavingSnapshots"
-        Type  = "DWord"
-        Path  = "HKLM:\DefaultUser\Software\Policies\Microsoft\Windows\Windows AI"
-        Value = "1"
-    }
 )
 
 foreach($entry in $RegData){

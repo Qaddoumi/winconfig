@@ -48,6 +48,10 @@ foreach ($extension in $VSCode_Extensions) {
 }
 
 Write-Output "`n================================================================"
+Write-Host "Stopping windhawk" -ForegroundColor Yellow
+taskkill /f /im windhawk.exe
+Start-Sleep -Seconds 3
+
 Write-Host "Setting Windhawk registry data" -ForegroundColor Green
 . "..\Global\Get-RegData.ps1"
 . "..\Global\Set-Registry.ps1"

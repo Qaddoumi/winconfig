@@ -1050,6 +1050,24 @@ $RegistrySettings  = @(
             }
         )
     }
+    @{ Message = "Edge Browser Settings"
+        Data   = @(
+            @{
+                Name     = "DiagnosticData"
+                Type     = "DWord"
+                Path     = "HKLM:\Software\Policies\Microsoft\Edge"
+                Value    = "0"
+                _Comment = "Disable Telemetry in Microsoft Edge"
+            }
+            @{
+                Name     = "Theme"
+                Type     = "String"
+                Path     = "HKCU\Software\Microsoft\Edge\Theme"
+                Value    = "1"
+                _Comment = "Set Microsoft Edge to Dark Mode"
+            }
+        )
+    }
     # TODO: review each item in Disable-Telemetry
     @{ Message = "Disable Telemetry(Part 1), Note: This will lock many Edge Browser settings. Microsoft spies heavily on you when using the Edge browser"
         Data   = @(

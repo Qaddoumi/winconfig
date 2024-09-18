@@ -125,7 +125,6 @@ Write-Host "`n================================================================"
 . ".\ServicesCollection.ps1"
 Write-Host $ServicesCollection.Description -ForegroundColor Green
 foreach($service in $ServicesCollection.service){
-    Write-Host "`n================================================================"
     Set-ServiceStartupType -Name $service.Name -StartupType $service.StartupType -OriginalType $service.OriginalType
 }
 

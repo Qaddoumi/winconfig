@@ -55,7 +55,7 @@ function Copy-FileOrFolder {
                 }
             }
         }
-        Write-Output "Folder copied successfully from $sourcePath to $finalDestinationPath."
+        Write-Output "Folder copied successfully from $sourcePath to $finalDestinationPath"
     }
     else {
         # It's a file, create the destination folder if it does not exist

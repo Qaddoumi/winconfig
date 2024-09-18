@@ -117,13 +117,15 @@ foreach ($appx_item in $Appx) {
 
                 $appxPackage = Get-AppxPackage "*$Name*" -allusers
                 if ($appxPackage) {
-                    Write-Host "Found AppxPackage Name : $($appxPackage.Name) Removing..." -ForegroundColor Cyan
+                    Write-Host "Found AppxPackage Name : $($appxPackage.Name)" -ForegroundColor Green -NoNewline
+                    Write-Host " Removing..." -ForegroundColor DarkYellow
                     $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
                 }
 
                 $provisionedPackage = Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*"
                 if ($provisionedPackage) {
-                    Write-Host "Found AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName) Removing..." -ForegroundColor Cyan
+                    Write-Host "Found AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName)" -ForegroundColor Green -NoNewline
+                    Write-Host " Removing..." -ForegroundColor DarkYellow
                     $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
                 }
 

@@ -1062,7 +1062,7 @@ $RegistrySettings  = @(
             @{
                 Name     = "Theme"
                 Type     = "String"
-                Path     = "HKCU\Software\Microsoft\Edge\Theme"
+                Path     = "HKCU:\Software\Microsoft\Edge\Theme"
                 Value    = "1"
                 _Comment = "Set Microsoft Edge to Dark Mode"
             }

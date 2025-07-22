@@ -138,6 +138,13 @@ Remove-Item "$([Environment]::GetFolderPath('Desktop'))\*.ini" -Force -ErrorActi
 # Remove shortcuts from the Public Desktop
 Remove-Item "C:\Users\Public\Desktop\*.ini" -Force -ErrorAction SilentlyContinue
 
+Write-Host "`n================================================================"
+Write-Host "Remove Recycle Bin Icon from the desktop" -ForegroundColor Green
+# Registry path where the Recycle Bin settings are stored
+$registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel"
+$registryName = "{645FF040-5081-101B-9F08-00AA002F954E}"
+Set-Registry -Name $registryName -Path $registryPath -Type "DWord" -Value 1
+
 Write-Host "`n================================================================" -ForegroundColor DarkYellow
 . "..\Global\TimeoutInput.ps1"
 

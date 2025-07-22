@@ -5,8 +5,8 @@ $PROGRAMS_ID = @(
     "JanDeDobbeleer.OhMyPosh" # powershell prompt
     "Microsoft.VisualStudioCode"
     "Nilesoft.Shell" #Powerfull context menu manager
-    "RamenSoftware.Windhawk"
-    "samlab-ws.SnappyDriverInstaller"
+    #"RamenSoftware.Windhawk"
+    #"samlab-ws.SnappyDriverInstaller"
     "RevoUninstaller.RevoUninstaller"
     "Microsoft.Sysinternals.ProcessMonitor"
 )
@@ -16,7 +16,7 @@ foreach($program in $PROGRAMS_ID){
     Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -Wait
 }
 
-& .\Install-NetBalancer.ps1
+#& .\Install-NetBalancer.ps1
 
 Write-Output "`n================================================================"
 Write-Output "`n   === Refresh Environment Variabels : ===`n"

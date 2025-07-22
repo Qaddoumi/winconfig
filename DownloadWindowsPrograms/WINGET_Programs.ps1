@@ -30,12 +30,12 @@ $PROGRAMS_COLLECTION = @(
         Installer   = "winget"
         Description = "Powerfull context menu manager"
     }
-    @{ Name         = "Windhawk"
-        Source      = "winget"
-        Id          = "RamenSoftware.Windhawk"
-        Installer   = "winget"
-        Description = "The customization marketplace for Windows and programs"
-    }
+    # @{ Name         = "Windhawk"
+    #     Source      = "winget"
+    #     Id          = "RamenSoftware.Windhawk"
+    #     Installer   = "winget"
+    #     Description = "The customization marketplace for Windows and programs"
+    # }
     @{ Name         = "Microsoft Visual Studio Code"
         Source      = "winget"
         Id          = "Microsoft.VisualStudioCode"
@@ -435,12 +435,12 @@ $PROGRAMS_COLLECTION = @(
         Installer   = "winget"
         Description = ""
     }
-    @{ Name         = "Snappy Driver Installer"
-        Source      = "winget"
-        Id          = "samlab-ws.SnappyDriverInstaller"
-        Installer   = "winget"
-        Description = ""
-    }
+    # @{ Name         = "Snappy Driver Installer"
+    #     Source      = "winget"
+    #     Id          = "samlab-ws.SnappyDriverInstaller"
+    #     Installer   = "winget"
+    #     Description = ""
+    # }
 )
 # @{ Name         = ""
 #     Source      = ""

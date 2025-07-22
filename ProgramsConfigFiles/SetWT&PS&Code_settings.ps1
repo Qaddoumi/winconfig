@@ -47,25 +47,25 @@ foreach ($extension in $VSCode_Extensions) {
     $Counter++
 }
 
-Write-Output "`n================================================================"
-Write-Host "Stopping windhawk" -ForegroundColor Yellow
-Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-exit" -PassThru -Wait
-Start-Sleep -Seconds 5
-taskkill /f /im windhawk.exe
-Start-Sleep -Seconds 5
+# Write-Output "`n================================================================"
+# Write-Host "Stopping windhawk" -ForegroundColor Yellow
+# Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-exit" -PassThru -Wait
+# Start-Sleep -Seconds 5
+# taskkill /f /im windhawk.exe
+# Start-Sleep -Seconds 5
 
-Write-Host "Setting Windhawk registry data" -ForegroundColor Green
-. "..\Global\Get-RegData.ps1"
-. "..\Global\Set-Registry.ps1"
-$windhawkRagData = Get-RegData -Path ".\WindhawkModsSettings\Windhawk.reg"
-foreach($regData in $windhawkRagData){
-    Set-Registry -Name $regData.Name -Path $regData.Path -Type $regData.Type -Value $regData.Value
-}
-Write-Host "Modify windhawk userprofile.json"
-. ".\WindhawkMods.ps1"
-$userProfileJson = Get-Content -Path "$Env:ProgramData\Windhawk\userprofile.json" -Raw
-$userProfileJson = $userProfileJson -creplace '(?ms)"mods": {.*?},\s*"os"', $windhawkMods
-$userProfileJson | Set-Content -Path "$Env:ProgramData\Windhawk\userprofile.json"
+# Write-Host "Setting Windhawk registry data" -ForegroundColor Green
+# . "..\Global\Get-RegData.ps1"
+# . "..\Global\Set-Registry.ps1"
+# $windhawkRagData = Get-RegData -Path ".\WindhawkModsSettings\Windhawk.reg"
+# foreach($regData in $windhawkRagData){
+#     Set-Registry -Name $regData.Name -Path $regData.Path -Type $regData.Type -Value $regData.Value
+# }
+# Write-Host "Modify windhawk userprofile.json"
+# . ".\WindhawkMods.ps1"
+# $userProfileJson = Get-Content -Path "$Env:ProgramData\Windhawk\userprofile.json" -Raw
+# $userProfileJson = $userProfileJson -creplace '(?ms)"mods": {.*?},\s*"os"', $windhawkMods
+# $userProfileJson | Set-Content -Path "$Env:ProgramData\Windhawk\userprofile.json"
 
 
 Write-Output "`n================================================================"
@@ -82,22 +82,22 @@ Copy-FileOrFolder -sourcePath ".\PowerShell" -destinationPath "$Env:USERPROFILE\
 Write-Output "================================================================"
 Write-Host "Copying VSCode settings file" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\VSCode\settings.json" -destinationPath "$Env:USERPROFILE\AppData\Roaming\Code\User\settings.json"
-Write-Output "================================================================"
-Write-Host "Copying NetBalancer settings file" -ForegroundColor Green
-Copy-FileOrFolder -sourcePath ".\NetBalancer\netbalancer.json" -destinationPath "$Env:USERPROFILE\Documents\netbalancer.json"
+# Write-Output "================================================================"
+# Write-Host "Copying NetBalancer settings file" -ForegroundColor Green
+# Copy-FileOrFolder -sourcePath ".\NetBalancer\netbalancer.json" -destinationPath "$Env:USERPROFILE\Documents\netbalancer.json"
 Write-Output "================================================================"
 Write-Host "Copying Nilesoft Shell settings files" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\Nilesoft Shell" -destinationPath "$Env:ProgramFiles"
 Write-Output "================================================================"
 Write-Host "Copying Procmon settings file" -ForegroundColor Green
 Copy-FileOrFolder -sourcePath ".\ProcessMonitor(procmon)\Filter(SetReg).PMF" -destinationPath "$Env:USERPROFILE\Documents\Filter(SetReg).PMF"
-Write-Output "================================================================"
-Write-Host "Copying Windhawk settings files" -ForegroundColor Green
-Copy-FileOrFolder -sourcePath ".\WindhawkModsSettings\Windhawk" -destinationPath "$Env:ProgramData\"
+# Write-Output "================================================================"
+# Write-Host "Copying Windhawk settings files" -ForegroundColor Green
+# Copy-FileOrFolder -sourcePath ".\WindhawkModsSettings\Windhawk" -destinationPath "$Env:ProgramData\"
 Write-Output "================================================================"
 
-Write-Host "Starting Windhawk"
-Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru
+# Write-Host "Starting Windhawk"
+# Start-Process -FilePath "$Env:ProgramFiles\Windhawk\windhawk.exe" -NoNewWindow -ArgumentList "-restart -tray-only" -PassThru
 
 function Set-NetBalancerToRunAtLogin {
     Write-Host "Checking if NetBalancer Tray task already exists..." -ForegroundColor Yellow
@@ -182,10 +182,10 @@ function Show-IconsSysTray {
     }
 }
 
-Write-Output "================================================================`n"
-Set-NetBalancerToRunAtLogin
-Set-NetBalancerSettings
-Show-IconsSysTray
+# Write-Output "================================================================`n"
+# Set-NetBalancerToRunAtLogin
+# Set-NetBalancerSettings
+# Show-IconsSysTray
 
-Write-Host "`nStarting NetBalancer"
-Start-Process -FilePath "$Env:ProgramFiles\NetBalancer\SeriousBit.NetBalancer.Tray.exe" -NoNewWindow -PassThru
+# Write-Host "`nStarting NetBalancer"
+# Start-Process -FilePath "$Env:ProgramFiles\NetBalancer\SeriousBit.NetBalancer.Tray.exe" -NoNewWindow -PassThru

@@ -1,10 +1,10 @@
 <#PSScriptInfo
 
-.VERSION 4.1.3
+.VERSION 5.2.0
 
 .GUID 3b581edb-5d90-4fa1-ba15-4f2377275463
 
-.AUTHOR asheroto, 1ckov, MisterZeus, ChrisTitusTech, uffemcev, MatthiasGuelck, o-l-a-v
+.AUTHOR asheroto
 
 .COMPANYNAME asheroto
 
@@ -51,18 +51,30 @@
 [Version 4.1.1] - Minor revisions to comments & debug output.
 [Version 4.1.2] - Implemented Visual C++ Redistributable version detection to ensure compatibility with winget.
 [Version 4.1.3] - Added additional debug output for Visual C++ Redistributable version detection.
+[Version 5.0.0] - Completely changed method to use winget-cli Repair-WingetPackageManager. Added environment path detection and addition if needed. Added NoExit parameter to prevent script from exiting after completion. Adjusted permissions of winget folder path for Server 2019. Improved exit handling to avoid PowerShell window closing.
+[Version 5.0.1] - Fixed typo in variable name.
+[Version 5.0.2] - Added detection of NuGet and PowerShell version to determine if package provider installation is needed.
+[Version 5.0.3] - Fixed missing argument in call to Add-ToEnvironmentPath.
+[Version 5.0.4] - Fixed bug with UpdateSelf function. Fixed bug when installing that may cause NuGet prompt to not be suppressed. Introduced Install-NuGetIfRequired function.
+[Version 5.0.5] - Fixed exit code issue. Fixes #52.
+[Version 5.0.6] - Fixed installation issue on Server 2022 by changing installation method to same as Server 2019. Fixes #62.
+[Version 5.0.7] - Added the literal %LOCALAPPDATA% path to the user environment PATH to prevent issues when usernames or user profile paths change, or when using non-Latin characters. Fixes #45. Added support to catch Get-CimInstance errors, lately occurring in Windows Sandbox. Removed Server 2022 changes introduced in version 5.0.6. Register winget command in all OS versions except Server 2019. Fixes #57.
+[Version 5.0.8] - Fixed an issue on Server 2019 where the script failed if the dependency was already installed by adding library/dependency version check functionality. Fixes #61. Thank you to @MatthiasGuelck for the fix.
+[Version 5.0.9] - Improved script output. Fixed error messages caused when checking for an existing library/dependency version with multiple installed variants by choosing highest version number of the installed dependency.
+[Version 5.1.0] - Added support for installing and using winget under the SYSTEM context. Thanks to @GraphicHealer for the contribution.
+[Version 5.2.0] - Added support for installing winget dependencies from winget-cli GitHub repository. Added fix for issue #66 and #65. Fixed version detection for winget dependencies. Thanks to @JonathanPitre for the contribution.
 
 #>
 
 <#
 .SYNOPSIS
-	Downloads and installs the latest version of winget and its dependencies.
+    Downloads and installs the latest version of winget and its dependencies.
 .DESCRIPTION
-	Downloads and installs the latest version of winget and its dependencies.
+    Downloads and installs the latest version of winget and its dependencies.
 
 This script is designed to be straightforward and easy to use, removing the hassle of manually downloading, installing, and configuring winget. This function should be run with administrative privileges.
 .EXAMPLE
-	winget-install
+    winget-install
 .PARAMETER Debug
     Enables debug mode, which shows additional information for debugging.
 .PARAMETER Force
@@ -71,6 +83,8 @@ This script is designed to be straightforward and easy to use, removing the hass
     Relaunches the script in conhost.exe and automatically ends active processes associated with winget that could interfere with the installation.
 .PARAMETER Wait
     Forces the script to wait several seconds before exiting.
+.PARAMETER NoExit
+    Forces the script to wait indefinitely before exiting.
 .PARAMETER UpdateSelf
     Updates the script to the latest version on PSGallery.
 .PARAMETER CheckForUpdate
@@ -80,24 +94,26 @@ This script is designed to be straightforward and easy to use, removing the hass
 .PARAMETER Help
     Displays the full help information for the script.
 .NOTES
-	Version      : 4.1.3
-	Created by   : asheroto
+    Version      : 5.2.0
+    Created by   : asheroto
 .LINK
-	Project Site: https://github.com/asheroto/winget-install
+    Project Site: https://github.com/asheroto/winget-install
 #>
 [CmdletBinding()]
 param (
     [switch]$Force,
     [switch]$ForceClose,
+    [switch]$AlternateInstallMethod,
     [switch]$CheckForUpdate,
     [switch]$Wait,
+    [switch]$NoExit,
     [switch]$UpdateSelf,
     [switch]$Version,
     [switch]$Help
 )
 
 # Script information
-$CurrentVersion = '4.1.3'
+$CurrentVersion = '5.2.0'
 $RepoOwner = 'asheroto'
 $RepoName = 'winget-install'
 $PowerShellGalleryName = 'winget-install'
@@ -128,6 +144,41 @@ if ($PSBoundParameters.ContainsKey('Verbose') -and $PSBoundParameters['Verbose']
 if ($PSBoundParameters.ContainsKey('Debug') -and $PSBoundParameters['Debug']) {
     $DebugPreference = 'Continue'
     $ConfirmPreference = 'None'
+}
+
+# Check if running as SYSTEM
+$RunAsSystem = $false
+if ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name -match "NT AUTHORITY\\SYSTEM") {
+    Write-Debug "Running as SYSTEM"
+    $RunAsSystem = $true
+}
+
+# Find the WinGet Executable Loaction (for use when running in SYSTEM context)
+function Find-WinGet {
+    try {
+        # Get the WinGet path
+        $WinGetPathToResolve = Join-Path -Path $ENV:ProgramFiles -ChildPath 'WindowsApps\Microsoft.DesktopAppInstaller_*_*__8wekyb3d8bbwe'
+        $ResolveWinGetPath = Resolve-Path -Path $WinGetPathToResolve -ErrorAction Stop | Sort-Object {
+            [version]($_.Path -replace '^[^\d]+_((\d+\.)*\d+)_.*', '$1')
+        }
+
+        if ($ResolveWinGetPath) {
+            # If we have multiple versions - use the latest.
+            $WinGetPath = $ResolveWinGetPath[-1].Path
+        }
+
+        $WinGet = Join-Path $WinGetPath 'winget.exe'
+
+        # Test if WinGet Executable exists
+        if (Test-Path -Path $WinGet) {
+            return $WinGet
+        } else {
+            return $null
+        }
+    } catch {
+        Write-Debug "Could not resolve winget path: $($_.Exception.Message)"
+        return $null
+    }
 }
 
 function Get-OSInfo {
@@ -171,7 +222,13 @@ function Get-OSInfo {
         $editionIdValue = $editionIdValue -replace "Server", ""
 
         # Get OS details using Get-CimInstance because the registry key for Name is not always correct with Windows 11
-        $osDetails = Get-CimInstance -ClassName Win32_OperatingSystem
+        try {
+            $osDetails = Get-CimInstance -ClassName Win32_OperatingSystem -ErrorAction Stop
+        } catch {
+            throw "Unable to run the command ""Get-CimInstance -ClassName Win32_OperatingSystem"". If you're using Window Sandbox, this may be related to a known issue with winget on Windows Sandbox: https://github.com/microsoft/Windows-Sandbox/issues/67"
+        }
+
+        # Get OS caption
         $nameValue = $osDetails.Caption
 
         # Get architecture details of the OS (not the processor)
@@ -308,10 +365,9 @@ function UpdateSelf {
         if ($CurrentVersion -lt $psGalleryScriptVersion) {
             Write-Output "Updating script to version $psGalleryScriptVersion..."
 
-            # Install NuGet PackageProvider if not already installed
-            if (-not (Get-PackageProvider -Name NuGet -ErrorAction SilentlyContinue)) {
-                Install-PackageProvider -Name "NuGet" -Force
-            }
+            # Check if running in PowerShell 7 or greater
+            Write-Debug "Checking if NuGet PackageProvider is already installed..."
+            Install-NuGetIfRequired
 
             # Trust the PSGallery if not already trusted
             $psRepoInstallationPolicy = (Get-PSRepository -Name 'PSGallery').InstallationPolicy
@@ -417,10 +473,19 @@ function Get-WingetStatus {
     #>
 
     # Check if winget is installed
-    $winget = Get-Command -Name winget -ErrorAction SilentlyContinue
+    if ($RunAsSystem) {
+        $wingetPath = Find-WinGet
+        if ($null -ne $wingetPath) {
+            $winget = & $wingetPath -v
+        } else {
+            $winget = $null
+        }
+    } else {
+        $winget = Get-Command -Name winget -ErrorAction SilentlyContinue
+    }
 
     # If winget is installed, return $true
-    if ($null -ne $winget) {
+    if ($null -ne $winget -and $winget -notlike '*failed to run*') {
         return $true
     }
 
@@ -569,10 +634,18 @@ function ExitWithDelay {
         Start-Sleep -Seconds $Seconds
     }
 
-    # Exit the script with error code
-    # Some systems may accidentally close the window, but that's a PowerShell bug
-    # https://stackoverflow.com/questions/67593504/why-wont-the-exit-function-work-in-my-powershell-code
-    Exit $ExitCode
+    # If NoExit is specified, do not exit the script
+    if ($NoExit) {
+        Write-Output "Script completed. Pausing indefinitely. Press any key to exit..."
+        Read-Host
+    }
+
+    # Exit the script with exit code
+    if ($MyInvocation.CommandOrigin -eq "Runspace") {
+        Break
+    } else {
+        Exit $ExitCode
+    }
 }
 
 function Import-GlobalVariable {
@@ -647,51 +720,143 @@ Function New-TemporaryFile2 {
     return $tempFile
 }
 
+function Path-ExistsInEnvironment {
+    param (
+        [string]$PathToCheck,
+        [string]$Scope = 'Both' # Valid values: 'User', 'System', 'Both'
+    )
+    <#
+    .SYNOPSIS
+    Checks if the specified path exists in the specified PATH environment variable.
+
+    .DESCRIPTION
+    This function checks if a given path is present in the user, system-wide, or both PATH environment variables.
+
+    .PARAMETER PathToCheck
+    The directory path to check in the environment PATH variable.
+
+    .PARAMETER Scope
+    The scope to check in the environment PATH variable. Valid values are 'User', 'System', or 'Both'. Default is 'Both'.
+
+    .EXAMPLE
+    Path-ExistsInEnvironment -PathToCheck "C:\Program Files\MyApp" -Scope 'User'
+    #>
+
+    $pathExists = $false
+
+    if ($Scope -eq 'User' -or $Scope -eq 'Both') {
+        $userEnvPath = $env:PATH
+        if (($userEnvPath -split ';').Contains($PathToCheck)) {
+            $pathExists = $true
+        }
+    }
+
+    if ($Scope -eq 'System' -or $Scope -eq 'Both') {
+        $systemEnvPath = [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine)
+        if (($systemEnvPath -split ';').Contains($PathToCheck)) {
+            $pathExists = $true
+        }
+    }
+
+    return $pathExists
+}
+
 function Add-ToEnvironmentPath {
     param (
-        [string]$PathToAdd
+        [Parameter(Mandatory = $true)]
+        [string]$PathToAdd,
+
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('User', 'System')]
+        [string]$Scope
     )
     <#
     .SYNOPSIS
     Adds the specified path to the environment PATH variable.
 
     .DESCRIPTION
-    This function adds a given path to the system-wide and current session PATH environment variable if it is not already present.
+    This function adds a given path to the specified scope (user or system) and the current process environment PATH variable if it is not already present.
 
     .PARAMETER PathToAdd
     The directory path to add to the environment PATH variable.
 
+    .PARAMETER Scope
+    Specifies whether to add the path to the user or system environment PATH variable.
+
     .EXAMPLE
-    Add-ToEnvironmentPath -PathToAdd "C:\Program Files\MyApp"
+    Add-ToEnvironmentPath -PathToAdd "C:\Program Files\MyApp" -Scope 'System'
     #>
 
-    # Get the full path to ensure consistency
-    $fullPathToAdd = [System.IO.Path]::GetFullPath($PathToAdd)
+    # Check if the path is already in the environment PATH variable
+    if (-not (Path-ExistsInEnvironment -PathToCheck $PathToAdd -Scope $Scope)) {
+        if ($Scope -eq 'System') {
+            # Get the current system PATH
+            $systemEnvPath = [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine)
+            # Add to system PATH
+            $systemEnvPath += ";$PathToAdd"
+            [System.Environment]::SetEnvironmentVariable('PATH', $systemEnvPath, [System.EnvironmentVariableTarget]::Machine)
+            Write-Debug "Adding $PathToAdd to the system PATH."
+        } elseif ($Scope -eq 'User') {
+            # Get the current user PATH
+            $userEnvPath = [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::User)
+            # Add to user PATH
+            $userEnvPath += ";$PathToAdd"
+            [System.Environment]::SetEnvironmentVariable('PATH', $userEnvPath, [System.EnvironmentVariableTarget]::User)
+            Write-Debug "Adding $PathToAdd to the user PATH."
+        }
 
-    # Get the current system PATH
-    $systemEnvPath = [System.Environment]::GetEnvironmentVariable('PATH', [System.EnvironmentVariableTarget]::Machine)
-
-    # Check if the path is already in the system PATH variable
-    if (-not ($systemEnvPath -split ';').Contains($fullPathToAdd)) {
-        # Add to system PATH
-        $systemEnvPath += ";$fullPathToAdd"
-        [System.Environment]::SetEnvironmentVariable('PATH', $systemEnvPath, [System.EnvironmentVariableTarget]::Machine)
-        Write-Output "Adding winget folder to the system PATH."
-        Write-Debug "Adding $fullPathToAdd to the system PATH.`n`n"
+        # Update the current process environment PATH
+        if (-not ($env:PATH -split ';').Contains($PathToAdd)) {
+            $env:PATH += ";$PathToAdd"
+            Write-Debug "Adding $PathToAdd to the current process environment PATH."
+        }
     } else {
-        Write-Output "winget folder already in the system PATH."
-        Write-Debug "$fullPathToAdd is already in the system PATH.`n`n"
+        Write-Debug "$PathToAdd is already in the PATH."
     }
+}
 
-    # Update the current session PATH
-    if (-not ($env:PATH -split ';').Contains($fullPathToAdd)) {
-        $env:PATH += ";$fullPathToAdd"
-        Write-Output "Adding winget folder to the current session PATH."
-        Write-Debug "Adding $fullPathToAdd to the current session PATH."
-    } else {
-        Write-Output "winget folder is already in the current session PATH."
-        Write-Debug "$fullPathToAdd is already in the current session PATH."
-    }
+function Set-PathPermissions {
+    param (
+        [string]$FolderPath
+    )
+    <#
+    .SYNOPSIS
+    Grants full control permissions for the Administrators group on the specified directory path.
+
+    .DESCRIPTION
+    This function sets full control permissions for the Administrators group on the specified directory path.
+    Useful for ensuring that administrators have unrestricted access to a given folder.
+
+    .PARAMETER FolderPath
+    The directory path for which to set full control permissions.
+
+    .EXAMPLE
+    Set-PathPermissions -FolderPath "C:\Program Files\MyApp"
+
+    Sets full control permissions for the Administrators group on "C:\Program Files\MyApp".
+    #>
+
+    Write-Debug "Setting full control permissions for the Administrators group on $FolderPath."
+
+    # Define the SID for the Administrators group
+    $administratorsGroupSid = New-Object System.Security.Principal.SecurityIdentifier("S-1-5-32-544")
+    $administratorsGroup = $administratorsGroupSid.Translate([System.Security.Principal.NTAccount])
+
+    # Retrieve the current ACL for the folder
+    $acl = Get-Acl -Path $FolderPath
+
+    # Define the access rule for full control inheritance
+    $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule(
+        $administratorsGroup,
+        "FullControl",
+        "ContainerInherit,ObjectInherit",
+        "None",
+        "Allow"
+    )
+
+    # Apply the access rule to the ACL and set it on the folder
+    $acl.SetAccessRule($accessRule)
+    Set-Acl -Path $FolderPath -AclObject $acl
 }
 
 function Test-VCRedistInstalled {
@@ -766,7 +931,7 @@ function TryRemove {
     Tries to remove a specified file if it exists.
 
     .DESCRIPTION
-    This function checks if the specified file exists and attempts to remove it. 
+    This function checks if the specified file exists and attempts to remove it.
     It will not produce an error if the file does not exist or if the removal fails.
 
     .PARAMETER FilePath
@@ -797,6 +962,184 @@ function TryRemove {
     }
 }
 
+function Install-NuGetIfRequired {
+    <#
+    .SYNOPSIS
+    Checks if the NuGet PackageProvider is installed and installs it if required.
+
+    .DESCRIPTION
+    This function checks whether the NuGet PackageProvider is already installed on the system. If it is not found and the current PowerShell version is less than 7, it attempts to install the NuGet provider using Install-PackageProvider.
+    For PowerShell 7 or greater, it assumes NuGet is available by default and advises reinstallation if NuGet is missing.
+
+    .PARAMETER Debug
+    Enables debug output for additional details during installation.
+
+    .EXAMPLE
+    Install-NuGetIfRequired
+    # Checks for the NuGet provider and installs it if necessary.
+
+    .NOTES
+    This function only attempts to install NuGet if the PowerShell version is less than 7.
+    For PowerShell 7 or greater, NuGet is typically included by default and does not require installation.
+    #>
+
+    # Check if NuGet PackageProvider is already installed, skip package provider installation if found
+    if (-not (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue)) {
+        Write-Debug "NuGet PackageProvider not found."
+
+        # Check if running in PowerShell version less than 7
+        if ($PSVersionTable.PSVersion.Major -lt 7) {
+            # Install NuGet PackageProvider if running PowerShell version less than 7
+            # PowerShell 7 has limited support for installing package providers, but NuGet is available by default in PowerShell 7 so installation is not required
+
+            Write-Debug "Installing NuGet PackageProvider..."
+
+            if ($Debug) {
+                try { Install-PackageProvider -Name "NuGet" -Force -ForceBootstrap -ErrorAction SilentlyContinue } catch { }
+            } else {
+                try { Install-PackageProvider -Name "NuGet" -Force -ForceBootstrap -ErrorAction SilentlyContinue | Out-Null } catch {}
+            }
+        } else {
+            # NuGet should be included by default in PowerShell 7, so if it's not detected, advise reinstallation
+            Write-Warning "NuGet is not detected in PowerShell 7. Consider reinstalling PowerShell 7, as NuGet should be included by default."
+        }
+    } else {
+        # NuGet PackageProvider is already installed
+        Write-Debug "NuGet PackageProvider is already installed. Skipping installation."
+    }
+}
+
+function Get-ManifestVersion {
+    <#
+    .SYNOPSIS
+    Retrieves the version of the AppxManifest.xml file from a specified library path.
+
+    .DESCRIPTION
+    This function opens a ZIP file at the specified path, reads the AppxManifest.xml file inside it,
+    and retrieves the version information from the manifest.
+
+    .PARAMETER Lib_Path
+    The path to the library (ZIP) file containing the AppxManifest.xml.
+
+    .EXAMPLE
+    Get-ManifestVersion -Lib_Path "C:\path\to\library.zip"
+    #>
+
+    param(
+        [Parameter(Mandatory)]
+        [string]$Lib_Path
+    )
+
+    Write-Debug "Checking manifest version of $($Lib_Path)..."
+
+    # Load ZIP assembly to read the package contents
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $zip = [System.IO.Compression.ZipFile]::OpenRead($Lib_Path)
+
+    Write-Debug "Reading AppxManifest.xml from $($Lib_Path)..."
+    # Find and read the AppxManifest.xml
+    $entry = $zip.Entries | Where-Object { $_.FullName -eq "AppxManifest.xml" }
+
+    if ($entry) {
+        $stream = $entry.Open()
+        $reader = New-Object System.IO.StreamReader($stream)
+        [xml]$xml = $reader.ReadToEnd()
+        $reader.Close()
+        $zip.Dispose()
+
+        # Output the version from the manifest
+        $DownloadedLibVersion = $xml.Package.Identity.Version
+        Write-Debug "Downloaded library version: $DownloadedLibVersion"
+    } else {
+        Write-Error "AppxManifest.xml not found inside the file: $Lib_Path"
+    }
+
+    return $DownloadedLibVersion
+}
+
+function Get-InstalledLibVersion {
+    <#
+    .SYNOPSIS
+    Retrieves the installed version of a specified library.
+
+    .DESCRIPTION
+    This function checks if a specified library is installed on the system and retrieves its version information.
+
+    .PARAMETER Lib_Name
+    The name of the library to check for installation and retrieve the version.
+
+    .EXAMPLE
+    Get-InstalledLibVersion -Lib_Name "VCLibs.140.00.UWPDesktop"
+    #>
+    param(
+        [Parameter(Mandatory)]
+        [string]$Lib_Name
+    )
+
+    Write-Debug "Checking installed library version of $($Lib_Name)..."
+
+    # Get the highest version of the installed library
+    $InstalledLib = Get-AppxPackage -Name "*$($Lib_Name)*" -ErrorAction SilentlyContinue | Sort-Object Version -Descending | Select-Object -First 1
+
+    if ($InstalledLib) {
+        $InstalledLibVersion = $InstalledLib.Version
+        Write-Debug "Installed library version: $InstalledLibVersion"
+    } else {
+        Write-Output "Library is not installed."
+        $InstalledLibVersion = $null
+    }
+
+    return $InstalledLibVersion
+}
+
+function Install-LibIfRequired {
+    <#
+    .SyNOPSIS
+    Installs a specified library if it is not already installed or if the downloaded version is newer.
+
+    .DESCRIPTION
+    This function checks if a specified library is installed on the system.
+    If it is not installed or if the downloaded version is newer than the installed version, it installs the library.
+
+    .PARAMETER Lib_Name
+    The name of the library to check for installation and retrieve the version.
+
+    .PARAMETER Lib_Path
+    The path to the library (ZIP) file containing the AppxManifest.xml.
+
+    .EXAMPLE
+    Install-LibIfRequired -Lib_Name "VCLibs.140.00.UWPDesktop" -Lib_Path "C:\path\to\library.zip"
+    #>
+    param(
+        [Parameter(Mandatory)]
+        [string]$Lib_Name,
+        [Parameter(Mandatory)]
+        [string]$Lib_Path
+    )
+
+    # Check the installed version of Lib
+    $InstalledLibVersion = Get-InstalledLibVersion -Lib_Name $Lib_Name
+
+    # Extract version from the downloaded file
+    $DownloadedLibVersion = Get-ManifestVersion -Lib_Path $Lib_Path
+
+    # Compare versions and install if necessary
+    if (!$InstalledLibVersion -or !$DownloadedLibVersion -or ($DownloadedLibVersion -gt $InstalledLibVersion)) {
+        if ($RunAsSystem) {
+            Write-Debug 'Running as system...'
+            Write-Debug "Installing library version $($DownloadedLibVersion)..."
+            $null = Add-ProvisionedAppxPackage -Online -SkipLicense -PackagePath $Lib_Path
+        } else {
+            Write-Debug 'Running as user...'
+            Write-Debug "Installing library version $($DownloadedLibVersion)..."
+            $null = Add-AppxPackage -Path $Lib_Path
+        }
+    } else {
+        Write-Output "Installed library version is up-to-date or newer. Skipping installation."
+    }
+}
+
+
 # ============================================================================ #
 # Initial checks
 # ============================================================================ #
@@ -805,6 +1148,7 @@ function TryRemove {
 Import-GlobalVariable -VariableName "Debug"
 Import-GlobalVariable -VariableName "ForceClose"
 Import-GlobalVariable -VariableName "Force"
+Import-GlobalVariable -VariableName "AlternateInstallMethod"
 
 # First heading
 Write-Output "winget-install $CurrentVersion"
@@ -818,6 +1162,7 @@ if ($UpdateSelf) { UpdateSelf }
 # Heading
 Write-Output "To check for updates, run winget-install -CheckForUpdate"
 Write-Output "To delay script exit, run winget-install -Wait"
+Write-Output "To force script pausing after execution, run winget-install -NoExit"
 
 # Check if the current user is an administrator
 if (-not (Test-AdminPrivileges)) {
@@ -901,83 +1246,155 @@ if ($ForceClose) {
 
 try {
     # ============================================================================ #
-    # Install prerequisites
+    # winget (regular method, Windows 10+)
     # ============================================================================ #
 
-    Write-Section "Prerequisites"
+    if ($osVersion.NumericVersion -ne 2019 -and $AlternateInstallMethod -eq $false -and $RunAsSystem -eq $false) {
 
-    try {
-        # Download VCLibs
-        $VCLibs_Url = "https://aka.ms/Microsoft.VCLibs.${arch}.14.00.Desktop.appx"
-        $VCLibs_Path = New-TemporaryFile2
-        Write-Output "Downloading VCLibs..."
-        Write-Debug "Downloading VCLibs from $VCLibs_Url to $VCLibs_Path`n`n"
-        Invoke-WebRequest -Uri $VCLibs_Url -OutFile $VCLibs_Path
+        Write-Section "winget"
 
-        # Download UI.Xaml
-        $UIXaml_Url = "https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.8.6/Microsoft.UI.Xaml.2.8.${arch}.appx"
-        $UIXaml_Path = New-TemporaryFile2
-        Write-Output "Downloading UI.Xaml..."
-        Write-Debug "Downloading UI.Xaml from $UIXaml_Url to $UIXaml_Path"
-        Invoke-WebRequest -Uri $UIXaml_Url -OutFile $UIXaml_Path
-    } catch {
-        $errorHandled = Handle-Error $_
-        if ($null -ne $errorHandled) {
-            throw $errorHandled
+        try {
+            Write-Debug "Checking if NuGet PackageProvider is already installed..."
+            Install-NuGetIfRequired
+
+            Write-Output "Installing Microsoft.WinGet.Client module..."
+            if ($Debug) {
+                try { Install-Module -Name Microsoft.WinGet.Client -Force -AllowClobber -Repository PSGallery -ErrorAction SilentlyContinue } catch { }
+            } else {
+                try { Install-Module -Name Microsoft.WinGet.Client -Force -AllowClobber -Repository PSGallery -ErrorAction SilentlyContinue *>&1 | Out-Null } catch { }
+            }
+
+            Write-Output "Installing winget (this takes a minute or two)..."
+            if ($Debug) {
+                try { Repair-WinGetPackageManager -AllUsers -Force -Latest } catch { }
+            } else {
+                try { Repair-WinGetPackageManager -AllUsers -Force -Latest *>&1 | Out-Null } catch { }
+            }
+        } catch {
+            $errorHandled = Handle-Error $_
+            if ($null -ne $errorHandled) {
+                throw $errorHandled
+            }
+            $errorHandled = $null
         }
-        $errorHandled = $null
+
+        # Add to environment PATH to avoid issues when usernames or user profile paths change, or when using non-Latin characters (see #45)
+        # Adding with literal %LOCALAPPDATA% to ensure it isn't resolved to the current user's LocalAppData as a fixed path
+        Add-ToEnvironmentPath -PathToAdd "%LOCALAPPDATA%\Microsoft\WindowsApps" -Scope 'User'
+
     }
 
     # ============================================================================ #
-    #  winget
+    #  Server 2019 or alternate install method only
     # ============================================================================ #
 
-    Write-Section "winget"
+    if (($osVersion.Type -eq "Server" -and ($osVersion.NumericVersion -eq 2019)) -or $AlternateInstallMethod -or $RunAsSystem) {
 
-    # winget
-    try {
-        # Download winget license
-        $winget_license_path = New-TemporaryFile2
-        $winget_license_url = Get-WingetDownloadUrl -Match "License1.xml"
-        Write-Output "Downloading winget license..."
-        Write-Debug "Downloading winget license from $winget_license_url to $winget_license_path`n`n"
-        Invoke-WebRequest -Uri $winget_license_url -OutFile $winget_license_path
+        # ============================================================================ #
+        # Install dependencies
+        # ============================================================================ #
 
-        # Download winget
-        $winget_path = New-TemporaryFile2
-        $winget_url = "https://aka.ms/getwinget"
-        Write-Output "Downloading winget..."
-        Write-Debug "Downloading winget from $winget_url to $winget_path`n`n"
-        Invoke-WebRequest -Uri $winget_url -OutFile $winget_path
+        Write-Section "Dependencies"
 
-        # Install everything
-        Write-Output "Installing winget and its dependencies..."
-        Add-AppxProvisionedPackage -Online -PackagePath $winget_path -DependencyPackagePath $UIXaml_Path, $VCLibs_Path -LicensePath $winget_license_path | Out-Null
+        try {
+            # Download winget dependencies (VCLibs.140.00.UWPDesktop and UI.Xaml.2.8)
+            $winget_dependencies_path = New-TemporaryFile2
+            $winget_dependencies_url = Get-WingetDownloadUrl -Match 'DesktopAppInstaller_Dependencies.zip'
+            Write-Output 'Downloading winget dependencies...'
+            Write-Debug "Downloading winget dependencies from $winget_dependencies_url to $winget_dependencies_path`n`n"
+            Invoke-WebRequest -Uri $winget_dependencies_url -OutFile $winget_dependencies_path
 
-        # Remove temporary files
-        Write-Debug "Removing temporary files..."
-        TryRemove $VCLibs_Path
-        TryRemove $UIXaml_Path
-        TryRemove $winget_path
-        TryRemove $winget_license_path
-    } catch {
-        $errorHandled = Handle-Error $_
-        if ($null -ne $errorHandled) {
-            throw $errorHandled
+            # Load ZIP assembly to read the package contents
+            Add-Type -AssemblyName System.IO.Compression.FileSystem
+            $zip = [System.IO.Compression.ZipFile]::OpenRead($winget_dependencies_path)
+
+            $matchingEntries = $zip.Entries | Where-Object { $_.FullName -match ".*$arch.appx" }
+            if ($matchingEntries) {
+                $matchingEntries | ForEach-Object {
+                    $destPath = Join-Path ([System.IO.Path]::GetTempPath()) $_.Name
+                    Write-Debug "Extracting $($_.FullName) to $destPath..."
+                    [System.IO.Compression.ZipFileExtensions]::ExtractToFile($_, $destPath, $true)
+                    # Get the paths to the extracted files
+                    if ($_.Name -like '*.VCLibs.140.00.UWPDesktop*.appx') {
+                        $VCLibs_Path = $destPath
+                        Write-Debug "VCLibs_Path: $VCLibs_Path"
+                    }
+                    if ($_.Name -like '*.UI.Xaml.2.8*.appx') {
+                        $UIXaml_Path = $destPath
+                        Write-Debug "UIXaml_Path: $UIXaml_Path"
+                    }
+                }
+                $zip.Dispose()
+            } else {
+                Write-Error "Dependency not found inside the file: $winget_dependencies_path"
+            }
+
+            # Install VCLibs.140.00.UWPDesktop
+            Write-Output "Installing VCLibs.140.00.UWPDesktop..."
+            Install-LibIfRequired -Lib_Name 'VCLibs.140.00.UWPDesktop' -Lib_Path $VCLibs_Path
+
+            # Line break for readability
+            Write-Output ""
+
+            # Install UI.Xaml.2.8
+            Write-Output "Installing UI.Xaml.2.8..."
+            Install-LibIfRequired -Lib_Name 'UI.Xaml.2.8' -Lib_Path $UIXaml_Path
+
+            Write-Debug "Removing temporary files..."
+            TryRemove $winget_dependencies_path
+            TryRemove $VCLibs_Path
+            TryRemove $UIXaml_Path
+        } catch {
+            $errorHandled = Handle-Error $_
+            if ($null -ne $errorHandled) {
+                throw $errorHandled
+            }
+            $errorHandled = $null
         }
-        $errorHandled = $null
-    }
 
-    # ============================================================================ #
-    #  Server 2019 only
-    # ============================================================================ #
+        # ============================================================================ #
+        #  winget
+        # ============================================================================ #
 
-    if ($osVersion.Type -eq "Server" -and $osVersion.NumericVersion -eq 2019) {
+        Write-Section "winget"
+
+        try {
+
+            # Download winget license
+            $winget_license_path = New-TemporaryFile2
+            $winget_license_url = Get-WingetDownloadUrl -Match "License1.xml"
+            Write-Output "Downloading winget license..."
+            Write-Debug "Downloading winget license from $winget_license_url to $winget_license_path`n`n"
+            Invoke-WebRequest -Uri $winget_license_url -OutFile $winget_license_path
+
+            # Download winget
+            $winget_path = New-TemporaryFile2
+            $winget_url = Get-WingetDownloadUrl -Match 'Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
+            Write-Output "Downloading winget..."
+            Write-Debug "Downloading winget from $winget_url to $winget_path`n`n"
+            Invoke-WebRequest -Uri $winget_url -OutFile $winget_path
+
+            # Install winget
+            Write-Output "Installing winget..."
+            Add-AppxProvisionedPackage -Online -PackagePath $winget_path -LicensePath $winget_license_path | Out-Null
+
+            # Remove temporary files
+            Write-Debug "Removing temporary files..."
+            TryRemove $winget_path
+            TryRemove $winget_license_path
+        } catch {
+            $errorHandled = Handle-Error $_
+            if ($null -ne $errorHandled) {
+                throw $errorHandled
+            }
+            $errorHandled = $null
+        }
+
         # ============================================================================ #
         # Visual C++ Redistributable
         # ============================================================================ #
 
-        Write-Section "Visual C++ Redistributable (Server 2019 only)"
+        Write-Section "Visual C++ Redistributable"
 
         # Test if Visual C++ Redistributable is not installed
         if (!(Test-VCRedistInstalled)) {
@@ -1006,29 +1423,37 @@ try {
         }
 
         # ============================================================================ #
-        # Adjust access rights & PATH environment variable
+        # Fix environment PATH and permissions
         # ============================================================================ #
 
-        Write-Section "Adjust access rights & PATH environment variable (Server 2019 only)"
+        # Fix permissions for winget folder
+        Write-Output "Fixing permissions for winget folder..."
 
-        # Find the last version of WinGet folder path
-        $WinGetFolderPath = Get-ChildItem -Path ([IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_${arch}__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1
-        Write-Debug "WinGetFolderPath: $WinGetFolderPath`n`n"
+        # Find winget folder path in Program Files
+        $WinGetFolderPath = (Get-ChildItem -Path ([System.IO.Path]::Combine($env:ProgramFiles, 'WindowsApps')) -Filter "Microsoft.DesktopAppInstaller_*_${arch}__8wekyb3d8bbwe" | Sort-Object Name | Select-Object -Last 1).FullName
+        Write-Debug "WinGetFolderPath: $WinGetFolderPath"
 
         if ($null -ne $WinGetFolderPath) {
-            $WinGetFolderPath = $WinGetFolderPath.FullName
-            # Fix Permissions
-            Write-Output "Fixing permissions for $WinGetFolderPath..."
-            $acl = Get-Acl $WinGetFolderPath
-            $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule($env:USERNAME, "FullControl", "ContainerInherit,ObjectInherit", "None", "Allow")
-            $acl.SetAccessRule($accessRule)
-            Set-Acl -Path $WinGetFolderPath -AclObject $acl
+            # Fix Permissions by adding Administrators group with FullControl
+            Set-PathPermissions -FolderPath $WinGetFolderPath
 
             # Add Environment Path
-            Add-ToEnvironmentPath -PathToAdd $WinGetFolderPath
+            Add-ToEnvironmentPath -PathToAdd $WinGetFolderPath -Scope 'System'
         } else {
             Write-Warning "winget folder path not found. You may need to manually add winget's folder path to your system PATH environment variable."
         }
+    }
+
+    # ============================================================================ #
+    # Force registration
+    # ============================================================================ #
+    Write-Output "Registering winget..."
+
+    # Register for all except Server 2019
+    if ($osVersion.NumericVersion -ne 2019 -and $RunAsSystem -eq $false) {
+        # Register winget
+        Write-Debug "Registering winget..."
+        Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
     }
 
     # ============================================================================ #
@@ -1049,28 +1474,15 @@ try {
 
     # Check if winget is installed
     if (Get-WingetStatus -eq $true) {
-        Write-Output "winget is installed and working now, you can go ahead and use it."
-    } else {
-        # ============================================================================ #
-        # Register winget
-        # ============================================================================ #
-
-        # If winget is not detected as a command, try registering it
-        Write-Section "Registering"
-        try {
-            Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -ErrorAction Stop
-            Write-Output "winget command registered successfully."
-        } catch {
-            Write-Warning "Unable to register winget. You may need to restart your computer for winget to work."
-            $errorHandled = Handle-Error $_
-            if ($null -ne $errorHandled) {
-                throw $errorHandled
-            }
-            $errorHandled = $null
+        Write-Output "winget is installed and working. You can go ahead and use it."
+        # If running as SYSTEM, inform the user a restart may be required for the winget command to work
+        if ($RunAsSystem) {
+            Write-Output "Since this script is running under the SYSTEM context, you may need to restart the computer or session for the winget command to function as expected."
         }
-
+    } else {
         # If winget is still not detected as a command, show warning
-        if (Get-WingetStatus -eq $false) {
+        Write-Debug "Get-WinGetStatus: $(Get-WingetStatus)"
+        if (Get-WingetStatus -ne $true) {
             Write-Warning "winget is installed but is not detected as a command. Try using winget now. If it doesn't work, wait about 1 minute and try again (it is sometimes delayed). Also try restarting your computer."
             Write-Warning "If you restart your computer and the command still isn't recognized, please read the Troubleshooting section`nof the README: https://github.com/asheroto/winget-install#troubleshooting`n"
             Write-Warning "Make sure you have the latest version of the script by running this command: $PowerShellGalleryName -CheckForUpdate`n`n"

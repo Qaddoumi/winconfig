@@ -197,14 +197,14 @@ $PROGRAMS_COLLECTION = @(
         Source      = "winget"
         Id          = "ONLYOFFICE.DesktopEditors"
         Installer   = "winget"
-        Description = "PDF Editor"
+        Description = "PDF Editor and Office Suite"
     }
-    @{ Name         = "LibreOffice"
-        Source      = "winget"
-        Id          = "TheDocumentFoundation.LibreOffice"
-        Installer   = "winget"
-        Description = "For Documents"
-    }
+    # @{ Name         = "LibreOffice"
+    #     Source      = "winget"
+    #     Id          = "TheDocumentFoundation.LibreOffice"
+    #     Installer   = "winget"
+    #     Description = "For Documents"
+    # }
     @{ Name         = "NAPS2"
         Source      = "winget"
         Id          = "Cyanfish.NAPS2"

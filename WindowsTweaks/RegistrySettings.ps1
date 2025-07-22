@@ -1295,3 +1295,45 @@ $RegistrySettings  = @(
 #             }
 #         )
 #     }
+
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "HideFirstRunExperience" /t REG_SZ /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "HomepageIsNewTabPage" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageBingChatEnabled" /t REG_DWORD /d "0" /f
+# # Up to 3 websites
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageManagedQuickLinks" /t REG_SZ /d '[ { "pinned": true, "title": "Google", "url": "https://google.com" }, { "title": "GitHub", "url": "https://github.com"}]' /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "RestoreOnStartupIsLastSessionAndURLs" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "AutoImportAtFirstRun" /t REG_DWORD /d "4" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "AutoplayAllowed" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "BingAdsSuppression" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearCachedImagesAndFilesOnExit" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowsingDataLifetime" /t REG_SZ /d '[ { "data_types": ["browsing_history"], "time_to_live_in_hours": 24 }, { "data_types": ["password_signin", "autofill"], "time_to_live_in_hours": 12}]' /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "ConfigureDoNotTrack" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultBrowserSettingEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultBrowserSettingsCampaignEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "Disable3DAPIs" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadRestrictions" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "Edge3PSerpTelemetryEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "FetchKeepaliveDurationSecondsOnShutdown" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedFavorites" /t REG_SZ /d '[ { "toplevel_name": "My managed favorites folder" }, { "name": "Microsoft", "url": "microsoft.com" }, { "name": "Bing", "url": "bing.com" }, { "children": [ { "name": "Microsoft Edge Insiders", "url": "www.microsoftedgeinsider.com" }, { "name": "Microsoft Edge", "url": "www.microsoft.com/windows/microsoft-edge" }], "name": "Microsoft Edge links"}]' /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerModeClearDataOnExitEnabled" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge\SpellcheckLanguage" /v "1" /t REG_SZ /d "en" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge\SpellcheckLanguage" /v "2" /t REG_SZ /d "ar" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEditorSynonymsEnabled" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "PinningWizardAllowed" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "PromotionalTabsEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "RestorePdfView" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowAcrobatSubscriptionButton" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsToolbarButton" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "3" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "TranslateEnabled" /t REG_DWORD /d "1" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "UrlDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v "UserFeedbackAllowed" /t REG_DWORD /d "0" /f
+# reg.exe add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcutDefault" /t REG_DWORD /d "0" /f

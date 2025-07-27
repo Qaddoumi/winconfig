@@ -1,5 +1,5 @@
 # Ensure you're in the correct directory
-Set-Location -Path "D:\GitHub\winconfig"
+Set-Location -Path "C:\Users\admin\github\winconfig"
 
 # Stage all changes
 git add .

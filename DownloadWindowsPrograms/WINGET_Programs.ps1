@@ -309,12 +309,12 @@ $PROGRAMS_COLLECTION = @(
         Installer   = "winget"
         Description = "screen zoom, annotation, and recording tool for technical presentations and demos"
     }
-    # @{ Name         = "Looking Glass"
-    #     Source      = "winget"
-    #     Id          = "gnif.LookingGlass"
-    #     Installer   = "winget"
-    #     Description = ""
-    # }
+    @{ Name         = "Looking Glass"
+        Source      = "winget"
+        Id          = "gnif.LookingGlass"
+        Installer   = "winget"
+        Description = ""
+    }
     @{ Name         = "Avidemux"
         Source      = "winget"
         Id          = "Avidemux.Avidemux"
@@ -441,6 +441,12 @@ $PROGRAMS_COLLECTION = @(
     #     Installer   = "winget"
     #     Description = ""
     # }
+    @{ Name         = "Neovim"
+        Source      = "winget"
+        Id          = "Neovim.Neovim"
+        Installer   = "winget"
+        Description = "keyboard-based text editor"
+    }
 )
 # @{ Name         = ""
 #     Source      = ""
@@ -450,4 +456,3 @@ $PROGRAMS_COLLECTION = @(
 # }
 # Windows Configuration Designer         9NBLGGH4TX22          Unknown               msstore
 # Vim                                    vim.vim               9.1.0618              winget
-# Neovim                                 Neovim.Neovim         0.10.1                winget

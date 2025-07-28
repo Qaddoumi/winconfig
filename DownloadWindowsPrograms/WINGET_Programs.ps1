@@ -447,6 +447,12 @@ $PROGRAMS_COLLECTION = @(
         Installer   = "winget"
         Description = "keyboard-based text editor"
     }
+    @{ Name         = "Obsidian"
+        Source      = "winget"
+        Id          = "Obsidian.Obsidian"
+        Installer   = "winget"
+        Description = "Markedown note-taking app"
+    }
 )
 # @{ Name         = ""
 #     Source      = ""

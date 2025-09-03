@@ -9,8 +9,10 @@ $PROGRAMS_ID = @(
     #"samlab-ws.SnappyDriverInstaller"
     "RevoUninstaller.RevoUninstaller"
     "Microsoft.Sysinternals.ProcessMonitor"
+    "Microsoft.Sysinternals.SDelete"
     "gnif.LookingGlass"
     "Neovim.Neovim"
+    "AntibodySoftware.WizTree"
 )
 
 foreach($program in $PROGRAMS_ID){

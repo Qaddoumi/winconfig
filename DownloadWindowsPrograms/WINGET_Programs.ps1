@@ -36,6 +36,12 @@ $PROGRAMS_COLLECTION = @(
     #     Installer   = "winget"
     #     Description = "The customization marketplace for Windows and programs"
     # }
+    @{ Name         = "WizTee"
+        Source      = "winget"
+        Id          = "AntibodySoftware.WizTree"
+        Installer   = "winget"
+        Description = "Finds the files and folders that uses the most disk space on your hard drive"
+    }
     @{ Name         = "Microsoft Visual Studio Code"
         Source      = "winget"
         Id          = "Microsoft.VisualStudioCode"
@@ -228,6 +234,12 @@ $PROGRAMS_COLLECTION = @(
         Id          = "Microsoft.Sysinternals.ProcessMonitor"
         Installer   = "winget"
         Description = "Log real-time file system, registry, and process/thread activity"
+    }
+    @{ Name         = "SDelete"
+        Source      = "winget"
+        Id          = "Microsoft.Sysinternals.SDelete"
+        Installer   = "winget"
+        Description = "Securely delete files so they can't be recovered, and fill free space on a disk with zeroes or random data"
     }
     @{ Name         = "Postman"
         Source      = "winget"
@@ -460,5 +472,6 @@ $PROGRAMS_COLLECTION = @(
 #     Installer   = "winget"
 #     Description = ""
 # }
+
 # Windows Configuration Designer         9NBLGGH4TX22          Unknown               msstore
 # Vim                                    vim.vim               9.1.0618              winget

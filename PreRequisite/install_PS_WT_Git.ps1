@@ -13,6 +13,7 @@ $PROGRAMS_ID = @(
     "gnif.LookingGlass"
     "Neovim.Neovim"
     "AntibodySoftware.WizTree"
+    "Brave.Brave"
 )
 
 foreach($program in $PROGRAMS_ID){

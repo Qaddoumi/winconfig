@@ -1,3 +1,5 @@
+irm https://raw.githubusercontent.com/VirtualDrivers/Virtual-Display-Driver/master/Community%20Scripts/silent-install.ps1 | iex
+
 $PROGRAMS_ID = @(
     "Microsoft.PowerShell" # powershell 7
     "Microsoft.WindowsTerminal"
@@ -17,7 +19,7 @@ $PROGRAMS_ID = @(
 )
 
 foreach($program in $PROGRAMS_ID){
-    $installArgs = "install --exact --id $program  --source winget --accept-package-agreements --accept-source-agreements"
+    $installArgs = "install --exact --id $program --source winget --accept-package-agreements --accept-source-agreements"
     Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -Wait
 }
 

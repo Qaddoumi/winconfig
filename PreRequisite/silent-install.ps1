@@ -60,9 +60,9 @@ try {
 
     # Install VDD
     Write-Host "Installing Virtual Display Driver..." -ForegroundColor Cyan;
-    Write-Host "Running: nefconw install `"$infFile`" `"Root\MttVDD`"" -ForegroundColor Gray;
+    Write-Host "Running: nefconw install `"$infFile`" `"Root\LenovoVDD`"" -ForegroundColor Gray;
     
-    $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
+    $output = & nefconw install $infFile "Root\LenovoVDD" 2>&1;
     $exitCode = $LASTEXITCODE;
     
     # Display the output from nefconw

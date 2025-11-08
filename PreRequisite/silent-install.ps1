@@ -60,16 +60,30 @@ try {
 
     # Install VDD
     Write-Host "Installing Virtual Display Driver..." -ForegroundColor Cyan;
-    & nefconw install $infFile "Root\MttVDD";
+    Write-Host "Running: nefconw install `"$infFile`" `"Root\MttVDD`"" -ForegroundColor Gray;
     
-    if ($LASTEXITCODE -ne 0) {
-        throw "Driver installation failed with exit code: $LASTEXITCODE";
+    $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
+    $exitCode = $LASTEXITCODE;
+    
+    # Display the output from nefconw
+    if ($output) {
+        Write-Host "nefconw output:" -ForegroundColor Yellow;
+        $output | ForEach-Object { Write-Host $_ };
+    }
+    
+    if ($exitCode -ne 0) {
+        throw "Driver installation failed with exit code: $exitCode";
     }
 
     Write-Host "Driver installation completed successfully!" -ForegroundColor Green;
 }
 catch {
     Write-Error "Installation failed: $_";
+    Write-Host "`nTroubleshooting tips:" -ForegroundColor Yellow;
+    Write-Host "1. Ensure you're running PowerShell as Administrator" -ForegroundColor Yellow;
+    Write-Host "2. Check if the driver is already installed (run: nefconw list)" -ForegroundColor Yellow;
+    Write-Host "3. Try uninstalling first (run: nefconw remove Root\MttVDD)" -ForegroundColor Yellow;
+    Write-Host "4. Check Windows Event Viewer for driver installation errors" -ForegroundColor Yellow;
     exit 1;
 }
 finally {

@@ -53,7 +53,8 @@ try {
     Write-Host "Installing driver certificates on local machine..." -ForegroundColor Cyan;
     foreach ($cert in $certificates) {
         $certFilePath = Join-Path -Path $certsFolder -ChildPath "$($cert.Thumbprint).cer";
-        $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert) | Set-Content -Path $certFilePath -Encoding Byte;
+        $certBytes = $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert);
+        [System.IO.File]::WriteAllBytes($certFilePath, $certBytes);
         Import-Certificate -FilePath $certFilePath -CertStoreLocation "Cert:\LocalMachine\TrustedPublisher" -ErrorAction Stop;
     }
 

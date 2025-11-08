@@ -25,6 +25,8 @@ foreach($program in $PROGRAMS_ID){
 
 #& .\Install-NetBalancer.ps1
 
+& .\silent-install.ps1
+
 Write-Output "`n================================================================"
 Write-Output "`n   === Refresh Environment Variabels : ===`n"
 & ..\Global\RefreshEnvironmentVariabels.ps1

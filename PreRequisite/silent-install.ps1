@@ -8,7 +8,7 @@ param(
     # Latest stable version of VDD driver only
     [Parameter(Mandatory=$false)]
     #[string]$DriverURL = "https://github.com/VirtualDrivers/Virtual-Display-Driver/releases/download/25.7.23/VirtualDisplayDriver-x86.Driver.Only.zip"
-    [string]$DriverURL = "https://github.com/VirtualDrivers/Virtual-Display-Driver/releases/download/24.12.24/Signed-Driver-v24.12.24-x64.zip"
+    [string]$DriverURL = "https://github.com/VirtualDrivers/Virtual-Display-Driver/releases/download/25.5.2/Signed-Driver-v24.12.24-x64.zip"
 );
 
 # Create temp directory

@@ -1,5 +1,3 @@
-irm https://raw.githubusercontent.com/VirtualDrivers/Virtual-Display-Driver/master/Community%20Scripts/silent-install.ps1 | iex
-
 $PROGRAMS_ID = @(
     "Microsoft.PowerShell" # powershell 7
     "Microsoft.WindowsTerminal"
@@ -12,7 +10,7 @@ $PROGRAMS_ID = @(
     "RevoUninstaller.RevoUninstaller"
     "Microsoft.Sysinternals.ProcessMonitor"
     "Microsoft.Sysinternals.SDelete"
-    "Nefarius.nefcon"
+    "Nefarius.nefcon" # Driver installer framework for the virtual display driver
     "gnif.LookingGlass"
     "Neovim.Neovim"
     "AntibodySoftware.WizTree"
@@ -26,7 +24,7 @@ foreach($program in $PROGRAMS_ID){
 
 #& .\Install-NetBalancer.ps1
 
-& .\silent-install.ps1
+& .\install-virtual-display-driver.ps1
 
 Write-Output "`n================================================================"
 Write-Output "`n   === Refresh Environment Variabels : ===`n"

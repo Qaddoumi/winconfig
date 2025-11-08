@@ -2,6 +2,7 @@ $PROGRAMS_ID = @(
     "Microsoft.PowerShell" # powershell 7
     "Microsoft.WindowsTerminal"
     "Git.Git"
+    "GitHub.cli"
     "JanDeDobbeleer.OhMyPosh" # powershell prompt
     "Microsoft.VisualStudioCode"
     "Nilesoft.Shell" #Powerfull context menu manager

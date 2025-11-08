@@ -36,7 +36,13 @@ $PROGRAMS_COLLECTION = @(
     #     Installer   = "winget"
     #     Description = "The customization marketplace for Windows and programs"
     # }
-    @{ Name         = "WizTee"
+    @{ Name         = "Nefcon"
+        Source      = "winget"
+        Id          = "Nefarius.nefcon"
+        Installer   = "winget"
+        Description = "Driver installer framework for the virtual display driver"
+    }
+    @{ Name         = "WizTree"
         Source      = "winget"
         Id          = "AntibodySoftware.WizTree"
         Installer   = "winget"
@@ -247,11 +253,11 @@ $PROGRAMS_COLLECTION = @(
         Installer   = "winget"
         Description = "For backend request tests"
     }
-    @{ Name         = "Python 3.13"
+    @{ Name         = "Python 3.14"
         Source      = "winget"
-        Id          = "Python.Python.3.13"
+        Id          = "Python.Python.3.14"
         Installer   = "winget"
-        Description = "Python 3.13 (change the version in the future)"
+        Description = "Python 3.14 (TODO: change the version in the future)"
     }
     @{ Name         = "Telegram Desktop"
         Source      = "winget"
@@ -472,6 +478,7 @@ $PROGRAMS_COLLECTION = @(
 #     Installer   = "winget"
 #     Description = ""
 # }
+
 
 # Windows Configuration Designer         9NBLGGH4TX22          Unknown               msstore
 # Vim                                    vim.vim               9.1.0618              winget

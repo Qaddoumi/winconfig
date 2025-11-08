@@ -28,6 +28,7 @@ Invoke-RestMethod https://raw.githubusercontent.com/Qaddoumi/winconfig/main/Down
 - [winget-install](https://github.com/asheroto/winget-install)
 - [winutil](https://github.com/ChrisTitusTech/winutil)
 - [windows-configuration-designer](https://github.com/letsdoautomation/windows-configuration-designer)
+- [Virtual-Display-Driver](https://github.com/VirtualDrivers/Virtual-Display-Driver)
 - --
 # Tools, settings 
 - [shanselman / Microsoft.PowerShell_profile.ps1](https://gist.github.com/shanselman)

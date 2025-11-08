@@ -12,6 +12,7 @@ $PROGRAMS_ID = @(
     "RevoUninstaller.RevoUninstaller"
     "Microsoft.Sysinternals.ProcessMonitor"
     "Microsoft.Sysinternals.SDelete"
+    "Nefarius.nefcon"
     "gnif.LookingGlass"
     "Neovim.Neovim"
     "AntibodySoftware.WizTree"

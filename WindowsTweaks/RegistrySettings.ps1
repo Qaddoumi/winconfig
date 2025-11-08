@@ -974,7 +974,7 @@ $RegistrySettings  = @(
             }
         )
     }
-    @{ Message = "Sets This PC as default"
+    @{ Message = "Sets This PC as default in explorer instead of Quick Access"
         Data = @(
             @{
                 Name          = "LaunchTo"

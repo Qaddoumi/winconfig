@@ -31,17 +31,17 @@ function Disable-Telemetry {
         Write-Warning $PSItem.Exception.Message
     }
 
-    # Fix Managed by your organization in Edge if registry path exists then remove it
-    Write-Host "Fix Managed by your organization in Edge" -ForegroundColor Green
-    Try {
-        If (Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge") {
-            Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Recurse -ErrorAction SilentlyContinue
-        }
-    }
-    Catch {
-        Write-Warning "Failed to remove Edge policies registry path"
-        Write-Warning $PSItem.Exception.Message
-    }
+    # # Fix Managed by your organization in Edge if registry path exists then remove it
+    # Write-Host "Fix Managed by your organization in Edge" -ForegroundColor Green
+    # Try {
+    #     If (Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge") {
+    #         Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Recurse -ErrorAction SilentlyContinue
+    #     }
+    # }
+    # Catch {
+    #     Write-Warning "Failed to remove Edge policies registry path"
+    #     Write-Warning $PSItem.Exception.Message
+    # }
 
     Write-Host "Group svchost.exe processes" -ForegroundColor Green
     Try {

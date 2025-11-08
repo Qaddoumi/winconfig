@@ -60,12 +60,12 @@ Copy-UserInternationalSettingsToSystem -WelcomeScreen $True -NewUser $True
 Write-Host "Setting the culture (time and date format) for the system to en-CA" -ForegroundColor Cyan
 Set-Culture en-CA
 
-Write-Host "`nSet Time to UTC (Dual Boot)" -ForegroundColor Cyan
-$RegistrySettings = @{
-    Name  = "RealTimeIsUniversal"
-    Type  = "DWord"
-    Path  = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
-    Value = "1"
-}
-. "..\Global\Set-Registry.ps1"
-Set-Registry -Name $RegistrySettings.Name -Path $RegistrySettings.Path -Type $RegistrySettings.Type -Value $RegistrySettings.Value
+# Write-Host "`nSet Time to UTC (Dual Boot)" -ForegroundColor Cyan
+# $RegistrySettings = @{
+#     Name  = "RealTimeIsUniversal"
+#     Type  = "DWord"
+#     Path  = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+#     Value = "1"
+# }
+# . "..\Global\Set-Registry.ps1"
+# Set-Registry -Name $RegistrySettings.Name -Path $RegistrySettings.Path -Type $RegistrySettings.Type -Value $RegistrySettings.Value

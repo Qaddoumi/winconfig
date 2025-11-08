@@ -3,8 +3,13 @@
 param(
     # Path to the driver folder (relative or absolute)
     [Parameter(Mandatory=$false)]
-    [string]$DriverPath = Join-Path $PSScriptRoot "Signed-Driver-v24.12.24-x64"
+    [string]$DriverPath = ""
 );
+
+# Set default path if not provided
+if ([string]::IsNullOrEmpty($DriverPath)) {
+    $DriverPath = Join-Path $PSScriptRoot "Signed-Driver-v24.12.24-x64";
+}
 
 # Verify driver path exists
 if (-not (Test-Path $DriverPath)) {

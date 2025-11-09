@@ -697,4 +697,10 @@ Set-PSReadLineKeyHandler -Key Ctrl+Shift+t `
 
 Import-Module z
 
+function Push-Git {
+    git add .
+    git commit --allow-empty-message -m ""
+    git push
+}
+Set-Alias gitpush Push-Git
 

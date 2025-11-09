@@ -1068,16 +1068,8 @@ $RegistrySettings  = @(
             }
         )
     }
-    # TODO: review each item in Disable-Telemetry
     @{ Message = "Disable Telemetry(Part 1), Note: This will lock many Edge Browser settings. Microsoft spies heavily on you when using the Edge browser"
         Data   = @(
-            @{
-                Name          = "LongPathsEnabled"
-                Type          = "DWord"
-                Path          = "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem"
-                Value         = "1"
-                OriginalValue = "0"
-            }
             @{
                 Name          = "AllowTelemetry"
                 Type          = "DWord"

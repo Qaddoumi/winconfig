@@ -1,0 +1,74 @@
+name: Create PowerShell Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0, v2.1, etc.
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Combine PowerShell files
+      run: |
+        # Create the combined file with header
+        echo "# WinConfig - Combined Script" > winconfig-combined.ps1
+        echo "# Auto-generated from: https://github.com/${{ github.repository }}" >> winconfig-combined.ps1
+        echo "# Version: ${{ github.ref_name }}" >> winconfig-combined.ps1
+        echo "" >> winconfig-combined.ps1
+        
+        # Function to process and add file
+        add_file() {
+          local file=$1
+          echo "" >> winconfig-combined.ps1
+          echo "#region $file" >> winconfig-combined.ps1
+          echo "# =====================================" >> winconfig-combined.ps1
+          echo "# Source: $file" >> winconfig-combined.ps1
+          echo "# =====================================" >> winconfig-combined.ps1
+          cat "$file" >> winconfig-combined.ps1
+          echo "" >> winconfig-combined.ps1
+          echo "#endregion $file" >> winconfig-combined.ps1
+        }
+        
+        # Add main files in order (adjust based on your structure)
+        if [ -f "Install.ps1" ]; then
+          add_file "Install.ps1"
+        fi
+        
+        # Add all other .ps1 files (excluding the combined output)
+        for file in $(find . -name "*.ps1" -not -name "winconfig-combined.ps1" | sort); do
+          if [ "$file" != "./Install.ps1" ]; then
+            add_file "$file"
+          fi
+        done
+        
+        # Show file size
+        ls -lh winconfig-combined.ps1
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: winconfig-combined.ps1
+        body: |
+          ## WinConfig Combined PowerShell Script
+          
+          This release contains a single PowerShell file combining all scripts.
+          
+          ### Usage
+          ```powershell
+          # Download and run directly
+          irm https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/winconfig-combined.ps1 | iex
+          
+          # Or download first
+          Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/winconfig-combined.ps1" -OutFile "winconfig.ps1"
+          .\winconfig.ps1
+          ```
+          
+          **Note:** Run PowerShell as Administrator for full functionality.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

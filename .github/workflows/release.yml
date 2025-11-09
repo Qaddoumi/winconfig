@@ -5,6 +5,11 @@ on:
     tags:
       - 'v*'  # Trigger on version tags like v1.0, v2.1, etc.
   workflow_dispatch:  # Allow manual trigger
+    inputs:
+      tag_name:
+        description: 'latest'
+        required: true
+        default: 'v1.0'
 
 jobs:
   build:
@@ -14,12 +19,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       
+    - name: Set release tag
+      id: set_tag
+      run: |
+        if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+          echo "tag_name=${{ github.event.inputs.tag_name }}" >> $GITHUB_OUTPUT
+        else
+          echo "tag_name=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+        fi
+      
     - name: Combine PowerShell files
       run: |
         # Create the combined file with header
         echo "# WinConfig - Combined Script" > winconfig-combined.ps1
         echo "# Auto-generated from: https://github.com/${{ github.repository }}" >> winconfig-combined.ps1
-        echo "# Version: ${{ github.ref_name }}" >> winconfig-combined.ps1
+        echo "# Version: ${{ steps.set_tag.outputs.tag_name }}" >> winconfig-combined.ps1
         echo "" >> winconfig-combined.ps1
         
         # Function to process and add file
@@ -53,6 +67,7 @@ jobs:
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
+        tag_name: ${{ steps.set_tag.outputs.tag_name }}
         files: winconfig-combined.ps1
         body: |
           ## WinConfig Combined PowerShell Script
@@ -62,10 +77,10 @@ jobs:
           ### Usage
           ```powershell
           # Download and run directly
-          irm https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/winconfig-combined.ps1 | iex
+          irm https://github.com/${{ github.repository }}/releases/download/${{ steps.set_tag.outputs.tag_name }}/winconfig-combined.ps1 | iex
           
           # Or download first
-          Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/winconfig-combined.ps1" -OutFile "winconfig.ps1"
+          Invoke-WebRequest -Uri "https://github.com/${{ github.repository }}/releases/download/${{ steps.set_tag.outputs.tag_name }}/winconfig-combined.ps1" -OutFile "winconfig.ps1"
           .\winconfig.ps1
           ```
           

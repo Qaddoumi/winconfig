@@ -14,11 +14,11 @@ $scripts = @(
     @{ Name = ".\WindowsTweaks\ApplyTweaks.ps1"; Description = "Apply Windows Tweaks, And remove telemetry"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change`nOr restart explorer" }
     @{ Name = ".\WindowsCleanupMaintenance\RestartExplorer.ps1"; Description = "Restart Explorer"; Parameter = ""; SleepTime = 3; MessageAfter = "" }
     
-    @{ Name = ".\TimeZoneLanguages.ps1"; Description = "Setting date, date format, timezone and location"; Parameter = ""; SleepTime = 2; MessageAfter = "" }
     @{ Name = ".\Hibernation.ps1"; Description = "Enabling Ultimate Performance, Turn on hibernation and stop sleep mode"; Parameter = ""; SleepTime = 2; MessageAfter = "" }
     @{ Name = ".\LegacyF8BootRecovery.ps1"; Description = "Enables Advanced Boot Options screen that lets you start Windows in advanced troubleshooting modes"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
     @{ Name = ".\MSCopilot.ps1"; Description = "Remove MSCopilot,and turn off Recall"; Parameter = ""; SleepTime = 0; MessageAfter = "You may need to restart for some setting to change" }
     @{ Name = ".\RemoveMSStoreApps.ps1"; Description = "Remove Microsoft Store Apps"; Parameter = ""; SleepTime = 0; MessageAfter = "" }
+    @{ Name = ".\TimeZoneLanguages.ps1"; Description = "Setting date, date format, timezone and location"; Parameter = ""; SleepTime = 2; MessageAfter = "" }
 )
 
 foreach ($script in $scripts) {

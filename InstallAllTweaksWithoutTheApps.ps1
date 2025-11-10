@@ -23,6 +23,11 @@ $scripts = @(
 
 foreach ($script in $scripts) {
     $scriptToRun = $script.Name
+    if (-not (Test-Path $scriptToRun)) {
+        Write-Warning "Script not found: $scriptToRun"
+        continue
+    }
+
     $scriptDirectory = Split-Path -Parent $scriptToRun
     $originalDirectory = Get-Location
 
@@ -34,7 +39,7 @@ foreach ($script in $scripts) {
     Write-Output "================================================================"
 
     if ($script.Parameter) {
-        $command = "& .\$(Split-Path -Leaf $scriptToRun) $(script.Parameter)"
+        $command = "& .\$(Split-Path -Leaf $scriptToRun) $($script.Parameter)"
         Invoke-Expression $command
     } else {
         & .\$(Split-Path -Leaf $scriptToRun)

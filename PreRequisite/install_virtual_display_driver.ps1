@@ -67,7 +67,8 @@ try {
     Write-Host "Installing Virtual Display Driver..." -ForegroundColor Cyan;
     Write-Host "Running: nefconw install `"$infFile`" `"Root\MttVDD`"" -ForegroundColor Gray;
     
-    $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
+    $output = & C:\Users\admin\AppData\Local\Microsoft\WinGet\Packages\Nefarius.nefcon_Microsoft.Winget.Source_8wekyb3d8bbwe\x64\nefconw.exe install $infFile "Root\MttVDD" 2>&1;
+    # $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
     $exitCode = $LASTEXITCODE;
     
     # Display the output from nefconw

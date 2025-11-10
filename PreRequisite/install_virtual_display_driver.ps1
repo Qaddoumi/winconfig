@@ -55,7 +55,12 @@ try {
         $certFilePath = Join-Path -Path $certsFolder -ChildPath "$($cert.Thumbprint).cer";
         $certBytes = $cert.Export([System.Security.Cryptography.X509Certificates.X509ContentType]::Cert);
         [System.IO.File]::WriteAllBytes($certFilePath, $certBytes);
-        Import-Certificate -FilePath $certFilePath -CertStoreLocation "Cert:\LocalMachine\TrustedPublisher" -ErrorAction Stop;
+    
+        # Skip Root store for non-root certs, only add to TrustedPublisher
+        $output = & certutil -enterprise -addstore TrustedPublisher $certFilePath 2>&1;
+        if ($LASTEXITCODE -ne 0) {
+            Write-Warning "Certificate import warning for $($cert.Subject): $output";
+        }
     }
 
     # Install VDD

@@ -23,6 +23,10 @@ foreach($program in $PROGRAMS_ID){
     Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -Wait
 }
 
+Write-Output "`n================================================================"
+Write-Output "`n   === Refresh Environment Variabels : ===`n"
+& ..\Global\RefreshEnvironmentVariabels.ps1
+
 #& .\install_NetBalancer.ps1
 
 & .\install_virtual_display_driver.ps1

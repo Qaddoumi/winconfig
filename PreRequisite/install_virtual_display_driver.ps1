@@ -31,11 +31,11 @@ if (-not (Test-Path $infFile)) {
     exit 1;
 }
 
-# # Verify nefconw is available
-# if (-not (Get-Command nefconw -ErrorAction SilentlyContinue)) {
-#     Write-Error "nefconw not found in PATH. Please install nefarius.nefcon via winget.";
-#     exit 1;
-# }
+# Verify nefconw is available
+if (-not (Get-Command nefconw -ErrorAction SilentlyContinue)) {
+    Write-Error "nefconw not found in PATH. Please install nefarius.nefcon via winget.";
+    exit 1;
+}
 
 # Create temp directory for certificates
 $tempDir = Join-Path $env:TEMP "VDDInstall";
@@ -67,7 +67,7 @@ try {
     Write-Host "Installing Virtual Display Driver..." -ForegroundColor Cyan;
     Write-Host "Running: nefconw install `"$infFile`" `"Root\MttVDD`"" -ForegroundColor Gray;
     
-    $output = & C:\Users\admin\AppData\Local\Microsoft\WinGet\Packages\Nefarius.nefcon_Microsoft.Winget.Source_8wekyb3d8bbwe\x64\nefconw.exe install $infFile "Root\MttVDD" 2>&1;
+    $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
     # $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
     $exitCode = $LASTEXITCODE;
     

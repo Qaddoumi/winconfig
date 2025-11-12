@@ -31,11 +31,11 @@ if (-not (Test-Path $infFile)) {
     exit 1;
 }
 
-# Verify nefconw is available
-if (-not (Get-Command nefconw -ErrorAction SilentlyContinue)) {
-    Write-Error "nefconw not found in PATH. Please install nefarius.nefcon via winget.";
-    exit 1;
-}
+# # Verify nefconw is available
+# if (-not (Get-Command nefconw -ErrorAction SilentlyContinue)) {
+#     Write-Error "nefconw not found in PATH. Please install nefarius.nefcon via winget.";
+#     exit 1;
+# }
 
 # Create temp directory for certificates
 $tempDir = Join-Path $env:TEMP "VDDInstall";

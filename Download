@@ -63,4 +63,4 @@ $bytes[0x15] = $bytes[0x15] -bor 0x20
 Write-Host "Shortcut created at: $shortcutPath"
 
 #Pause
-exit
+#exit

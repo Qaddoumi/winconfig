@@ -68,7 +68,6 @@ try {
     Write-Host "Running: nefconw install `"$infFile`" `"Root\MttVDD`"" -ForegroundColor Gray;
     
     $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
-    # $output = & nefconw install $infFile "Root\MttVDD" 2>&1;
     $exitCode = $LASTEXITCODE;
     
     # Display the output from nefconw

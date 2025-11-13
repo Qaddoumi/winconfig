@@ -227,6 +227,9 @@ public class DisplaySettings
 }
 "@
 
+Write-Host "=== Display Configuration Script ===`n" -ForegroundColor Green
+Write-Host "This script will set all connected monitors to 1920x1080 resolution, 144Hz refresh rate, and 32-bit color depth.`n" -ForegroundColor Cyan
+
 # Add the C# code to PowerShell
 try {
     Write-Host "Compiling C# code for display settings..."

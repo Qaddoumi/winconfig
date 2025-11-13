@@ -259,8 +259,6 @@ Write-Host "`n=== Applying Settings to All Monitors ===`n"
 foreach ($device in $devices) {
     Write-Host "Configuring: $($device.DeviceName) - $($device.DeviceString)"
     Write-Host "--------------------------------------------"
-    
-    $deviceSuccess = $true
 
     # Set resolution to 1920x1080
     Write-Host "  Setting resolution to 1920x1080..."
@@ -271,12 +269,10 @@ foreach ($device in $devices) {
         }
         else {
             Write-Host "  ✗ Failed to set resolution. Error code: $result" -ForegroundColor Red
-            $deviceSuccess = $false
         }
     }
     catch {
         Write-Host "  ✗ Exception setting resolution: $($_.Exception.Message)" -ForegroundColor Red
-        $deviceSuccess = $false
     }
 
     # Set refresh rate to 144Hz
@@ -303,12 +299,10 @@ foreach ($device in $devices) {
         }
         else {
             Write-Host "  ✗ Failed to set color depth. Error code: $result" -ForegroundColor Red
-            $deviceSuccess = $false
         }
     }
     catch {
         Write-Host "  ✗ Exception setting color depth: $($_.Exception.Message)" -ForegroundColor Red
-        $deviceSuccess = $false
     }
 
     Write-Host ""

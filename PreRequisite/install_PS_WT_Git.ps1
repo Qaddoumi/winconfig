@@ -31,6 +31,8 @@ Write-Output "`n   === Refresh Environment Variabels : ===`n"
 
 & .\install_virtual_display_driver.ps1
 
+& .\resolution.ps1
+
 Write-Output "`n================================================================"
 Write-Output "`n   === Refresh Environment Variabels : ===`n"
 & ..\Global\RefreshEnvironmentVariabels.ps1

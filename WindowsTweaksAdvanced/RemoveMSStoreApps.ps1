@@ -92,54 +92,49 @@ $Appx = @(
     "HotspotShieldFreeVPN"
     "Microsoft.Advertising.Xaml"
 )
-# Create a new PowerShell session in Windows PowerShell
-$session = New-PSSession -UseWindowsPowerShell
 
-foreach ($appx_item in $Appx) {
-    # Run the Appx removal code in this session
-    Invoke-Command -Session $session -ArgumentList $appx_item -ScriptBlock {
-        param ($AppxName)
-        function Remove-APPX {
-            <#
-            .SYNOPSIS
-                Removes all APPX packages that match the given name
-            .PARAMETER Name
-                The name of the APPX package to remove
-            .EXAMPLE
-                Remove-APPX -Name "Microsoft.Microsoft3DViewer"
-            #>
-            param (
-                [Parameter(Mandatory = $true)]
-                [string]$Name
-            )
-            Try {
-                Write-Host "Checking if '*$Name*' is installed" -ForegroundColor Cyan
+function Remove-APPX {
+    <#
+    .SYNOPSIS
+        Removes all APPX packages that match the given name
+    .PARAMETER Name
+        The name of the APPX package to remove
+    .EXAMPLE
+        Remove-APPX -Name "Microsoft.Microsoft3DViewer"
+    #>
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Name
+    )
+    Try {
+        Write-Host "Checking if '*$Name*' is installed" -ForegroundColor Cyan
 
-                $appxPackage = Get-AppxPackage "*$Name*" -allusers
-                if ($appxPackage) {
-                    Write-Host "Found AppxPackage Name : $($appxPackage.Name)" -ForegroundColor Green -NoNewline
-                    Write-Host " Removing..." -ForegroundColor DarkYellow
-                    $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
-                }
-
-                $provisionedPackage = Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*$Name*"
-                if ($provisionedPackage) {
-                    Write-Host "Found AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName)" -ForegroundColor Green -NoNewline
-                    Write-Host " Removing..." -ForegroundColor DarkYellow
-                    $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
-                }
-
-                if($null -eq $appxPackage -and $null -eq $provisionedPackage){
-                    Write-Host "$Name not found." -ForegroundColor Yellow
-                }
-            }
-            Catch {
-                Write-Host "Failed to remove $Name" -ForegroundColor Red
-            }
+        $appxPackage = Get-AppxPackage "*$Name*" -allusers -ErrorAction SilentlyContinue
+        if ($appxPackage) {
+            Write-Host "Found AppxPackage Name : $($appxPackage.Name)" -ForegroundColor Green -NoNewline
+            Write-Host " Removing..." -ForegroundColor DarkYellow
+            $appxPackage | Remove-AppxPackage -allusers -ErrorAction SilentlyContinue
         }
-        # Call the function with the package name
-        Remove-APPX -Name $AppxName
+
+        $provisionedPackage = Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Where-Object DisplayName -like "*$Name*"
+        if ($provisionedPackage) {
+            Write-Host "Found AppxProvisionedPackage DisplayName : $($provisionedPackage.DisplayName)" -ForegroundColor Green -NoNewline
+            Write-Host " Removing..." -ForegroundColor DarkYellow
+            $provisionedPackage | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+        }
+
+        if ($null -eq $appxPackage -and $null -eq $provisionedPackage) {
+            Write-Host "$Name not found." -ForegroundColor Yellow
+        }
+    }
+    Catch {
+        Write-Host "Failed to remove $Name - Error: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
-# Remove the session
-$session | Remove-PSSession
+
+# Process each app
+foreach ($appx_item in $Appx) {
+    Remove-APPX -Name $appx_item
+}
+
+Write-Host "`nApp removal process completed!" -ForegroundColor Green

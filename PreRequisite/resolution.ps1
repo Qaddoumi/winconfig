@@ -311,8 +311,7 @@ foreach ($device in $devices) {
     Write-Host ""
 }
 
-Write-Host "=== Configuration Complete ===" -ForegroundColor Cyan
-
+Write-Host "=== Setting logical DPI and HDR ===`n" -ForegroundColor Green
 . "..\Global\Set-Registry.ps1"
 Set-Registry -Path "HKCU:\Control Panel\Desktop" -Name "LogPixels" -Type DWord -Value 96
 Write-Host "Set LogPixels registry value to 96 for 100% scaling." -ForegroundColor Green
@@ -330,4 +329,5 @@ foreach ($setting in $regSettings) {
 
 
 
+Write-Host "=== Configuration Complete ===" -ForegroundColor Cyan
 Write-Host "`nPlease log out and log back in or restart your computer for all changes to take effect." -ForegroundColor Yellow

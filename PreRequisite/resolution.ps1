@@ -312,3 +312,22 @@ foreach ($device in $devices) {
 }
 
 Write-Host "=== Configuration Complete ===" -ForegroundColor Cyan
+
+. "..\Global\Set-Registry.ps1"
+Set-Registry -Path "HKCU:\Control Panel\Desktop" -Name "LogPixels" -Type DWord -Value 96
+Write-Host "Set LogPixels registry value to 96 for 100% scaling." -ForegroundColor Green
+
+$regSettings = @(
+    @{Path = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\MonitorDataStore\MTT1337518463207_1C_07E8_C2"; Name = "HDREnabled"; Type = "DWORD"; Value = 1},
+    @{Path = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\FeatureSetUsage"; Name = "DisplayHDR"; Type = "DWORD"; Value = 1}
+)
+
+foreach ($setting in $regSettings) {
+    Set-Registry -Path $setting.Path -Name $setting.Name -Type $setting.Type -Value $setting.Value
+    Write-Host "Set registry $($setting.Path)\$($setting.Name) to $($setting.Value)." -ForegroundColor Green
+}
+
+
+
+
+Write-Host "`nPlease log out and log back in or restart your computer for all changes to take effect." -ForegroundColor Yellow

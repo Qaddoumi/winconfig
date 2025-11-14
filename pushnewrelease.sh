@@ -1,3 +1,4 @@
+TODO: learn more making a new release
 git add .
 git commit --allow-empty-message -m ""
 git push

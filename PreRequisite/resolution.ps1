@@ -316,18 +316,43 @@ Write-Host "=== Setting logical DPI and HDR ===`n" -ForegroundColor Green
 Set-Registry -Path "HKCU:\Control Panel\Desktop" -Name "LogPixels" -Type DWord -Value 96
 Write-Host "Set LogPixels registry value to 96 for 100% scaling." -ForegroundColor Green
 
-$regSettings = @(
-    @{Path = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\MonitorDataStore\MTT1337518463207_1C_07E8_C2"; Name = "HDREnabled"; Type = "DWORD"; Value = 1},
-    @{Path = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\FeatureSetUsage"; Name = "DisplayHDR"; Type = "DWORD"; Value = 1}
-)
+# Dynamically find MTT registry keys in MonitorDataStore
+$monitorDataStorePath = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\MonitorDataStore"
 
-foreach ($setting in $regSettings) {
-    Set-Registry -Path $setting.Path -Name $setting.Name -Type $setting.Type -Value $setting.Value
-    Write-Host "Set registry $($setting.Path)\$($setting.Name) to $($setting.Value)." -ForegroundColor Green
+if (Test-Path $monitorDataStorePath) {
+    $mttKeys = Get-ChildItem -Path $monitorDataStorePath -ErrorAction SilentlyContinue | Where-Object {$_.PSChildName -like "MTT*"}
+    
+    if ($mttKeys.Count -gt 0) {
+        Write-Host "Found $($mttKeys.Count) MTT monitor key(s):" -ForegroundColor Cyan
+        
+        foreach ($key in $mttKeys) {
+            $keyPath = Join-Path $monitorDataStorePath $key.PSChildName
+            Write-Host "  - $($key.PSChildName)" -ForegroundColor Yellow
+            
+            try {
+                Set-Registry -Path $keyPath -Name "HDREnabled" -Type "DWORD" -Value 1
+                Write-Host "  ✓ Set HDREnabled to 1 in $($key.PSChildName)" -ForegroundColor Green
+            }
+            catch {
+                Write-Host "  ✗ Failed to set HDREnabled: $_" -ForegroundColor Yellow
+            }
+        }
+    } else {
+        Write-Host "No MTT keys found in MonitorDataStore" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "MonitorDataStore path not found" -ForegroundColor Yellow
 }
 
+# Set DisplayHDR in FeatureSetUsage
+$featureSetPath = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\FeatureSetUsage"
+try {
+    Set-Registry -Path $featureSetPath -Name "DisplayHDR" -Type "DWORD" -Value 1
+    Write-Host "Set DisplayHDR to 1 in FeatureSetUsage" -ForegroundColor Green
+}
+catch {
+    Write-Host "Failed to set DisplayHDR: $_" -ForegroundColor Yellow
+}
 
-
-
-Write-Host "=== Configuration Complete ===" -ForegroundColor Cyan
-Write-Host "`nPlease log out and log back in or restart your computer for all changes to take effect." -ForegroundColor Yellow
+Write-Host "`n=== Configuration Complete ===" -ForegroundColor Cyan
+Write-Host "`nPlease restart your computer for all changes to take effect." -ForegroundColor Yellow

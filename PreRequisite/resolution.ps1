@@ -311,10 +311,8 @@ foreach ($device in $devices) {
     Write-Host ""
 }
 
-Write-Host "=== Setting logical DPI and HDR ===`n" -ForegroundColor Green
+Write-Host "=== Enabling HDR ===`n" -ForegroundColor Green
 . "..\Global\Set-Registry.ps1"
-Set-Registry -Path "HKCU:\Control Panel\Desktop" -Name "LogPixels" -Type DWord -Value 96
-Write-Host "Set LogPixels registry value to 96 for 100% scaling." -ForegroundColor Green
 
 # Dynamically find MTT registry keys in MonitorDataStore
 $monitorDataStorePath = "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\MonitorDataStore"

@@ -335,10 +335,12 @@ if (Test-Path $monitorDataStorePath) {
                 Write-Host "  ✗ Failed to set HDREnabled: $_" -ForegroundColor Yellow
             }
         }
-    } else {
+    }
+    else {
         Write-Host "No MTT keys found in MonitorDataStore" -ForegroundColor Yellow
     }
-} else {
+}
+else {
     Write-Host "MonitorDataStore path not found" -ForegroundColor Yellow
 }
 

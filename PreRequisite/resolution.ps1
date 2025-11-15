@@ -1,9 +1,9 @@
-# Define C# code for ChangeDisplaySettings and EnumDisplaySettings APIs
+# Define C# code for ChangeDisplay_Settings and EnumDisplay_Settings APIs
 $code = @"
 using System;
 using System.Runtime.InteropServices;
 
-public class DisplaySettings
+public class Display_Settings
 {
     // Constants from winuser.h
     public const int DM_PELSWIDTH = 0x00080000;
@@ -72,13 +72,13 @@ public class DisplaySettings
     public const int DISPLAY_DEVICE_PRIMARY_DEVICE = 0x00000004;
 
     [DllImport("user32.dll")]
-    public static extern int ChangeDisplaySettingsEx(string lpszDeviceName, ref DEVMODE lpDevMode, IntPtr hwnd, int dwflags, IntPtr lParam);
+    public static extern int ChangeDisplay_SettingsEx(string lpszDeviceName, ref DEVMODE lpDevMode, IntPtr hwnd, int dwflags, IntPtr lParam);
 
     [DllImport("user32.dll")]
-    public static extern int ChangeDisplaySettings(ref DEVMODE devMode, int flags);
+    public static extern int ChangeDisplay_Settings(ref DEVMODE devMode, int flags);
 
     [DllImport("user32.dll")]
-    public static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
+    public static extern bool EnumDisplay_Settings(string deviceName, int modeNum, ref DEVMODE devMode);
 
     [DllImport("user32.dll")]
     public static extern bool EnumDisplayDevices(string lpDevice, int iDevNum, ref DISPLAY_DEVICE lpDisplayDevice, int dwFlags);
@@ -109,7 +109,7 @@ public class DisplaySettings
         devMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
 
         // Get current settings for this device
-        if (!EnumDisplaySettings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
+        if (!EnumDisplay_Settings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
         {
             return DISP_CHANGE_BADMODE;
         }
@@ -120,7 +120,7 @@ public class DisplaySettings
         DEVMODE testMode = new DEVMODE();
         testMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
         
-        while (EnumDisplaySettings(deviceName, modeIndex, ref testMode))
+        while (EnumDisplay_Settings(deviceName, modeIndex, ref testMode))
         {
             if (testMode.dmPelsWidth == width && testMode.dmPelsHeight == height)
             {
@@ -140,7 +140,7 @@ public class DisplaySettings
         devMode.dmPelsWidth = width;
         devMode.dmPelsHeight = height;
 
-        return ChangeDisplaySettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
+        return ChangeDisplay_SettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
     }
 
     // Set refresh rate for a specific device
@@ -150,7 +150,7 @@ public class DisplaySettings
         devMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
 
         // Get current settings
-        if (!EnumDisplaySettings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
+        if (!EnumDisplay_Settings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
         {
             return DISP_CHANGE_BADMODE;
         }
@@ -161,7 +161,7 @@ public class DisplaySettings
         DEVMODE testMode = new DEVMODE();
         testMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
         
-        while (EnumDisplaySettings(deviceName, modeIndex, ref testMode))
+        while (EnumDisplay_Settings(deviceName, modeIndex, ref testMode))
         {
             if (testMode.dmDisplayFrequency == refreshRate && 
                 testMode.dmPelsWidth == devMode.dmPelsWidth && 
@@ -182,7 +182,7 @@ public class DisplaySettings
         devMode.dmFields = DM_DISPLAYFREQUENCY;
         devMode.dmDisplayFrequency = refreshRate;
 
-        return ChangeDisplaySettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
+        return ChangeDisplay_SettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
     }
 
     // Set color depth for a specific device
@@ -192,7 +192,7 @@ public class DisplaySettings
         devMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
 
         // Get current settings
-        if (!EnumDisplaySettings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
+        if (!EnumDisplay_Settings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
         {
             return DISP_CHANGE_BADMODE;
         }
@@ -203,7 +203,7 @@ public class DisplaySettings
         DEVMODE testMode = new DEVMODE();
         testMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
         
-        while (EnumDisplaySettings(deviceName, modeIndex, ref testMode))
+        while (EnumDisplay_Settings(deviceName, modeIndex, ref testMode))
         {
             if (testMode.dmBitsPerPel == bitsPerPixel)
             {
@@ -222,7 +222,7 @@ public class DisplaySettings
         devMode.dmFields = DM_BITSPERPEL;
         devMode.dmBitsPerPel = bitsPerPixel;
 
-        return ChangeDisplaySettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
+        return ChangeDisplay_SettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
     }
 }
 "@
@@ -242,7 +242,7 @@ catch {
 
 # Get all display devices
 Write-Host "`nDetecting display devices..."
-$devices = [DisplaySettings]::GetDisplayDevices()
+$devices = [Display_Settings]::GetDisplayDevices()
 
 if ($devices.Count -eq 0) {
     Write-Host "No display devices found!"
@@ -251,7 +251,7 @@ if ($devices.Count -eq 0) {
 
 Write-Host "Found $($devices.Count) display device(s):`n"
 foreach ($device in $devices) {
-    $isPrimary = ($device.StateFlags -band [DisplaySettings]::DISPLAY_DEVICE_PRIMARY_DEVICE) -ne 0
+    $isPrimary = ($device.StateFlags -band [Display_Settings]::DISPLAY_DEVICE_PRIMARY_DEVICE) -ne 0
     $primaryText = if ($isPrimary) { " (PRIMARY)" } else { "" }
     Write-Host "  - $($device.DeviceName): $($device.DeviceString)$primaryText"
 }
@@ -266,7 +266,7 @@ foreach ($device in $devices) {
     # Set resolution to 1920x1080
     Write-Host "  Setting resolution to 1920x1080..."
     try {
-        $result = [DisplaySettings]::SetResolution($device.DeviceName, 1920, 1080)
+        $result = [Display_Settings]::SetResolution($device.DeviceName, 1920, 1080)
         if ($result -eq 0) {
             Write-Host "Successfully set resolution to 1920x1080." -ForegroundColor Green
         }
@@ -281,7 +281,7 @@ foreach ($device in $devices) {
     # Set refresh rate to 144Hz
     Write-Host "  Setting refresh rate to 144Hz..."
     try {
-        $result = [DisplaySettings]::SetRefreshRate($device.DeviceName, 144)
+        $result = [Display_Settings]::SetRefreshRate($device.DeviceName, 144)
         if ($result -eq 0) {
             Write-Host "Successfully set refresh rate to 144Hz." -ForegroundColor Green
         }
@@ -296,7 +296,7 @@ foreach ($device in $devices) {
     # Set color depth to 32-bit
     Write-Host "  Setting color depth to 32-bit..."
     try {
-        $result = [DisplaySettings]::SetColorDepth($device.DeviceName, 32)
+        $result = [Display_Settings]::SetColorDepth($device.DeviceName, 32)
         if ($result -eq 0) {
             Write-Host "Successfully set color depth to 32-bit." -ForegroundColor Green
         }

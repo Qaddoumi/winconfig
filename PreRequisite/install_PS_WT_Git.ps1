@@ -21,6 +21,7 @@ $PROGRAMS_ID = @(
 foreach($program in $PROGRAMS_ID){
     $installArgs = "install --exact --id $program --source winget --accept-package-agreements --accept-source-agreements"
     Start-Process -FilePath "winget" -ArgumentList $installArgs -NoNewWindow -Wait
+    Write-Host "----------------------------------------------------------------"
 }
 
 Write-Output "`n================================================================"

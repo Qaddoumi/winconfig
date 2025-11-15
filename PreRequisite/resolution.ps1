@@ -268,14 +268,14 @@ foreach ($device in $devices) {
     try {
         $result = [DisplaySettings]::SetResolution($device.DeviceName, 1920, 1080)
         if ($result -eq 0) {
-            Write-Host "  ✓ Successfully set resolution to 1920x1080." -ForegroundColor Green
+            Write-Host "Successfully set resolution to 1920x1080." -ForegroundColor Green
         }
         else {
-            Write-Host "  ✗ Failed to set resolution. Error code: $result" -ForegroundColor Red
+            Write-Host "Failed to set resolution. Error code: $result" -ForegroundColor Red
         }
     }
     catch {
-        Write-Host "  ✗ Exception setting resolution: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "Exception setting resolution: $($_.Exception.Message)" -ForegroundColor Red
     }
 
     # Set refresh rate to 144Hz
@@ -283,14 +283,14 @@ foreach ($device in $devices) {
     try {
         $result = [DisplaySettings]::SetRefreshRate($device.DeviceName, 144)
         if ($result -eq 0) {
-            Write-Host "  ✓ Successfully set refresh rate to 144Hz." -ForegroundColor Green
+            Write-Host "Successfully set refresh rate to 144Hz." -ForegroundColor Green
         }
         else {
-            Write-Host "  ✗ Failed to set refresh rate. Error code: $result (May not be supported)" -ForegroundColor Yellow
+            Write-Host "Failed to set refresh rate. Error code: $result (May not be supported)" -ForegroundColor Yellow
         }
     }
     catch {
-        Write-Host "  ✗ Exception setting refresh rate: $($_.Exception.Message)" -ForegroundColor Yellow
+        Write-Host "Exception setting refresh rate: $($_.Exception.Message)" -ForegroundColor Yellow
     }
 
     # Set color depth to 32-bit
@@ -298,14 +298,14 @@ foreach ($device in $devices) {
     try {
         $result = [DisplaySettings]::SetColorDepth($device.DeviceName, 32)
         if ($result -eq 0) {
-            Write-Host "  ✓ Successfully set color depth to 32-bit." -ForegroundColor Green
+            Write-Host "Successfully set color depth to 32-bit." -ForegroundColor Green
         }
         else {
-            Write-Host "  ✗ Failed to set color depth. Error code: $result" -ForegroundColor Red
+            Write-Host "Failed to set color depth. Error code: $result" -ForegroundColor Red
         }
     }
     catch {
-        Write-Host "  ✗ Exception setting color depth: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "Exception setting color depth: $($_.Exception.Message)" -ForegroundColor Red
     }
 
     Write-Host ""
@@ -329,10 +329,10 @@ if (Test-Path $monitorDataStorePath) {
             
             try {
                 Set-Registry -Path $keyPath -Name "HDREnabled" -Type "DWORD" -Value 1
-                Write-Host "  ✓ Set HDREnabled to 1 in $($key.PSChildName)" -ForegroundColor Green
+                Write-Host "Set HDREnabled to 1 in $($key.PSChildName)" -ForegroundColor Green
             }
             catch {
-                Write-Host "  ✗ Failed to set HDREnabled: $_" -ForegroundColor Yellow
+                Write-Host "Failed to set HDREnabled: $_" -ForegroundColor Yellow
             }
         }
     }

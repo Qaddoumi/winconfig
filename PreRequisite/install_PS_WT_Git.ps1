@@ -32,6 +32,8 @@ Write-Output "`n   === Refresh Environment Variabels : ===`n"
 
 & .\install_virtual_display_driver.ps1
 
+Start-Sleep -Seconds 7
+
 & .\resolution.ps1
 
 Write-Output "`n================================================================"

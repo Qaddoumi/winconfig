@@ -1,4 +1,4 @@
-# Define C# code for ChangeDisplay_Settings and EnumDisplay_Settings APIs
+# Define C# code for ChangeDisplaySettings and EnumDisplaySettings APIs
 $code = @"
 using System;
 using System.Runtime.InteropServices;
@@ -72,13 +72,13 @@ public class Display_Settings
     public const int DISPLAY_DEVICE_PRIMARY_DEVICE = 0x00000004;
 
     [DllImport("user32.dll")]
-    public static extern int ChangeDisplay_SettingsEx(string lpszDeviceName, ref DEVMODE lpDevMode, IntPtr hwnd, int dwflags, IntPtr lParam);
+    public static extern int ChangeDisplaySettingsEx(string lpszDeviceName, ref DEVMODE lpDevMode, IntPtr hwnd, int dwflags, IntPtr lParam);
 
     [DllImport("user32.dll")]
-    public static extern int ChangeDisplay_Settings(ref DEVMODE devMode, int flags);
+    public static extern int ChangeDisplaySettings(ref DEVMODE devMode, int flags);
 
     [DllImport("user32.dll")]
-    public static extern bool EnumDisplay_Settings(string deviceName, int modeNum, ref DEVMODE devMode);
+    public static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref DEVMODE devMode);
 
     [DllImport("user32.dll")]
     public static extern bool EnumDisplayDevices(string lpDevice, int iDevNum, ref DISPLAY_DEVICE lpDisplayDevice, int dwFlags);
@@ -109,7 +109,7 @@ public class Display_Settings
         devMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
 
         // Get current settings for this device
-        if (!EnumDisplay_Settings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
+        if (!EnumDisplaySettings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
         {
             return DISP_CHANGE_BADMODE;
         }
@@ -120,7 +120,7 @@ public class Display_Settings
         DEVMODE testMode = new DEVMODE();
         testMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
         
-        while (EnumDisplay_Settings(deviceName, modeIndex, ref testMode))
+        while (EnumDisplaySettings(deviceName, modeIndex, ref testMode))
         {
             if (testMode.dmPelsWidth == width && testMode.dmPelsHeight == height)
             {
@@ -140,7 +140,7 @@ public class Display_Settings
         devMode.dmPelsWidth = width;
         devMode.dmPelsHeight = height;
 
-        return ChangeDisplay_SettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
+        return ChangeDisplaySettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
     }
 
     // Set refresh rate for a specific device
@@ -150,7 +150,7 @@ public class Display_Settings
         devMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
 
         // Get current settings
-        if (!EnumDisplay_Settings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
+        if (!EnumDisplaySettings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
         {
             return DISP_CHANGE_BADMODE;
         }
@@ -161,7 +161,7 @@ public class Display_Settings
         DEVMODE testMode = new DEVMODE();
         testMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
         
-        while (EnumDisplay_Settings(deviceName, modeIndex, ref testMode))
+        while (EnumDisplaySettings(deviceName, modeIndex, ref testMode))
         {
             if (testMode.dmDisplayFrequency == refreshRate && 
                 testMode.dmPelsWidth == devMode.dmPelsWidth && 
@@ -182,7 +182,7 @@ public class Display_Settings
         devMode.dmFields = DM_DISPLAYFREQUENCY;
         devMode.dmDisplayFrequency = refreshRate;
 
-        return ChangeDisplay_SettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
+        return ChangeDisplaySettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
     }
 
     // Set color depth for a specific device
@@ -192,7 +192,7 @@ public class Display_Settings
         devMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
 
         // Get current settings
-        if (!EnumDisplay_Settings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
+        if (!EnumDisplaySettings(deviceName, ENUM_CURRENT_SETTINGS, ref devMode))
         {
             return DISP_CHANGE_BADMODE;
         }
@@ -203,7 +203,7 @@ public class Display_Settings
         DEVMODE testMode = new DEVMODE();
         testMode.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
         
-        while (EnumDisplay_Settings(deviceName, modeIndex, ref testMode))
+        while (EnumDisplaySettings(deviceName, modeIndex, ref testMode))
         {
             if (testMode.dmBitsPerPel == bitsPerPixel)
             {
@@ -222,7 +222,7 @@ public class Display_Settings
         devMode.dmFields = DM_BITSPERPEL;
         devMode.dmBitsPerPel = bitsPerPixel;
 
-        return ChangeDisplay_SettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
+        return ChangeDisplaySettingsEx(deviceName, ref devMode, IntPtr.Zero, CDS_UPDATEREGISTRY | CDS_GLOBAL, IntPtr.Zero);
     }
 }
 "@

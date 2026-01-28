@@ -612,7 +612,7 @@ $RegistrySettings  = @(
     #     Data = @(
     #         @{
     #             Name = "RealTimeIsUniversal"
-    #             Type = "DWord"
+    #             Type = "QWord" # QWord is for 64-bit values, and DWord is for 32-bit values
     #             Path = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
     #             Value = "1"
     #         }

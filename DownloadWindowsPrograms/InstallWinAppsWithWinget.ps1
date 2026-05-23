@@ -104,3 +104,8 @@ if ($userInput -eq 'y' -or $userInput -eq 'yes') {
     # Remove shortcuts from the Public Desktop
     Remove-Item "C:\Users\Public\Desktop\*.lnk" -Force -ErrorAction SilentlyContinue
 }
+
+# Add Android SDK platform-tools to the user PATH environment variable
+Write-Host "`n================================================================" -ForegroundColor DarkYellow
+Write-Host "Adding Android SDK platform-tools to the user PATH environment variable..." -ForegroundColor Green
+[System.Environment]::SetEnvironmentVariable("Path", [System.Environment]::GetEnvironmentVariable("Path", "User") + ";$env:LOCALAPPDATA\Android\Sdk\platform-tools", "User")
